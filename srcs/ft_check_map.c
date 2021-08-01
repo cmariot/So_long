@@ -6,35 +6,37 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 17:42:19 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/01 21:31:20 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_check_characters(char *line, t_map_objects *map_objects)
+int	ft_check_characters(char *line, t_map *objects)
 {
 	int	i;
 
 	i = 0;
+	objects->width = -1;
 	while (line[i])
 	{
 		if (line[i] == '0')
-			map_objects->space += 1;
+			objects->space += 1;
 		else if (line[i] == '1')
-			map_objects->wall += 1;
+			objects->wall += 1;
 		else if (line[i] == 'P')
-			map_objects->start += 1;
+			objects->start += 1;
 		else if (line[i] == 'C')
-			map_objects->collectible += 1;
+			objects->collectible += 1;
 		else if (line[i] == 'E')
-			map_objects->exit += 1;
+			objects->exit += 1;
 		else if (line[i] != '\n')
 		{
 			ft_putstr("Error\nThe map have unauthorized characters.\n");
 			return (-1);
 		}
 		i++;
+		objects->width += 1;
 	}
 	return (0);
 }
@@ -95,23 +97,25 @@ int	ft_check_wall(char *map, int i)
 
 int	ft_check_map(char **map)
 {
-	int				i;
-	t_map_objects	*map_objects;
+	int		i;
+	t_map	*objects;
 
-	map_objects = malloc(sizeof(t_map_objects));
-	if (!map_objects)
+	objects = malloc(sizeof(objects));
+	if (!objects)
 		return (-1);
-	ft_initialize(map_objects);
+	ft_initialize(objects);
 	i = 0;
 	while (map[i])
 	{
-		if (ft_check_characters(map[i], map_objects) == -1)
+		if (ft_check_characters(map[i], objects) == -1)
 			return (-1);
 		if (ft_check_wall(map[i], i) == -1)
 			return (-1);
+		objects->height += 1;
 		i++;
 	}
-	if (ft_check_objects(map_objects) == -1)
+	if (ft_check_objects(objects) == -1)
 		return (-1);
+	ft_open_window(map, objects);
 	return (0);
 }

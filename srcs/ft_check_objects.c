@@ -6,34 +6,36 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 16:23:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 17:44:45 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/01 19:48:06 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_initialize(t_map_objects *map_objects)
+void	ft_initialize(t_map *objects)
 {
-	map_objects->start = 0;
-	map_objects->collectible = 0;
-	map_objects->exit = 0;
-	map_objects->wall = 0;
-	map_objects->space = 0;
+	objects->height = 0;
+	objects->width = 0;
+	objects->start = 0;
+	objects->collectible = 0;
+	objects->exit = 0;
+	objects->wall = 0;
+	objects->space = 0;
 }
 
-int	ft_check_objects(t_map_objects *map_objects)
+int	ft_check_objects(t_map *objects)
 {
-	if (!map_objects->start)
+	if (!objects->start)
 	{
 		ft_putstr("Error\nThere is no start on the map.\n");
 		return (-1);
 	}
-	else if (!map_objects->collectible)
+	else if (!objects->collectible)
 	{
 		ft_putstr("Error\nThere is no collectible on the map.\n");
 		return (-1);
 	}
-	else if (!map_objects->exit)
+	else if (!objects->exit)
 	{
 		ft_putstr("Error\nThere is no  exit on the map.\n");
 		return (-1);

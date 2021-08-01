@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 17:46:26 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/01 20:27:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include "mlx.h"
 
-typedef struct s_map_objects
+typedef struct s_map
 {
+	int	height;
+	int	width;
 	int	start;
 	int	collectible;
 	int	exit;
 	int	wall;
 	int	space;
-}	t_map_objects;
+}	t_map;
 
 int		ft_check_extension(char *map_name);
 void	ft_putstr(char *str);
@@ -43,7 +46,8 @@ char	*ft_strdel(char **adr_str);
 void	ft_add_buf_to_str(char **str, void *buf);
 char	*gnl_outpout(ssize_t read_return, char **str_input);
 int		ft_check_map(char **map);
-void	ft_initialize(t_map_objects *map_objects);
-int		ft_check_objects(t_map_objects *map_objects);
+void	ft_initialize(t_map *objects);
+int		ft_check_objects(t_map *objects);
+int		ft_open_window(char **map, t_map *objects);
 
 #endif
