@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 20:27:11 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 13:48:51 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,16 @@ typedef struct s_map
 	int	space;
 }	t_map;
 
-int		ft_check_extension(char *map_name);
+typedef struct s_window
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+	int		mvmt;
+}	t_window;
+
+void	ft_putchar(char c);
 void	ft_putstr(char *str);
+void	ft_putnbr(int n);
 char	**ft_save_map(int file_descriptor, char *map_path);
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s1);
@@ -45,9 +53,14 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
 char	*ft_strdel(char **adr_str);
 void	ft_add_buf_to_str(char **str, void *buf);
 char	*gnl_outpout(ssize_t read_return, char **str_input);
-int		ft_check_map(char **map);
 void	ft_initialize(t_map *objects);
+int		ft_check_map(char **map);
+int		ft_check_extension(char *map_name);
 int		ft_check_objects(t_map *objects);
 int		ft_open_window(char **map, t_map *objects);
+int		ft_move_forward(int key, t_window *window);
+int		ft_turn_left(int key, t_window *window);
+int		ft_move_back(int key, t_window *window);
+int		ft_turn_right(int key, t_window *window);
 
 #endif
