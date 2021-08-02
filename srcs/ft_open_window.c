@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 13:41:32 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 20:49:44 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,34 +40,101 @@ int	ft_key_pressed(int key, void *window)
 		ft_move_back(key,window);
 	else if (key == 2)
 		ft_turn_right(key,window);
-	else
-		ft_show_key(key, window);
 	return (0);
 }
 
-int	ft_mvmt_count(int key, t_window *window)
+int	ft_expose_pressed(int key, void *window)
 {
-	if (key == 0)
+	if (key)
+		ft_close_window(1, window);
+	else
 	{
-		window->mvmt++;
-		ft_putnbr(window->mvmt);
+		ft_putnbr(key);
 		ft_putchar('\n');
-		return (0);
 	}
 	return (0);
+}
+
+void	my_mlx_pixel_put(t_window *window, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = window->img_addr + (y * window->line_length + x * (window->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
+void	ft_print_square(t_window window, int size, int pos_x, int pos_y, int color)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (y != size)
+	{
+		x = 0;
+		while (x != size)
+		{
+			my_mlx_pixel_put(&window, pos_x + x, pos_y + y, color);
+			mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0, 0);
+			x++;
+		}
+		y++;
+	}
+}
+
+/* Just 1/8 of a circle */
+void	ft_print_circle(t_window window, int radius, int a, int b, int color)
+{
+	int x;
+	int y;
+	int d;
+
+	x = 0;
+	y = radius;
+	d = radius - 1;
+	while (y >= x)
+	{
+		my_mlx_pixel_put(&window, a + x, b + y, color);
+		mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0, 0);
+		if (d >= x * 2)
+		{
+			d = d - 2 * x - 1;
+			x++;
+		}
+		else if (d < 2 * (radius - y))
+		{
+			d = d + 2 * y - 1;
+			y = y - 1;
+		}
+		else
+		{
+			d = d + 2 * (y - x - 1);
+			y = y - 1;
+			x = x + 1;
+		}
+	}
 }
 
 int	ft_open_window(char **map, t_map *objects)
 {
 	t_window	window;
+	char *relative_path;
+	int		img_width;
+	int		img_height;
 
-	printf("%s\n", *map);
+	relative_path = "./images/metal.xpm";
 	window.mvmt = 0;
 	window.mlx_ptr = mlx_init();
 	window.win_ptr = mlx_new_window(window.mlx_ptr, objects->width * 100, objects->height * 100, "./so_long");
-	//mlx_key_hook(window.win_ptr, ft_show_key, &window);
-	//mlx_key_hook(window.win_ptr, ft_close_window, &window);
+	window.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, relative_path, &img_width, &img_height);
+//	window.img_ptr = mlx_new_image(window.mlx_ptr, objects->width * 100, objects->height * 100);
+	window.img_addr = mlx_get_data_addr(window.img_ptr, &window.bits_per_pixel, &window.line_length, &window.endian);
+	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0, 0);
+//	ft_print_square(window, 100, 100, 100, 0x00FF0000);
+//	ft_print_circle(window, 100, 100, 100, 0x00FF0000);
 	mlx_hook(window.win_ptr, 02, 1L << 0, ft_key_pressed, &window);
+	free(map);
+	free(objects);
 	mlx_loop(window.mlx_ptr);
 	return (0);
 }

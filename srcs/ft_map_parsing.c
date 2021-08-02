@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 13:11:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 15:00:25 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	**ft_save_map(int file_descriptor, char *map_path)
 	map = malloc(sizeof(char **) * map_width + 1);
 	if (!map)
 		return (NULL);
-	map_lenght = 0;
 	i = 0;
 	while (1)
 	{
@@ -92,5 +91,6 @@ char	**ft_save_map(int file_descriptor, char *map_path)
 		i++;
 	}
 	map[i] = NULL;
+	close(file_descriptor);
 	return (map);
 }

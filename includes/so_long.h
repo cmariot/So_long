@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 13:48:51 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 18:33:04 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct s_window
 	void	*mlx_ptr;
 	void	*win_ptr;
 	int		mvmt;
+	void	*img_ptr;
+	char	*img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_window;
 
 void	ft_putchar(char c);

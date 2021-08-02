@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/02 13:49:22 by cmariot          ###   ########.fr        #
+#    Updated: 2021/08/02 20:52:55 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ MLX_INCLUDE_DIR = mlx
 
 MLX_LIBRARY_DIR = mlx
 
-MAP_NAME = map.ber
+MAP_NAME = maps/map.ber
 
 REMOVE = rm -rf
 

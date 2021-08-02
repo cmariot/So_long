@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 21:37:47 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 14:58:58 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char **argv)
 		}
 		if (ft_check_map(map) != -1)
 			ft_putstr("The map is ok, let's open the window !\n");
-		close(file_descriptor);
 		free(map);
 	}
 	return (0);
