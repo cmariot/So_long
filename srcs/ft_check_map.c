@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 13:12:22 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 22:15:40 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_characters(char *line, t_map *objects)
 	int	i;
 
 	i = 0;
-	objects->width = -1;
+	objects->width = 0;
 	while (line[i])
 	{
 		if (line[i] == '0')

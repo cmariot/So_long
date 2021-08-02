@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 20:49:44 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 22:19:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,14 +122,45 @@ int	ft_open_window(char **map, t_map *objects)
 	int		img_width;
 	int		img_height;
 
-	relative_path = "./images/metal.xpm";
+	relative_path = "./images/beton.xpm";
 	window.mvmt = 0;
 	window.mlx_ptr = mlx_init();
-	window.win_ptr = mlx_new_window(window.mlx_ptr, objects->width * 100, objects->height * 100, "./so_long");
+	window.win_ptr = mlx_new_window(window.mlx_ptr, objects->width * 40, objects->height * 40, "./so_long");
 	window.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, relative_path, &img_width, &img_height);
 //	window.img_ptr = mlx_new_image(window.mlx_ptr, objects->width * 100, objects->height * 100);
 	window.img_addr = mlx_get_data_addr(window.img_ptr, &window.bits_per_pixel, &window.line_length, &window.endian);
-	mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0, 0);
+
+	printf("WIDTH = %d\n", objects->width);
+	int x;
+	int y;
+	int j;
+	int i;
+	int a;
+	int b;
+	
+	i = objects->height;
+	a = 0;
+	b = 0;
+	x = 0;
+	y = 0;
+	while (i--)
+	{
+		j = objects->width;
+		x = 0;
+		b = 0;
+		while (j--)
+		{
+			if (map[a][b] == '0' || map[a][b] == 'P' || map[a][b] == 'C' || map[a][b] == 'E')
+			{
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0 + x, 0 + y);
+			}
+			x += 40;
+			b++;
+		}
+		y += 40;
+		a++;
+	}
+
 //	ft_print_square(window, 100, 100, 100, 0x00FF0000);
 //	ft_print_circle(window, 100, 100, 100, 0x00FF0000);
 	mlx_hook(window.win_ptr, 02, 1L << 0, ft_key_pressed, &window);
