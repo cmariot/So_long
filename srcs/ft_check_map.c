@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 21:31:20 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 13:12:22 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_check_characters(char *line, t_map *objects)
 			objects->collectible += 1;
 		else if (line[i] == 'E')
 			objects->exit += 1;
-		else if (line[i] != '\n')
+		else 
 		{
 			ft_putstr("Error\nThe map have unauthorized characters.\n");
 			return (-1);
@@ -48,7 +48,7 @@ int	ft_check_firt_and_last_line(char *map_line)
 	i = 0;
 	while (map_line[i])
 	{
-		if (map_line[i] != '1' && map_line[i] != '\n')
+		if (map_line[i] != '1')
 		{
 			ft_putstr("Error\nThe map is not surround by walls.\n");
 			return (-1);
@@ -65,7 +65,7 @@ int	ft_check_other_lines(char *map_line)
 	if (map_line[0] != '1')
 		return (-1);
 	len = ft_strlen(map_line);
-	if (map_line[len - 2] != '1')
+	if (map_line[len - 1] != '1')
 	{
 		ft_putstr("Error\nThe map is not surround by walls.\n");
 		return (-1);

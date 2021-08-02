@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 17:38:47 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/02 13:11:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	map_lenght_checker(char *map_line, unsigned int map_lenght, int i)
 			ft_putstr("Error\nThe map is not rectangular.\n");
 			return (-1);
 		}
+	}
+	if (map_lenght == 0)
+	{
+		ft_putstr("Error\nThe map is empty.\n");
+		return (-1);
 	}
 	return (map_lenght);
 }
@@ -50,6 +55,17 @@ int	ft_count_line(int file_descriptor)
 	return (number_of_lines);
 }
 
+char	*ft_remove_backslash_n(char *str, int str_len)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(str);
+	free(str);
+	str = ft_substr(tmp, 0, str_len);
+	free(tmp);
+	return (str);
+}
+
 char	**ft_save_map(int file_descriptor, char *map_path)
 {
 	char	**map;
@@ -72,6 +88,7 @@ char	**ft_save_map(int file_descriptor, char *map_path)
 		map_lenght = map_lenght_checker(map[i], map_lenght, i);
 		if (map_lenght == -1)
 			return (NULL);
+		map[i] = ft_remove_backslash_n(map[i], map_lenght);
 		i++;
 	}
 	map[i] = NULL;
