@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 13:26:38 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 15:20:24 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ int	ft_show_key(int key, void *window)
 
 int	ft_close_window(int key, t_window *window)
 {
-	mlx_clear_window(window->mlx_ptr, window->win_ptr);
+//	mlx_clear_window(window->mlx_ptr, window->win_ptr);
 	mlx_destroy_window(window->mlx_ptr, window->win_ptr);
+//	mlx_loop_end(window->mlx_ptr);
 	exit(EXIT_SUCCESS);
 	return (key);
 }
@@ -43,16 +44,25 @@ int	ft_key_pressed(int key, void *window)
 	return (0);
 }
 
-int	ft_expose_pressed(int key, void *window)
+int	ft_show_mouse_position(t_window *window)
 {
-	if (key)
-		ft_close_window(1, window);
-	else
-	{
-		ft_putnbr(key);
-		ft_putchar('\n');
-	}
+
+	int pos;
+	int x;
+	int y;
+
+	x = 0;
+	y = 0;
+	pos = mlx_mouse_get_pos(&window, &x, &y);
+	printf("pos = %d\nx = %d\ny = %d\n", pos, x, y);
 	return (0);
+}
+
+int	ft_red_cross(int key, void *window)
+{
+	(void)window;
+	exit(EXIT_SUCCESS);
+	return (key);
 }
 
 void	my_mlx_pixel_put(t_window *window, int x, int y, int color)
@@ -114,6 +124,8 @@ void	ft_print_circle(t_window window, int radius, int a, int b, int color)
 		}
 	}
 }
+
+
 
 int	ft_open_window(char **map, t_map *objects)
 {
@@ -205,7 +217,8 @@ int	ft_open_window(char **map, t_map *objects)
 
 //	ft_print_square(window, 100, 100, 100, 0x00FF0000);
 //	ft_print_circle(window, 100, 100, 100, 0x00FF0000);
-	mlx_hook(window.win_ptr, 02, 1L << 0, ft_key_pressed, &window);
+	mlx_key_hook(window.win_ptr, ft_key_pressed, &window);
+	mlx_hook(window.win_ptr, 17, 1L << 2, ft_red_cross, &window);
 	free(objects);
 	mlx_loop(window.mlx_ptr);
 	return (0);

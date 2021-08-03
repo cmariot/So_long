@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 11:37:56 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 16:55:01 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define SO_LONG_H
 
 # define BUFFER_SIZE 1
+# define MLX_SYNC_IMAGE_WRITABLE 1
+# define MLX_SYNC_WIN_FLUSH_CMD 2
+# define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 # include <fcntl.h>
 # include <stdio.h>
