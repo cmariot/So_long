@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/03 01:45:42 by cmariot          ###   ########.fr        #
+#    Updated: 2021/08/03 11:02:15 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,8 @@ compil_srcs:	${SRCS_OBJS}
 test:			compil_srcs
 				@./${EXECUTABLE_NAME} ${MAP_NAME}
 
-leaks:			compil_srcs
+leaks:			
+				@make re
 				@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
 
 clean:

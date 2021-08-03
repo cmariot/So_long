@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 18:33:04 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 11:37:56 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,27 @@ typedef struct s_window
 	int		line_length;
 	int		endian;
 }	t_window;
+
+
+
+typedef struct s_perso_img
+{
+	void	*perso_img_ptr;
+	char	*perso_img_addr;
+	int		perso_bits_per_pixel;
+	int		perso_line_length;
+	int		perso_endian;
+}	t_perso;
+
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	char	*img_addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_img;
 
 void	ft_putchar(char c);
 void	ft_putstr(char *str);

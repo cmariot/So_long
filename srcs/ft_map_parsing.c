@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 01:03:28 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 10:58:37 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,29 @@ int	ft_count_line(int file_descriptor)
 }
 
 //Memory leaks ici ! Mais si ft_strdel probleme sur certaines maps, a fix.
-char	*ft_remove_backslash_n(char *str, int str_len)
+char	*ft_remove_backslash_n(char *str, char *tmp)
 {
-	char	*tmp;
+//	char	*tmp;
+	int		len;
+	int		i;
 
-	tmp = ft_strdup(str);
-//	ft_strdel(&str);
-	str = ft_substr(tmp, 0, str_len);
-//	ft_strdel(&tmp);
-	return (str);
+	len = ft_strlen(str);
+	tmp = malloc(sizeof(char) * len);
+	i = 0;
+	while (len-- - 1)
+	{
+		tmp[i] = str[i];
+		i++;
+	}
+	tmp[i] = '\0';
+//	free(str);
+	return (tmp);
 }
 
 char	**ft_save_map(int file_descriptor, char *map_path)
 {
 	char	**map;
+	char	*tmp;
 	int		map_width;
 	int		map_lenght;
 	int		i;
@@ -88,7 +97,10 @@ char	**ft_save_map(int file_descriptor, char *map_path)
 		map_lenght = map_lenght_checker(map[i], map_lenght, i);
 		if (map_lenght == -1)
 			return (NULL);
-			map[i] = ft_remove_backslash_n(map[i], map_lenght);
+		map[i] = ft_remove_backslash_n(map[i], tmp);
+		tmp = NULL;
+		printf("%s\n", map[i]);
+	//	free(tmp);
 		i++;
 	}
 	map[i] = NULL;

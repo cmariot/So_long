@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 01:28:22 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 13:26:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,43 @@ void	ft_print_circle(t_window window, int radius, int a, int b, int color)
 int	ft_open_window(char **map, t_map *objects)
 {
 	t_window	window;
-	char *relative_path;
+
+	t_img		player;
+	t_img		collectible;
+	t_img		wall;
+	t_img		space;
+	t_img		start;
+	t_img		exit;
+	
 	int		img_width;
 	int		img_height;
 
-	relative_path = "./images/beton.xpm";
+	//Count the mouvements
 	window.mvmt = 0;
+
+	
 	window.mlx_ptr = mlx_init();
+	
 	window.win_ptr = mlx_new_window(window.mlx_ptr, objects->width * 40, objects->height * 40, "./so_long");
-	window.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, relative_path, &img_width, &img_height);
+
+//	window.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/beton.xpm", &img_width, &img_height);
+	
+	player.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/player.xpm", &img_width, &img_height);
+	collectible.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/collectible.xpm", &img_width, &img_height);
+	wall.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/wall.xpm", &img_width, &img_height);
+	space.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/space.xpm", &img_width, &img_height);
+	start.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/start.xpm", &img_width, &img_height);
+	exit.img_ptr = mlx_xpm_file_to_image(window.mlx_ptr, "./images/exit.xpm", &img_width, &img_height);
+
 //	window.img_ptr = mlx_new_image(window.mlx_ptr, objects->width * 100, objects->height * 100);
-	window.img_addr = mlx_get_data_addr(window.img_ptr, &window.bits_per_pixel, &window.line_length, &window.endian);
+	
+	player.img_addr = mlx_get_data_addr(player.img_ptr, &player.bits_per_pixel, &player.line_length, &player.endian);
+	collectible.img_addr = mlx_get_data_addr(collectible.img_ptr, &collectible.bits_per_pixel, &collectible.line_length, &collectible.endian);
+	wall.img_addr = mlx_get_data_addr(wall.img_ptr, &wall.bits_per_pixel, &wall.line_length, &wall.endian);
+	space.img_addr = mlx_get_data_addr(space.img_ptr, &space.bits_per_pixel, &space.line_length, &space.endian);
+	start.img_addr = mlx_get_data_addr(start.img_ptr, &start.bits_per_pixel, &start.line_length, &start.endian);
+	exit.img_addr = mlx_get_data_addr(exit.img_ptr, &exit.bits_per_pixel, &exit.line_length, &exit.endian);
+
 
 	int x;
 	int y;
@@ -151,7 +177,24 @@ int	ft_open_window(char **map, t_map *objects)
 		{
 			if (map[a][b] == '0' || map[a][b] == 'P' || map[a][b] == 'C' || map[a][b] == 'E')
 			{
-				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, window.img_ptr, 0 + x, 0 + y);
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, space.img_ptr, 0 + x, 0 + y);
+			}
+			if (map[a][b] == '1')
+			{
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, wall.img_ptr, 0 + x, 0 + y);
+			}
+			if (map[a][b] == 'C')
+			{
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, collectible.img_ptr, 0 + x, 0 + y);
+			}
+			if (map[a][b] == 'P')
+			{
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, start.img_ptr, 0 + x, 0 + y);
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, player.img_ptr, 0 + x, 0 + y);
+			}
+			if (map[a][b] == 'E')
+			{
+				mlx_put_image_to_window(window.mlx_ptr, window.win_ptr, exit.img_ptr, 0 + x, 0 + y);
 			}
 			x += 40;
 			b++;
