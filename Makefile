@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/03 11:02:15 by cmariot          ###   ########.fr        #
+#    Updated: 2021/08/03 23:15:02 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,12 @@ all: 			compil_srcs
 bonus:			compil_srcs
 
 norme:
-				norminette srcs includes
+				@norminette srcs includes
 				@printf "\x1b[32mThe norm is checked.\x1b[0m\n"
 
 compil_srcs:	${SRCS_OBJS}
-				${COMPILER} ${COMPILER_FLAGS} -I /usr/local/include -g -L /usr/local/lib -l mlx -framework OpenGL -framework AppKit ${SRCS_OBJS} -o ${EXECUTABLE_NAME}  
+				@cd ${MLX_LIBRARY_DIR} && make
+				@${COMPILER} ${COMPILER_FLAGS} -I mlx -g -L mlx -l mlx -framework OpenGL -framework AppKit ${SRCS_OBJS} -o ${EXECUTABLE_NAME}  
 
 				@printf "\x1b[32mThe game is ready. Call the executable with a map as argument.\x1b[0m\n"
 
@@ -74,6 +75,7 @@ clean:
 
 fclean:			clean
 				@${REMOVE} ${EXECUTABLE_NAME}
+				@cd ${MLX_LIBRARY_DIR} && make clean
 				@printf "\x1b[32mThe binary files have been deleted\x1b[0m\n"
 
 re:				fclean all
