@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/02 22:19:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 01:28:22 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,13 @@ int	ft_open_window(char **map, t_map *objects)
 //	window.img_ptr = mlx_new_image(window.mlx_ptr, objects->width * 100, objects->height * 100);
 	window.img_addr = mlx_get_data_addr(window.img_ptr, &window.bits_per_pixel, &window.line_length, &window.endian);
 
-	printf("WIDTH = %d\n", objects->width);
 	int x;
 	int y;
 	int j;
 	int i;
 	int a;
 	int b;
-	
+
 	i = objects->height;
 	a = 0;
 	b = 0;
@@ -164,7 +163,6 @@ int	ft_open_window(char **map, t_map *objects)
 //	ft_print_square(window, 100, 100, 100, 0x00FF0000);
 //	ft_print_circle(window, 100, 100, 100, 0x00FF0000);
 	mlx_hook(window.win_ptr, 02, 1L << 0, ft_key_pressed, &window);
-	free(map);
 	free(objects);
 	mlx_loop(window.mlx_ptr);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/02 20:52:55 by cmariot          ###   ########.fr        #
+#    Updated: 2021/08/03 01:45:42 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ MLX_INCLUDE_DIR = mlx
 
 MLX_LIBRARY_DIR = mlx
 
-MAP_NAME = maps/map.ber
+MAP_NAME = ./maps/34x6.ber
 
 REMOVE = rm -rf
 
@@ -65,7 +65,7 @@ test:			compil_srcs
 				@./${EXECUTABLE_NAME} ${MAP_NAME}
 
 leaks:			compil_srcs
-				@leaks -atExit -- ./${EXECUTABLE_NAME}
+				@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
 
 clean:
 				@${REMOVE} ${SRCS_OBJS}
