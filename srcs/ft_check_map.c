@@ -6,13 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 09:55:01 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 21:36:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_check_characters(char *line, t_map *objects)
+int	ft_check_characters(char *line, t_obj *objects)
 {
 	int	i;
 
@@ -98,8 +98,9 @@ int	ft_check_wall(char *map, int i)
 int	ft_check_map(char **map)
 {
 	int		i;
-	t_map	*objects;
+	t_obj	*objects;
 
+	objects = NULL;
 	objects = malloc(sizeof(objects));
 	if (!objects)
 		return (-1);

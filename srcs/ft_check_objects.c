@@ -6,13 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 16:23:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/01 19:48:06 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/03 21:44:48 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_initialize(t_map *objects)
+void	ft_initialize(t_obj *objects)
 {
 	objects->height = 0;
 	objects->width = 0;
@@ -21,9 +21,10 @@ void	ft_initialize(t_map *objects)
 	objects->exit = 0;
 	objects->wall = 0;
 	objects->space = 0;
+	objects->mvmt = 0;
 }
 
-int	ft_check_objects(t_map *objects)
+int	ft_check_objects(t_obj *objects)
 {
 	if (!objects->start)
 	{
