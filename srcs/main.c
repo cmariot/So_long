@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 21:20:19 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/04 18:30:42 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	main(int argc, char **argv)
 {
-//	int		file_descriptor;
 	char	**map;
 
 	if (argc == 2)

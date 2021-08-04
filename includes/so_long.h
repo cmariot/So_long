@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 21:52:50 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/04 18:26:35 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,26 @@ typedef struct s_obj
 	int	mvmt;
 }	t_obj;
 
-typedef struct s_window
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-//	void	*img_ptr;
-//	char	*img_addr;
-//	int		bits_per_pixel;
-//	int		line_length;
-//	int		endian;
-}	t_window;
-
 typedef struct s_img
 {
-	void	*img_ptr;
-	char	*img_addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void	*img;
+	char	*add;
+	int		bpp;
+	int		len;
+	int		end;
 }	t_img;
+
+typedef struct s_window
+{
+	void	*mlx;
+	void	*win;
+	t_img	p;
+	t_img	c;
+	t_img	m;
+	t_img	v;
+	t_img	s;
+	t_img	e;
+}	t_window;
 
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
@@ -79,5 +80,8 @@ int		ft_move_forward(int key, t_obj *obj);
 int		ft_turn_left(int key, t_obj *obj);
 int		ft_move_back(int key, t_obj *obj);
 int		ft_turn_right(int key, t_obj *obj);
+void	ft_xpm_to_img(t_window *w);
+void	ft_put_img_to_window(char pos, t_window wind, int x, int y);
+void	ft_print_img(t_window wind, char **map, t_obj *objects);
 
 #endif

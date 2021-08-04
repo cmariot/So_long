@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 21:22:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/04 18:52:02 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	ft_count_line(int file_descriptor)
 	return (number_of_lines);
 }
 
-//Memory leaks ici ! Mais si ft_strdel probleme sur certaines maps, a fix.
 char	*ft_remove_backslash_n(char *str, char *tmp)
 {
 	int		len;
@@ -73,32 +72,36 @@ char	*ft_remove_backslash_n(char *str, char *tmp)
 	return (tmp);
 }
 
+int	ft_file_line(char *map_path)
+{
+	int	file_descriptor;
+	int	map_width;
+
+	file_descriptor = open(map_path, O_RDONLY);
+	if (file_descriptor == -1)
+	{
+		ft_putstr("Error\nThe map couldn't be open.\n");
+		return (-1);
+	}
+	map_width = ft_count_line(file_descriptor);
+	close(file_descriptor);
+	return (map_width);
+}
+
 char	**ft_parse_map(char *map_path)
 {
 	int		file_descriptor;
 	char	**map;
 	char	*tmp;
 	int		map_width;
-	int		map_lenght;
 	int		i;
 
-	//Check if the map could be open and count the lines.
-	file_descriptor = open(map_path, O_RDONLY);
-	if (file_descriptor == -1)
-	{
-		ft_putstr("Error\nThe map couldn't be open, check the name of the map.\n");
+	map_width = ft_file_line(map_path);
+	if (map_width == -1)
 		return (NULL);
-	}
-	map_width = ft_count_line(file_descriptor);
-	map_lenght = 0;
-	close(file_descriptor);
-	
-	//Create an array
-	map = malloc(sizeof(char **) * map_width + 1);
+	map = malloc(sizeof(char *) * (map_width + 1));
 	if (!map)
 		return (NULL);
-
-	//Put the map in the array
 	i = 0;
 	file_descriptor = open(map_path, O_RDONLY);
 	while (map_width--)

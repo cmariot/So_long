@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 21:36:38 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/04 18:27:07 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_check_characters(char *line, t_obj *objects)
 			objects->collectible += 1;
 		else if (line[i] == 'E')
 			objects->exit += 1;
-		else 
+		else
 		{
 			ft_putstr("Error\nThe map have unauthorized characters.\n");
 			return (-1);
