@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/05 17:08:03 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/05 17:38:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_window
 	t_img	c;
 	t_img	m;
 	t_img	v;
-	t_img	s;
 	t_img	e;
 }	t_window;
 

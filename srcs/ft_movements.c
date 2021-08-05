@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/05 17:01:35 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/05 17:43:04 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_move_forward(int key, t_window *wind)
 			wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
 		}
-		printf("Mouvement %d : Move forward\n", wind->obj.mvmt);
+		printf("Mouvement %d : Top\n", wind->obj.mvmt);
 	}
 	return (key);
 }
@@ -75,7 +75,7 @@ int	ft_turn_left(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
 		}
-		printf("Mouvement %d : Turn left\n", wind->obj.mvmt);
+		printf("Mouvement %d : Left\n", wind->obj.mvmt);
 	}
 	return (key);
 }
@@ -103,7 +103,7 @@ int	ft_move_back(int key, t_window *wind)
 			wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
 		}
-		printf("Mouvement %d : Move back\n", wind->obj.mvmt);
+		printf("Mouvement %d : Back\n", wind->obj.mvmt);
 	}
 	return (key);
 }
@@ -131,7 +131,7 @@ int	ft_turn_right(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
 		}
-		printf("Mouvement %d : Turn right\n", wind->obj.mvmt);
+		printf("Mouvement %d : Right\n", wind->obj.mvmt);
 	}
 	return (key);
 }
