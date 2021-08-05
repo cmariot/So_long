@@ -6,22 +6,23 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 16:23:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/03 21:44:48 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/05 16:05:01 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_initialize(t_obj *objects)
+void	ft_initialize(t_window *wind)
 {
-	objects->height = 0;
-	objects->width = 0;
-	objects->start = 0;
-	objects->collectible = 0;
-	objects->exit = 0;
-	objects->wall = 0;
-	objects->space = 0;
-	objects->mvmt = 0;
+	wind->obj.height = 0;
+	wind->obj.width = 0;
+	wind->obj.start = 0;
+	wind->obj.collected = 0;
+	wind->obj.collectible = 0;
+	wind->obj.exit = 0;
+	wind->obj.wall = 0;
+	wind->obj.space = 0;
+	wind->obj.mvmt = 0;
 }
 
 int	ft_check_objects(t_obj *objects)

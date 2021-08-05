@@ -6,13 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/04 18:27:07 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/05 17:09:05 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_check_characters(char *line, t_obj *objects)
+int	ft_check_characters(char *line, t_obj *objects, int x)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ int	ft_check_characters(char *line, t_obj *objects)
 		else if (line[i] == '1')
 			objects->wall += 1;
 		else if (line[i] == 'P')
-			objects->start += 1;
+			ft_set_player_position(objects, x, i);
 		else if (line[i] == 'C')
 			objects->collectible += 1;
 		else if (line[i] == 'E')
@@ -95,28 +95,22 @@ int	ft_check_wall(char *map, int i)
 	return (0);
 }
 
-int	ft_check_map(char **map)
+int	ft_check_map(t_window *wind)
 {
 	int		i;
-	t_obj	*objects;
 
-	objects = NULL;
-	objects = malloc(sizeof(objects));
-	if (!objects)
-		return (-1);
-	ft_initialize(objects);
+	ft_initialize(wind);
 	i = 0;
-	while (map[i])
+	while (wind->map[i])
 	{
-		if (ft_check_characters(map[i], objects) == -1)
+		if (ft_check_characters(wind->map[i], &wind->obj, i) == -1)
 			return (-1);
-		if (ft_check_wall(map[i], i) == -1)
+		if (ft_check_wall(wind->map[i], i) == -1)
 			return (-1);
-		objects->height += 1;
+		wind->obj.height += 1;
 		i++;
 	}
-	if (ft_check_objects(objects) == -1)
+	if (ft_check_objects(&wind->obj) == -1)
 		return (-1);
-	ft_open_window(map, objects);
 	return (0);
 }

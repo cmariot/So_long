@@ -6,17 +6,12 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/04 18:26:35 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/05 17:08:03 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
-# define BUFFER_SIZE 10
-# define MLX_SYNC_IMAGE_WRITABLE 1
-# define MLX_SYNC_WIN_FLUSH_CMD 2
-# define MLX_SYNC_WIN_CMD_COMPLETED	3
 
 # include <fcntl.h>
 # include <stdio.h>
@@ -24,16 +19,23 @@
 # include <stdlib.h>
 # include "mlx.h"
 
+# define BUFFER_SIZE 10
+# define IMG_H 40
+# define IMG_W 40
+
 typedef struct s_obj
 {
 	int	height;
 	int	width;
 	int	start;
+	int	collected;
 	int	collectible;
 	int	exit;
 	int	wall;
 	int	space;
 	int	mvmt;
+	int	player_x;
+	int	player_y;
 }	t_obj;
 
 typedef struct s_img
@@ -47,8 +49,10 @@ typedef struct s_img
 
 typedef struct s_window
 {
+	char	**map;
 	void	*mlx;
 	void	*win;
+	t_obj	obj;
 	t_img	p;
 	t_img	c;
 	t_img	m;
@@ -71,17 +75,18 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
 char	*ft_strdel(char **adr_str);
 void	ft_add_buf_to_str(char **str, void *buf);
 char	*gnl_outpout(ssize_t read_return, char **str_input);
-void	ft_initialize(t_obj *objects);
-int		ft_check_map(char **map);
+void	ft_initialize(t_window *window);
+int		ft_check_map(t_window *wind);
 int		ft_check_extension(char *map_name);
 int		ft_check_objects(t_obj *objects);
-int		ft_open_window(char **map, t_obj *objects);
-int		ft_move_forward(int key, t_obj *obj);
-int		ft_turn_left(int key, t_obj *obj);
-int		ft_move_back(int key, t_obj *obj);
-int		ft_turn_right(int key, t_obj *obj);
+int		ft_open_window(t_window *window);
+int		ft_move_forward(int key, t_window *wind);
+int		ft_turn_left(int key, t_window *wind);
+int		ft_move_back(int key, t_window *wind);
+int		ft_turn_right(int key, t_window *wind);
 void	ft_xpm_to_img(t_window *w);
-void	ft_put_img_to_window(char pos, t_window wind, int x, int y);
-void	ft_print_img(t_window wind, char **map, t_obj *objects);
+void	ft_put_img_to_window(char pos, t_window *wind, int x, int y);
+void	ft_print_img(t_window *wind);
+void	ft_set_player_position(t_obj *objects, int x, int i);
 
 #endif

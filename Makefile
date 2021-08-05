@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/04 17:49:22 by cmariot          ###   ########.fr        #
+#    Updated: 2021/08/05 17:07:43 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = srcs/ft_check_extension.c \
 	   srcs/ft_open_window.c \
 	   srcs/ft_movements.c \
 	   srcs/ft_images.c \
+	   srcs/ft_player.c \
 	   srcs/main.c
 
 SRCS_OBJS = ${SRCS:.c=.o}
