@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/05 17:43:04 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/08/06 14:15:47 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ int	ft_finish(t_window *wind)
 	{
 		if (wind->obj.collected % wind->obj.collectible == 0)
 		{
+			printf("Congratualations ! You have finished this level ");
+			printf("with %d moves ", wind->obj.mvmt);
+			printf("and collect %d collectibles !\n", wind->obj.collected);
 			exit(EXIT_SUCCESS);
 		}
 	}
