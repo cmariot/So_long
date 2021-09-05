@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 16:37:58 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/05 17:34:00 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,11 +111,12 @@ char	**ft_parse_map(char *map_path)
 		return (NULL);
 	i = 0;
 	file_descriptor = open(map_path, O_RDONLY);
-	while (i++ < map_height)
+	while (i < map_height)
 	{
 		map[i] = get_next_line(file_descriptor);
 		if (map[i][ft_strlen(map[i]) - 1] == '\n')
 			map[i] = ft_remove_backslash_n(map[i]);
+		i++;
 	}
 	map[i] = NULL;
 	close(file_descriptor);
