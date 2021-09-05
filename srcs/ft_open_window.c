@@ -6,21 +6,15 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 18:09:07 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/05 20:32:22 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_free_all(t_window *window)
-{
-	free(window);
-}
-
 int	ft_red_cross(int key, void *window)
 {
-//	ft_free_all(window);
-	window = 0;
+	window = NULL;
 	exit(EXIT_SUCCESS);
 	return (key);
 }
@@ -29,8 +23,6 @@ int	ft_close_window(int key, t_window *window)
 {
 	mlx_clear_window(window->mlx, window->win);
 	mlx_destroy_window(window->mlx, window->win);
-//	ft_free_all(window);
-//	printf("ICI %s\n", window->map[0]);
 	exit(EXIT_SUCCESS);
 	return (key);
 }

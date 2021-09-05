@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 17:34:00 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/05 20:28:10 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ int	ft_count_line(int file_descriptor)
 	{
 		read_return = read(file_descriptor, tmp, 1);
 		tmp[1] = '\0';
+		if (read_return == -1)
+		{
+			ft_putstr("Error\nThe so_long argument given is a directory.\n");
+			free(tmp);
+			return (-1);
+		}
 		if (read_return == 0)
 			break ;
 		if (*tmp == '\n')
@@ -74,7 +80,7 @@ int	ft_count_line(int file_descriptor)
 int	ft_file_line(char *map_path)
 {
 	int	file_descriptor;
-	int	map_width;
+	int	map_height;
 
 	file_descriptor = open(map_path, O_RDONLY);
 	if (file_descriptor == -1)
@@ -82,14 +88,11 @@ int	ft_file_line(char *map_path)
 		ft_putstr("Error\nThe map couldn't be open.\n");
 		return (-1);
 	}
-	map_width = ft_count_line(file_descriptor);
-	if (map_width == -1)
-	{
-		ft_putstr("Error\nMalloc error during map parsing.\n");
-		return (-1);
-	}
+	map_height = ft_count_line(file_descriptor);
 	close(file_descriptor);
-	return (map_width);
+	if (map_height == -1)
+		return (-1);
+	return (map_height);
 }
 
 /* Count the lines of the map,
