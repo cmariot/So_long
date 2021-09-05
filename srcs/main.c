@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/05 14:27:58 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/05 14:16:47 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_window	window;
+	int			i;
 
 	if (argc == 2)
 	{
@@ -23,7 +24,11 @@ int	main(int argc, char **argv)
 		window.map = ft_parse_map(argv[1]);
 		if (!window.map)
 			return (-1);
-		ft_open_window(&window);
+		//ft_open_window(&window);
+		i = 0;
+		while (window.map[i++])
+			free(window.map[i]);
+		free(window.map);
 	}
 	return (0);
 }

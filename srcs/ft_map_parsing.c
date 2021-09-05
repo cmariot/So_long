@@ -6,25 +6,38 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/08/04 18:52:02 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/05 16:37:58 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/* Remove the final char of a string */
+char	*ft_remove_backslash_n(char *str)
+{
+	int		len;
+	char	*new;
+
+	len = 0;
+	len = ft_strlen(str);
+	new = ft_substr(str, 0, len - 1);
+	free(str);
+	return (new);
+}
+
+/* Check if the map is rectangular */
 int	map_lenght_checker(char *map_line, unsigned int map_lenght, int i)
 {
-	unsigned int	map_lenght_control;
+	unsigned int	control;
 
-	map_lenght_control = 1;
 	if (i == 0)
 	{
 		map_lenght = ft_strlen(map_line);
 	}
 	else
 	{
-		map_lenght_control = ft_strlen(map_line);
-		if (map_lenght != map_lenght_control)
+		control = ft_strlen(map_line);
+		if (map_lenght != control)
 		{
 			ft_putstr("Error\nThe map is not rectangular.\n");
 			return (-1);
@@ -33,13 +46,17 @@ int	map_lenght_checker(char *map_line, unsigned int map_lenght, int i)
 	return (map_lenght);
 }
 
+/* Count the number of lines of the map */
 int	ft_count_line(int file_descriptor)
 {
 	int		number_of_lines;
 	int		read_return;
-	char	tmp[2];
+	char	*tmp;
 
 	number_of_lines = 0;
+	tmp = malloc(sizeof(char) * 2);
+	if (!tmp)
+		return (-1);
 	while (1)
 	{
 		read_return = read(file_descriptor, tmp, 1);
@@ -49,29 +66,11 @@ int	ft_count_line(int file_descriptor)
 		if (*tmp == '\n')
 			number_of_lines++;
 	}
+	free(tmp);
 	return (number_of_lines);
 }
 
-char	*ft_remove_backslash_n(char *str, char *tmp)
-{
-	int		len;
-	int		i;
-
-	len = ft_strlen(str);
-	printf("%s", str);
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	i = 0;
-	while (len-- - 1)
-	{
-		tmp[i] = str[i];
-		i++;
-	}	
-	tmp[i] = '\0';
-	return (tmp);
-}
-
+/* Open the file for ft_count_line */
 int	ft_file_line(char *map_path)
 {
 	int	file_descriptor;
@@ -84,33 +83,39 @@ int	ft_file_line(char *map_path)
 		return (-1);
 	}
 	map_width = ft_count_line(file_descriptor);
+	if (map_width == -1)
+	{
+		ft_putstr("Error\nMalloc error during map parsing.\n");
+		return (-1);
+	}
 	close(file_descriptor);
 	return (map_width);
 }
 
+/* Count the lines of the map,
+   create an array to store the map,
+   put the map in the array, without the '\n',
+   return the map. */
 char	**ft_parse_map(char *map_path)
 {
 	int		file_descriptor;
 	char	**map;
-	char	*tmp;
-	int		map_width;
+	int		map_height;
 	int		i;
 
-	map_width = ft_file_line(map_path);
-	if (map_width == -1)
+	map_height = ft_file_line(map_path);
+	if (map_height == -1)
 		return (NULL);
-	map = malloc(sizeof(char *) * (map_width + 1));
+	map = malloc(sizeof(char *) * (map_height + 1));
 	if (!map)
 		return (NULL);
 	i = 0;
 	file_descriptor = open(map_path, O_RDONLY);
-	while (map_width--)
+	while (i++ < map_height)
 	{
 		map[i] = get_next_line(file_descriptor);
-		tmp = NULL;
-		map[i] = ft_remove_backslash_n(map[i], tmp);
-		free(tmp);
-		i++;
+		if (map[i][ft_strlen(map[i]) - 1] == '\n')
+			map[i] = ft_remove_backslash_n(map[i]);
 	}
 	map[i] = NULL;
 	close(file_descriptor);
