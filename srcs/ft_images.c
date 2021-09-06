@@ -6,12 +6,17 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 20:56:19 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:12:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*	p = player start position
+	c = coin
+	1 = wall
+	0 = empty
+	e = exit	*/
 void	ft_xpm_to_img(t_window *w)
 {
 	int		iw;
@@ -43,6 +48,18 @@ void	ft_put_img_to_window(char pos, t_window *wind, int x, int y)
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->p.img, x, y);
 }
 
+void	ft_display_movement_count(t_window *wind)
+{
+	char *number;
+	char *movements;
+
+	number = ft_itoa(wind->obj.mvmt);
+	movements = ft_strjoin("Moves : ", number);
+	mlx_string_put(wind->mlx, wind->win, 10, 20, 2147483647, movements);
+	free(number);
+	free(movements);
+}
+
 void	ft_print_img(t_window *wind)
 {
 	int	i;
@@ -59,6 +76,7 @@ void	ft_print_img(t_window *wind)
 		while (j--)
 		{
 			ft_put_img_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
+			ft_display_movement_count(wind);
 			b++;
 		}
 		a++;

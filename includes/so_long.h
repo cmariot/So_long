@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 20:56:05 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/06 13:06:09 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	ft_xpm_to_img(t_window *w);
 void	ft_put_img_to_window(char pos, t_window *wind, int x, int y);
 void	ft_print_img(t_window *wind);
 void	ft_set_player_position(t_obj *objects, int x, int i);
+char	*ft_itoa(int n);
 
 #endif
