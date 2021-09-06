@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/08/05 21:23:44 by cmariot          ###   ########.fr        #
+#    Updated: 2021/09/06 02:12:42 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ EXECUTABLE_NAME = so_long
 
 COMPILER = gcc
 
-COMPILER_FLAGS = -Wall -Wextra -Werror
+COMPILER_FLAGS = -Wall -Wextra -Werror -O2 
 
 INCLUDES_DIR = includes
 

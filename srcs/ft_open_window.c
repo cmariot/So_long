@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 20:32:22 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/06 01:56:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ int	ft_open_window(t_window *wind)
 	win_h = wind->obj.height * IMG_H;
 	win_w = wind->obj.width * IMG_W;
 	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
+
 	ft_xpm_to_img(wind);
 	ft_print_img(wind);
+
 	mlx_key_hook(wind->win, ft_key_pressed, wind);
 	mlx_hook(wind->win, 17, 1L << 2, ft_red_cross, &wind);
+	
 	mlx_loop(wind->mlx);
 	return (0);
 }
