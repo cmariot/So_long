@@ -30,5 +30,7 @@ int	main(int argc, char **argv)
 			free(window.map[i++]);
 		free(window.map);
 	}
+	else
+		ft_putstr("Error\nUsage : ./so_long [MAP_PATH]\n");
 	return (0);
 }

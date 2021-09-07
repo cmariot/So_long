@@ -60,10 +60,8 @@ typedef struct s_window
 	t_img	e;
 }	t_window;
 
-void	ft_putchar(char c);
-void	ft_putstr(char *str);
-void	ft_putnbr(int n);
-char	**ft_parse_map(char *map_path);
+
+// GET NEXT LINE
 char	*get_next_line(int fd);
 char	*ft_strdup(char *s1);
 size_t	ft_strlen(const char *s);
@@ -74,6 +72,12 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
 char	*ft_strdel(char **adr_str);
 void	ft_add_buf_to_str(char **str, void *buf);
 char	*gnl_outpout(ssize_t read_return, char **str_input);
+
+// SO LONG
+int	ft_putchar(char c);
+void	ft_putstr(char *str);
+void	ft_putnbr(int n);
+char	**ft_parse_map(char *map_path);
 void	ft_initialize(t_window *window);
 int		ft_check_map(t_window *wind);
 int		ft_check_extension(char *map_name);

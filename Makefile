@@ -16,7 +16,7 @@ EXECUTABLE_NAME = so_long
 
 COMPILER = gcc
 
-COMPILER_FLAGS = -Wall -Wextra -Werror -O2 
+COMPILER_FLAGS = -Wall -Wextra -Werror
 
 INCLUDES_DIR = includes
 
@@ -38,16 +38,17 @@ SRCS = srcs/ft_check_extension.c \
 
 SRCS_OBJS = ${SRCS:.c=.o}
 
-MLX_INCLUDE_DIR = mlx
+MLX_INCLUDES_DIR = mlx_linux
 
-MLX_LIBRARY_DIR = mlx
+MLX_LIBRARY_DIR = mlx_linux
 
 MAP_NAME = ./maps/34x6.ber
 
 REMOVE = rm -rf
 
+# COMPILATION
 .c.o:
-				${COMPILER} ${COMPILER_FLAGS} -c $< -o ${<:.c=.o} -I ${INCLUDES_DIR} 
+			${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -c $< -o ${<:.c=.o}
 				
 ${NAME}:		compil_srcs
 
@@ -56,31 +57,31 @@ all: 			compil_srcs
 bonus:			compil_srcs
 
 norme:
-				@norminette srcs includes
-				@printf "\x1b[32mThe norm is checked.\x1b[0m\n"
+			@norminette srcs includes
+			@printf "\x1b[32mThe norm is checked.\x1b[0m\n"
 
-compil_srcs:	${SRCS_OBJS}
-				@cd ${MLX_LIBRARY_DIR} && make
-				@${COMPILER} ${COMPILER_FLAGS} -I mlx -g -L mlx -l mlx -framework OpenGL -framework AppKit ${SRCS_OBJS} -o ${EXECUTABLE_NAME}  
-
-				@printf "\x1b[32mThe game is ready. Call the executable with a map as argument.\x1b[0m\n"
+# EDITION LIENS
+compil_srcs:		${SRCS_OBJS}
+			@cd ${MLX_LIBRARY_DIR} && ./configure
+			@${COMPILER} ${COMPILER_FLAGS} ${SRCS_OBJS} -Lmlx_linux -lmlx -lmlx_Linux -Imlx_linux -L/usr/lib -lXext -lX11 -lm -lz -o ${EXECUTABLE_NAME}  
+			@printf "\x1b[32mThe game is ready. Call the executable with a map as argument.\x1b[0m\n"
 
 test:			compil_srcs
-				@./${EXECUTABLE_NAME} ${MAP_NAME}
+			@./${EXECUTABLE_NAME} ${MAP_NAME}
 
 leaks:			
-				@make re
-				@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
+			@make re
+			@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
 
 clean:
-				@${REMOVE} ${SRCS_OBJS}
-				@printf "\x1b[32mThe object files have been deleted\x1b[0m\n"
+			@${REMOVE} ${SRCS_OBJS}
+			@printf "\x1b[32mThe object files have been deleted\x1b[0m\n"
 
 fclean:			clean
-				@${REMOVE} ${EXECUTABLE_NAME}
-				@cd ${MLX_LIBRARY_DIR} && make clean
-				@printf "\x1b[32mThe binary files have been deleted\x1b[0m\n"
+			@${REMOVE} ${EXECUTABLE_NAME}
+			@cd ${MLX_LIBRARY_DIR} && make clean
+			@printf "\x1b[32mThe binary files have been deleted\x1b[0m\n"
 
-re:				fclean all
+re:			fclean all
 
 .PHONY:			clean fclean

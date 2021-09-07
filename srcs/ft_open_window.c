@@ -15,7 +15,8 @@
 int	ft_red_cross(int key, void *window)
 {
 	window = NULL;
-	exit(EXIT_SUCCESS);
+	if (window == NULL)
+		exit(EXIT_SUCCESS);
 	return (key);
 }
 
@@ -29,15 +30,15 @@ int	ft_close_window(int key, t_window *window)
 
 int	ft_key_pressed(int key, t_window *wind)
 {
-	if (key == 53)
+	if (key == 65307)
 		ft_close_window(key, wind);
-	else if (key == 13)
+	else if (key == 119)
 		ft_move_forward(key, wind);
-	else if (key == 0)
+	else if (key == 97)
 		ft_turn_left(key, wind);
-	else if (key == 1)
+	else if (key == 115)
 		ft_move_back(key, wind);
-	else if (key == 2)
+	else if (key == 100)
 		ft_turn_right(key, wind);
 	ft_print_img(wind);
 	return (0);

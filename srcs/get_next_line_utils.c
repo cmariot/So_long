@@ -37,7 +37,7 @@ char	*ft_strchr(const char *s, int c)
 	char	*str;
 	int		i;
 
-	if ((char)c < 0 || (char)c > 127)
+	if (c < 0 || c > 127)
 		return (NULL);
 	str = (char *)s;
 	i = 0;
