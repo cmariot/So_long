@@ -23,6 +23,12 @@
 # define IMG_H 40
 # define IMG_W 40
 
+# define ESC_KEY 65307
+# define W_KEY 119
+# define S_KEY 115
+# define D_KEY 100
+# define A_KEY 97
+
 typedef struct s_obj
 {
 	int	height;
@@ -55,42 +61,44 @@ typedef struct s_window
 	t_obj	obj;
 	t_img	p;
 	t_img	c;
-	t_img	m;
+	t_img	w;
 	t_img	v;
 	t_img	e;
 }	t_window;
 
+// SO LONG
+int		check_extension(char *map_name);
+char	**parse_map(char *map_path);
+int		check_map(t_window *wind);
+int		is_rectangular(char *str, unsigned int len, int i, int max_index);
+void	struct_init(t_window *window);
+int		check_objects(t_obj *objects);
+void	set_player_position(t_obj *objects, int x, int i);
+int		open_window(t_window *window);
+void	open_xpm_img(t_window *w);
+void	put_img_to_window(char pos, t_window *wind, int x, int y);
+void	print_img(t_window *wind);
+int		move_forward(int key, t_window *wind);
+int		turn_left(int key, t_window *wind);
+int		move_back(int key, t_window *wind);
+int		turn_right(int key, t_window *wind);
 
 // GET NEXT LINE
 char	*get_next_line(int fd);
+char	*ft_strdel(char **adr_str);
+void	ft_add_buf_to_str(char **str, void *buf);
+char	*gnl_outpout(ssize_t read_return, char **str_input);
+
+// LIBFT
+int		ft_putchar(char c);
+void	ft_putstr(char *str);
+void	ft_putnbr(int n);
+char	*ft_itoa(int n);
 char	*ft_strdup(char *s1);
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
-char	*ft_strdel(char **adr_str);
-void	ft_add_buf_to_str(char **str, void *buf);
-char	*gnl_outpout(ssize_t read_return, char **str_input);
-
-// SO LONG
-int	ft_putchar(char c);
-void	ft_putstr(char *str);
-void	ft_putnbr(int n);
-char	**ft_parse_map(char *map_path);
-void	ft_initialize(t_window *window);
-int		ft_check_map(t_window *wind);
-int		ft_check_extension(char *map_name);
-int		ft_check_objects(t_obj *objects);
-int		ft_open_window(t_window *window);
-int		ft_move_forward(int key, t_window *wind);
-int		ft_turn_left(int key, t_window *wind);
-int		ft_move_back(int key, t_window *wind);
-int		ft_turn_right(int key, t_window *wind);
-void	ft_xpm_to_img(t_window *w);
-void	ft_put_img_to_window(char pos, t_window *wind, int x, int y);
-void	ft_print_img(t_window *wind);
-void	ft_set_player_position(t_obj *objects, int x, int i);
-char	*ft_itoa(int n);
 
 #endif

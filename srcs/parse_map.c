@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_map_parsing.c                                   :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 20:28:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/08 16:29:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,28 @@ char	*ft_remove_backslash_n(char *str)
 }
 
 /* Check if the map is rectangular */
-int	map_lenght_checker(char *map_line, unsigned int map_lenght, int i)
+int	is_rectangular(char *str, unsigned int map_len, int i, int max_index)
 {
 	unsigned int	control;
 
-	if (i == 0)
+	if (i == 0 || i == max_index)
 	{
-		map_lenght = ft_strlen(map_line);
+		map_len = ft_strlen(str);
 	}
 	else
 	{
-		control = ft_strlen(map_line);
-		if (map_lenght != control)
+		control = ft_strlen(str);
+		if (map_len != control)
 		{
 			ft_putstr("Error\nThe map is not rectangular.\n");
 			return (-1);
 		}
 	}
-	return (map_lenght);
+	return (map_len);
 }
 
 /* Count the number of lines of the map */
-int	ft_count_line(int file_descriptor)
+int	count_lines(int file_descriptor)
 {
 	int		number_of_lines;
 	int		read_return;
@@ -77,7 +77,7 @@ int	ft_count_line(int file_descriptor)
 }
 
 /* Open the file for ft_count_line */
-int	ft_file_line(char *map_path)
+int	count_map_lines(char *map_path)
 {
 	int	file_descriptor;
 	int	map_height;
@@ -88,7 +88,7 @@ int	ft_file_line(char *map_path)
 		ft_putstr("Error\nThe map couldn't be open.\n");
 		return (-1);
 	}
-	map_height = ft_count_line(file_descriptor);
+	map_height = count_lines(file_descriptor);
 	close(file_descriptor);
 	if (map_height == -1)
 		return (-1);
@@ -99,14 +99,14 @@ int	ft_file_line(char *map_path)
    create an array to store the map,
    put the map in the array, without the '\n',
    return the map. */
-char	**ft_parse_map(char *map_path)
+char	**parse_map(char *map_path)
 {
 	int		file_descriptor;
 	char	**map;
 	int		map_height;
 	int		i;
 
-	map_height = ft_file_line(map_path);
+	map_height = count_map_lines(map_path);
 	if (map_height == -1)
 		return (NULL);
 	map = malloc(sizeof(char *) * (map_height + 1));

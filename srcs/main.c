@@ -19,12 +19,12 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		if (ft_check_extension(argv[1]) == -1)
+		if (check_extension(argv[1]) == -1)
 			return (-1);
-		window.map = ft_parse_map(argv[1]);
+		window.map = parse_map(argv[1]);
 		if (window.map == NULL)
 			return (-1);
-		ft_open_window(&window);
+		open_window(&window);
 		i = 0;
 		while (window.map[i])
 			free(window.map[i++]);

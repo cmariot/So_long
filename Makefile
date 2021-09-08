@@ -22,19 +22,18 @@ INCLUDES_DIR = includes
 
 SRCS_DIR = srcs
 
-SRCS = srcs/ft_check_extension.c \
-	   srcs/ft_check_map.c\
-	   srcs/ft_check_objects.c \
-	   srcs/ft_map_parsing.c \
-	   srcs/ft_putstr.c \
-	   srcs/get_next_line.c \
-	   srcs/get_next_line_utils.c \
-	   srcs/ft_open_window.c \
-	   srcs/ft_movements.c \
-	   srcs/ft_images.c \
-	   srcs/ft_player.c \
-	   srcs/ft_itoa.c \
-	   srcs/main.c
+SRCS = ${SRCS_DIR}/main.c \
+	   ${SRCS_DIR}/check_extension.c \
+	   ${SRCS_DIR}/parse_map.c \
+	   ${SRCS_DIR}/check_map.c \
+	   ${SRCS_DIR}/check_objects.c \
+	   ${SRCS_DIR}/open_window.c \
+	   ${SRCS_DIR}/display_images.c \
+	   ${SRCS_DIR}/move_character.c \
+	   ${SRCS_DIR}/libft/ft_itoa.c \
+	   ${SRCS_DIR}/libft/ft_putstr.c \
+	   ${SRCS_DIR}/libft/get_next_line.c \
+	   ${SRCS_DIR}/libft/get_next_line_utils.c
 
 SRCS_OBJS = ${SRCS:.c=.o}
 
@@ -46,10 +45,12 @@ MAP_NAME = ./maps/34x6.ber
 
 REMOVE = rm -rf
 
-# COMPILATION
+GREEN = /bin/echo -e "\x1b[92m$1\x1b[0m"
+
+
 .c.o:
-			${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -c $< -o ${<:.c=.o}
-				
+				${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -c $< -o ${<:.c=.o} -g
+
 ${NAME}:		compil_srcs
 
 all: 			compil_srcs
@@ -57,31 +58,34 @@ all: 			compil_srcs
 bonus:			compil_srcs
 
 norme:
-			@norminette srcs includes
-			@printf "\x1b[32mThe norm is checked.\x1b[0m\n"
+				@norminette srcs includes
+				@$(call GREEN,"The norm is checked.")
 
-# EDITION LIENS
-compil_srcs:		${SRCS_OBJS}
-			@cd ${MLX_LIBRARY_DIR} && ./configure
-			@${COMPILER} ${COMPILER_FLAGS} ${SRCS_OBJS} -Lmlx_linux -lmlx -lmlx_Linux -Imlx_linux -L/usr/lib -lXext -lX11 -lm -lz -o ${EXECUTABLE_NAME}  
-			@printf "\x1b[32mThe game is ready. Call the executable with a map as argument.\x1b[0m\n"
+compil_srcs:	${SRCS_OBJS}
+				@cd ${MLX_LIBRARY_DIR} && ./configure
+				@${COMPILER} ${COMPILER_FLAGS} ${SRCS_OBJS} -Lmlx_linux -lmlx -lmlx_Linux -Imlx_linux -L/usr/lib -lXext -lX11 -lm -lz -o ${EXECUTABLE_NAME}  
+				$(call GREEN,"The game is ready. Call the executable with a map as argument.")
 
 test:			compil_srcs
-			@./${EXECUTABLE_NAME} ${MAP_NAME}
+				@./${EXECUTABLE_NAME} ${MAP_NAME}
 
-leaks:			
-			@make re
-			@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
+leaks_macOs:			
+				@make re
+				@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
+
+leaks_linux:
+				@make re
+				@valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes ./so_long maps/34x6.ber
 
 clean:
-			@${REMOVE} ${SRCS_OBJS}
-			@printf "\x1b[32mThe object files have been deleted\x1b[0m\n"
+				@${REMOVE} ${SRCS_OBJS}
+				@$(call GREEN,"The object files have been deleted.")
 
 fclean:			clean
-			@${REMOVE} ${EXECUTABLE_NAME}
-			@cd ${MLX_LIBRARY_DIR} && make clean
-			@printf "\x1b[32mThe binary files have been deleted\x1b[0m\n"
+				@${REMOVE} ${EXECUTABLE_NAME}
+				@cd ${MLX_LIBRARY_DIR} && make clean
+				@$(call GREEN,"The binary files have been deleted.")
 
-re:			fclean all
+re:				fclean all
 
 .PHONY:			clean fclean

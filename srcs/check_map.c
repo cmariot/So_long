@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_map.c                                     :+:      :+:    :+:   */
+/*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 17:36:45 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/08 16:28:28 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_check_characters(char *line, t_obj *objects, int x)
+/* Authorized char :
+	'0' (void), '1' (wall), 'P' (start), 'C' coin, 'E' (exit) */
+int	check_unauthorized_characters(char *line, t_obj *objects, int x)
 {
 	int	i;
 
@@ -25,7 +27,7 @@ int	ft_check_characters(char *line, t_obj *objects, int x)
 		else if (line[i] == '1')
 			objects->wall += 1;
 		else if (line[i] == 'P')
-			ft_set_player_position(objects, x, i);
+			set_player_position(objects, x, i);
 		else if (line[i] == 'C')
 			objects->collectible += 1;
 		else if (line[i] == 'E')
@@ -41,7 +43,8 @@ int	ft_check_characters(char *line, t_obj *objects, int x)
 	return (0);
 }
 
-int	ft_check_firt_and_last_line(char *map_line)
+/* Check if the first and the last lines are only composed of '1' */
+int	check_firt_and_last_line(char *map_line)
 {
 	int	i;
 
@@ -58,7 +61,8 @@ int	ft_check_firt_and_last_line(char *map_line)
 	return (0);
 }
 
-int	ft_check_other_lines(char *map_line)
+/* Check if the other lines begin and finish with '1' */
+int	check_other_lines(char *map_line)
 {
 	int	len;
 
@@ -73,44 +77,47 @@ int	ft_check_other_lines(char *map_line)
 	return (0);
 }
 
-int	ft_check_wall(char *map, int i)
+/* Check if the map is surounded by walls */
+int	check_walls(char *map, int i)
 {
-	int	last_index;
 	int	j;
 
-	last_index = -1;
 	j = 0;
-	while (map[j++])
-		last_index++;
-	if (i == 0 || i == last_index)
+	while (map[j])
+		j++;
+	if (i == 0 || i == j)
 	{
-		if (ft_check_firt_and_last_line(map) == -1)
+		if (check_firt_and_last_line(map) == -1)
 			return (-1);
 	}
 	else
 	{
-		if (ft_check_other_lines(map) == -1)
+		if (check_other_lines(map) == -1)
 			return (-1);
 	}
 	return (0);
 }
 
-int	ft_check_map(t_window *wind)
+/* Search if there are errors on the map */
+int	check_map(t_window *wind)
 {
 	int		i;
+	int		first_len;
 
-	ft_initialize(wind);
+	first_len = ft_strlen(wind->map[0]);
+	struct_init(wind);
 	i = 0;
 	while (wind->map[i])
 	{
-		if (ft_check_characters(wind->map[i], &wind->obj, i) == -1)
+		if (check_unauthorized_characters(wind->map[i], &wind->obj, i) == -1)
 			return (-1);
-		if (ft_check_wall(wind->map[i], i) == -1)
+		if (check_walls(wind->map[i], i) == -1)
 			return (-1);
-		wind->obj.height += 1;
+		if (is_rectangular(wind->map[i], first_len, i, wind->obj.height) == -1)
+			return (-1);
 		i++;
 	}
-	if (ft_check_objects(&wind->obj) == -1)
+	if (check_objects(&wind->obj) == -1)
 		return (-1);
 	return (0);
 }

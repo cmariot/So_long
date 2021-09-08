@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_objects.c                                 :+:      :+:    :+:   */
+/*   check_objects.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 16:23:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/05 17:39:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/08 16:28:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_initialize(t_window *wind)
+/* The height of the map = number of char * in the array */
+int	count_array_height(char **array)
 {
-	wind->obj.height = 0;
+	int	i;
+	int	height;
+
+	i = 0;
+	height = 0;
+	while (array[i])
+	{
+		height++;
+		i++;
+	}
+	return (height);
+}
+
+/* Set initial value of the objects structure */
+void	struct_init(t_window *wind)
+{
+	wind->obj.height = count_array_height(wind->map);
 	wind->obj.width = 0;
 	wind->obj.start = 0;
 	wind->obj.collected = 0;
@@ -25,7 +42,8 @@ void	ft_initialize(t_window *wind)
 	wind->obj.mvmt = 0;
 }
 
-int	ft_check_objects(t_obj *objects)
+/* Check if there is at least a Start, a Coin and an Exit */
+int	check_objects(t_obj *objects)
 {
 	if (!objects->start)
 	{
@@ -44,4 +62,12 @@ int	ft_check_objects(t_obj *objects)
 	}
 	else
 		return (0);
+}
+
+/* The last 'P' will be the start position */
+void	set_player_position(t_obj *objects, int x, int i)
+{
+	objects->player_y = i;
+	objects->player_x = x;
+	objects->start += 1;
 }
