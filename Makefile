@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/09/06 13:06:30 by cmariot          ###   ########.fr        #
+#    Updated: 2021/09/13 13:16:18 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,9 +31,8 @@ SRCS = ${SRCS_DIR}/main.c \
 	   ${SRCS_DIR}/display_images.c \
 	   ${SRCS_DIR}/move_character.c \
 	   ${SRCS_DIR}/libft/ft_itoa.c \
-	   ${SRCS_DIR}/libft/ft_putstr.c \
-	   ${SRCS_DIR}/libft/get_next_line.c \
-	   ${SRCS_DIR}/libft/get_next_line_utils.c
+	   ${SRCS_DIR}/libft/gnl_without_bn.c \
+	   ${SRCS_DIR}/libft/ft_putstr.c
 
 SRCS_OBJS = ${SRCS:.c=.o}
 

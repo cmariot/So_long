@@ -6,24 +6,11 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/08 16:29:50 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/13 13:43:30 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-/* Remove the final char of a string */
-char	*ft_remove_backslash_n(char *str)
-{
-	int		len;
-	char	*new;
-
-	len = 0;
-	len = ft_strlen(str);
-	new = ft_substr(str, 0, len - 1);
-	free(str);
-	return (new);
-}
 
 /* Check if the map is rectangular */
 int	is_rectangular(char *str, unsigned int map_len, int i, int max_index)
@@ -40,7 +27,7 @@ int	is_rectangular(char *str, unsigned int map_len, int i, int max_index)
 		if (map_len != control)
 		{
 			ft_putstr("Error\nThe map is not rectangular.\n");
-			return (-1);
+			return (0);
 		}
 	}
 	return (map_len);
@@ -53,7 +40,7 @@ int	count_lines(int file_descriptor)
 	int		read_return;
 	char	*tmp;
 
-	number_of_lines = 0;
+	number_of_lines = 1;
 	tmp = malloc(sizeof(char) * 2);
 	if (!tmp)
 		return (-1);
@@ -109,19 +96,26 @@ char	**parse_map(char *map_path)
 	map_height = count_map_lines(map_path);
 	if (map_height == -1)
 		return (NULL);
-	map = malloc(sizeof(char *) * (map_height + 1));
+	printf("MAP_HEIGHT = %d\n", map_height);
+	map = malloc(sizeof(char *) * (map_height));
 	if (!map)
 		return (NULL);
-	i = 0;
+	
 	file_descriptor = open(map_path, O_RDONLY);
-	while (i < map_height)
+	i = 0;
+	while (1)
 	{
-		map[i] = get_next_line(file_descriptor);
-		if (map[i][ft_strlen(map[i]) - 1] == '\n')
-			map[i] = ft_remove_backslash_n(map[i]);
-		i++;
+		map[i] = gnl_without_bn(file_descriptor);
+		printf("map[%d] = [%s]\n", i, map[i]);
+		if (map[i++] == NULL)
+			break ;
 	}
-	map[i] = NULL;
 	close(file_descriptor);
+	if (map[i - 1] == NULL)
+	{
+		ft_putstr("Error\nThe map have an unauthorized final backslash n.\n");
+		return (NULL);
+	}
+	printf("I = %d et map_height = %d\n", i, map_height); 
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/06 13:06:09 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/13 13:19:14 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 
-# define BUFFER_SIZE 10
+#define BUFFER_SIZE 10
 # define IMG_H 40
 # define IMG_W 40
 
@@ -84,19 +84,16 @@ int		move_back(int key, t_window *wind);
 int		turn_right(int key, t_window *wind);
 
 // GET NEXT LINE
-char	*get_next_line(int fd);
-char	*ft_strdel(char **adr_str);
-void	ft_add_buf_to_str(char **str, void *buf);
-char	*gnl_outpout(ssize_t read_return, char **str_input);
+char	*gnl_without_bn(int fd);
 
 // LIBFT
 int		ft_putchar(char c);
 void	ft_putstr(char *str);
 void	ft_putnbr(int n);
+int		ft_strlen(char *str);
+char	*ft_strdup(char *str);
+char	*ft_strjoin(char *str1, char *str2);
 char	*ft_itoa(int n);
-char	*ft_strdup(char *s1);
-size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
