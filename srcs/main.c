@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/13 13:40:18 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/13 14:36:32 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	main(int argc, char **argv)
 {
 	t_window	window;
-	int			i;
 
 	if (argc == 2)
 	{
@@ -25,10 +24,6 @@ int	main(int argc, char **argv)
 		if (window.map == NULL)
 			return (-1);
 		open_window(&window);
-		i = 0;
-		while (window.map[i])
-			free(window.map[i++]);
-		free(window.map);
 	}
 	else
 		ft_putstr("Error\nUsage : ./so_long [MAP_PATH]\n");

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/13 13:43:30 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/13 14:47:09 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
+
+void	ft_free_map(char ***map)
+{
+	int i;
+
+	i = 0;
+	while ((*map)[i])
+	{
+		free((*map)[i]);
+		i++;
+	}
+	free(*map);
+}
+
 /* Count the lines of the map,
    create an array to store the map,
    put the map in the array, without the '\n',
@@ -96,26 +110,24 @@ char	**parse_map(char *map_path)
 	map_height = count_map_lines(map_path);
 	if (map_height == -1)
 		return (NULL);
-	printf("MAP_HEIGHT = %d\n", map_height);
 	map = malloc(sizeof(char *) * (map_height));
 	if (!map)
 		return (NULL);
-	
 	file_descriptor = open(map_path, O_RDONLY);
 	i = 0;
-	while (1)
+	while (i < map_height)
 	{
 		map[i] = gnl_without_bn(file_descriptor);
-		printf("map[%d] = [%s]\n", i, map[i]);
 		if (map[i++] == NULL)
 			break ;
 	}
-	close(file_descriptor);
 	if (map[i - 1] == NULL)
 	{
-		ft_putstr("Error\nThe map have an unauthorized final backslash n.\n");
-		return (NULL);
+		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
+		ft_free_map(&map);
+		exit(0);;
 	}
-	printf("I = %d et map_height = %d\n", i, map_height); 
+	map [i] = NULL;
+	close(file_descriptor);
 	return (map);
 }
