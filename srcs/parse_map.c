@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/13 14:47:09 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 14:34:28 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	count_map_lines(char *map_path)
 }
 
 
-void	ft_free_map(char ***map)
+void	free_map(char ***map)
 {
 	int i;
 
@@ -110,7 +110,7 @@ char	**parse_map(char *map_path)
 	map_height = count_map_lines(map_path);
 	if (map_height == -1)
 		return (NULL);
-	map = malloc(sizeof(char *) * (map_height));
+	map = malloc(sizeof(char *) * (map_height + 1));
 	if (!map)
 		return (NULL);
 	file_descriptor = open(map_path, O_RDONLY);
@@ -123,9 +123,8 @@ char	**parse_map(char *map_path)
 	}
 	if (map[i - 1] == NULL)
 	{
-		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
-		ft_free_map(&map);
-		exit(0);;
+		free_map(&map);
+		exit(0);
 	}
 	map [i] = NULL;
 	close(file_descriptor);

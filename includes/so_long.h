@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/13 13:19:14 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 14:33:43 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		move_forward(int key, t_window *wind);
 int		turn_left(int key, t_window *wind);
 int		move_back(int key, t_window *wind);
 int		turn_right(int key, t_window *wind);
+void	free_map(char ***map);
 
 // GET NEXT LINE
 char	*gnl_without_bn(int fd);
