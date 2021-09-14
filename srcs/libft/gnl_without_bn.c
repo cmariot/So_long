@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 14:35:22 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/13 10:40:59 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:58:18 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	ft_strlen(char *str)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (*str++)
@@ -27,7 +27,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char *ft_strdup(char *str)
+char	*ft_strdup(char *str)
 {
 	char	*new;
 	int		len;
@@ -49,10 +49,10 @@ char *ft_strdup(char *str)
 	return (new);
 }
 
-char *ft_strjoin(char *str1, char *str2)
+char	*ft_strjoin(char *str1, char *str2)
 {
-	int 	total_len;
-	char 	*new;
+	int		total_len;
+	char	*new;
 	int		i;
 	int		j;
 
@@ -75,9 +75,9 @@ char *ft_strjoin(char *str1, char *str2)
 	return (new);
 }
 
-int ft_gnl_strchr(char *str, char c)
+int	ft_strchr(char *str, char c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -86,11 +86,11 @@ int ft_gnl_strchr(char *str, char c)
 	return (0);
 }
 
-char *ft_gnl_get_begin(char *str)
+char	*ft_gnl_get_begin(char *str)
 {
-	char *new;
-	int len;
-	int i;
+	char	*new;
+	int		len;
+	int		i;
 
 	i = 0;
 	len = 0;
@@ -109,12 +109,12 @@ char *ft_gnl_get_begin(char *str)
 	return (new);
 }
 
-char *ft_gnl_get_end(char *str)
+char	*ft_gnl_get_end(char *str)
 {
-	char *new;
-	int len;
-	int	bn_pos;
-	int i;
+	char	*new;
+	int		len;
+	int		bn_pos;
+	int		i;
 
 	i = 0;
 	len = 1;
@@ -163,15 +163,14 @@ char	*gnl_output_without_bn(char **str, int read_return)
 
 char	*gnl_without_bn(int fd)
 {
-	int 		read_return;
-	char 		buf[BUFFER_SIZE + 1];
-	static char *str;
+	int			read_return;
+	char		buf[BUFFER_SIZE + 1];
+	static char	*str;
 	char		*tmp;
 
 	if (fd == -1 || BUFFER_SIZE < 1)
 		return (NULL);
-	read_return = 1;
-	while (read_return)
+	while (1)
 	{
 		read_return = read(fd, buf, BUFFER_SIZE);
 		if (read_return == -1)
@@ -185,7 +184,7 @@ char	*gnl_without_bn(int fd)
 			free(str);
 			str = tmp;
 		}
-		if (ft_gnl_strchr(str, '\n'))
+		if (ft_strchr(str, '\n') || !read_return)
 			break ;
 	}
 	return (gnl_output_without_bn(&str, read_return));

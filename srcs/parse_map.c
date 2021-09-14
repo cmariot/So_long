@@ -6,31 +6,27 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 14:34:28 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:49:33 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 /* Check if the map is rectangular */
-int	is_rectangular(char *str, unsigned int map_len, int i, int max_index)
+int	is_rectangular(char **map, int i)
 {
-	unsigned int	control;
+	int	first_len;
+	int	line_len;
 
-	if (i == 0 || i == max_index)
+	first_len = ft_strlen(map[0]);
+	line_len = ft_strlen(map[i]);
+	if (first_len != line_len)
 	{
-		map_len = ft_strlen(str);
+		ft_putstr("Error\nThe map is not rectangular.\n");
+		return (0);
 	}
 	else
-	{
-		control = ft_strlen(str);
-		if (map_len != control)
-		{
-			ft_putstr("Error\nThe map is not rectangular.\n");
-			return (0);
-		}
-	}
-	return (map_len);
+		return (1);
 }
 
 /* Count the number of lines of the map */
@@ -82,10 +78,9 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
-
 void	free_map(char ***map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while ((*map)[i])
@@ -123,6 +118,7 @@ char	**parse_map(char *map_path)
 	}
 	if (map[i - 1] == NULL)
 	{
+		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
 		free_map(&map);
 		exit(0);
 	}

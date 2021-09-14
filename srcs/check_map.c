@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/08 16:28:28 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:43:21 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,7 @@ int	check_walls(char *map, int i)
 int	check_map(t_window *wind)
 {
 	int		i;
-	int		first_len;
 
-	first_len = ft_strlen(wind->map[0]);
 	struct_init(wind);
 	i = 0;
 	while (wind->map[i])
@@ -113,7 +111,7 @@ int	check_map(t_window *wind)
 			return (-1);
 		if (check_walls(wind->map[i], i) == -1)
 			return (-1);
-		if (is_rectangular(wind->map[i], first_len, i, wind->obj.height) == -1)
+		if (is_rectangular(wind->map, i) == 0)
 			return (-1);
 		i++;
 	}

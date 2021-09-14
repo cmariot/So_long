@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 14:33:43 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/09/14 15:59:42 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 
-#define BUFFER_SIZE 10
+# define BUFFER_SIZE 10
 # define IMG_H 40
 # define IMG_W 40
 
@@ -70,7 +70,7 @@ typedef struct s_window
 int		check_extension(char *map_name);
 char	**parse_map(char *map_path);
 int		check_map(t_window *wind);
-int		is_rectangular(char *str, unsigned int len, int i, int max_index);
+int		is_rectangular(char **map, int i);
 void	struct_init(t_window *window);
 int		check_objects(t_obj *objects);
 void	set_player_position(t_obj *objects, int x, int i);
@@ -95,8 +95,5 @@ int		ft_strlen(char *str);
 char	*ft_strdup(char *str);
 char	*ft_strjoin(char *str1, char *str2);
 char	*ft_itoa(int n);
-char	*ft_strchr(const char *s, int c);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-size_t	ft_strlcpy(char *dest, const char *src, size_t dst_size);
 
 #endif
