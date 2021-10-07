@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/09/13 13:16:18 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/07 11:42:07 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ GREEN = /bin/echo -e "\x1b[92m$1\x1b[0m"
 
 
 .c.o:
-				${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -c $< -o ${<:.c=.o} -g
+				${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -g -c $< -o ${<:.c=.o} -g
 
 ${NAME}:		compil_srcs
 

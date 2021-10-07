@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 16:00:17 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/07 12:11:14 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ int	red_cross(int key, void *window)
 int	close_window(int key, t_window *window)
 {
 	free_map(&window->map);
+	
+	mlx_destroy_image(window->mlx, window->p.img);
+//	mlx_destroy_image(window->mlx, window->c.img);
+//	mlx_destroy_image(window->mlx, window->w.img);
+//	mlx_destroy_image(window->mlx, window->v.img);
+//	mlx_destroy_image(window->mlx, window->e.img);
 	mlx_destroy_window(window->mlx, window->win);
-	free(window->mlx);
+	mlx_destroy_display(window->mlx);
+	free(window->mlx);	
 	exit(EXIT_SUCCESS);
 	return (key);
 }
@@ -60,6 +67,12 @@ int	open_window(t_window *wind)
 	win_h = wind->obj.height * IMG_H;
 	win_w = wind->obj.width * IMG_W;
 	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
+	
+	open_xpm_img(wind);
+	print_img(wind);
+	mlx_key_hook(wind->win, key_pressed, wind);
+	mlx_hook(wind->win, 17, 1L << 2, red_cross, &wind);
+
 	mlx_loop(wind->mlx);
 	return (0);
 }
