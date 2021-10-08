@@ -173,10 +173,6 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_left.img, x, y);
 			}
 		}
-		else
-		{
-			mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle.img, x, y);
-		}
 	}
 	else if (pos == 'E')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->exit.img, x, y);
@@ -209,7 +205,18 @@ void	print_img(t_window *wind)
 		{
 			put_img_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
 			b++;
+			if (wind->map[a][b] == '1')
+			{
+				if (i != wind->obj.height && i != 0)
+				{
+					if (j != wind->obj.width && j != 0)
+					{
+						mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle.img, b * IMG_W, a * IMG_H);
+					}
+				}
+			}
 		}
+
 		a++;
 	}
 	display_mouvement_count(wind);
