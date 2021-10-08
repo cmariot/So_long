@@ -56,6 +56,12 @@ void	open_xpm_img(t_window *w)
 	w->wall_top_corner_left.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_top_corner_left.xpm", &iw, &ih);
 	w->wall_top_corner_left.add = mlx_get_data_addr(w->wall_top_corner_left.img, &w->wall_top_corner_left.bpp, &w->wall_top_corner_left.len, &w->wall_top_corner_left.end);
 	
+	w->wall_bottom_corner_right.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_bottom_corner_right.xpm", &iw, &ih);
+	w->wall_bottom_corner_right.add = mlx_get_data_addr(w->wall_bottom_corner_right.img, &w->wall_bottom_corner_right.bpp, &w->wall_bottom_corner_right.len, &w->wall_bottom_corner_right.end);
+	
+	w->wall_bottom_corner_left.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_bottom_corner_left.xpm", &iw, &ih);
+	w->wall_bottom_corner_left.add = mlx_get_data_addr(w->wall_bottom_corner_left.img, &w->wall_bottom_corner_left.bpp, &w->wall_bottom_corner_left.len, &w->wall_bottom_corner_left.end);
+
 	w->wall_bottom.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_bottom.xpm", &iw, &ih);
 	w->wall_bottom.add = mlx_get_data_addr(w->wall_bottom.img, &w->wall_bottom.bpp, &w->wall_bottom.len, &w->wall_bottom.end);
 
@@ -64,6 +70,15 @@ void	open_xpm_img(t_window *w)
 
 	w->wall_left.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_left.xpm", &iw, &ih);
 	w->wall_left.add = mlx_get_data_addr(w->wall_left.img, &w->wall_left.bpp, &w->wall_left.len, &w->wall_left.end);
+
+	w->obstacle1.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle1.xpm", &iw, &ih);
+	w->obstacle1.add = mlx_get_data_addr(w->obstacle1.img, &w->obstacle1.bpp, &w->obstacle1.len, &w->obstacle1.end);
+
+	w->obstacle2.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle2.xpm", &iw, &ih);
+	w->obstacle2.add = mlx_get_data_addr(w->obstacle2.img, &w->obstacle2.bpp, &w->obstacle2.len, &w->obstacle2.end);
+
+
+
 //	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
 //	w->c.img = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &iw, &ih);
 //	w->w.img = mlx_xpm_file_to_image(w->mlx, "./img/1.xpm", &iw, &ih);
@@ -127,15 +142,38 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 		}
 		else if (y / IMG_H == (wind->obj.height - 1) && y % IMG_H == 0)
 		{
-			mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_bottom.img, x, y);
+			if (x / IMG_W != 0 && x / IMG_W != wind->obj.width - 1)
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_bottom.img, x, y);
+			else if (x / IMG_W == 0)
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_bottom_corner_right.img, x, y);
+			else if (x / IMG_W == wind->obj.width - 1)
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_bottom_corner_left.img, x, y);
 		}
 		else if (x / IMG_W == 0 && x % IMG_W == 0)
 		{
-			mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_right.img, x, y);
+			if (y / IMG_H != wind->obj.height - 1)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_right.img, x, y);
+			}
 		}
 		else if (x / IMG_W == wind->obj.width - 1 && x % IMG_W == 0)
 		{
-			mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_left.img, x, y);
+			if (y / IMG_H != wind->obj.height - 1)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_left.img, x, y);
+			}
+		}
+		else
+		{
+			if (wind->count == 0)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle1.img, x, y);
+				wind->count++;
+			}
+			else
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle2.img, x, y);
+			}
 		}
 	}
 	/*if (pos == 'C')
