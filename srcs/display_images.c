@@ -35,7 +35,20 @@ void	open_xpm_img(t_window *w)
 	w->ground1.img = mlx_xpm_file_to_image(w->mlx, "./img/ground1.xpm", &iw, &ih);
 	w->ground1.add = mlx_get_data_addr(w->ground1.img, &w->ground1.bpp, &w->ground1.len, &w->ground1.end);
 
+	w->ground2.img = mlx_xpm_file_to_image(w->mlx, "./img/ground2.xpm", &iw, &ih);
+	w->ground2.add = mlx_get_data_addr(w->ground2.img, &w->ground2.bpp, &w->ground2.len, &w->ground2.end);
 
+	w->ground3.img = mlx_xpm_file_to_image(w->mlx, "./img/ground3.xpm", &iw, &ih);
+	w->ground3.add = mlx_get_data_addr(w->ground3.img, &w->ground3.bpp, &w->ground3.len, &w->ground3.end);
+	
+	w->wall_top1.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_top1.xpm", &iw, &ih);
+	w->wall_top1.add = mlx_get_data_addr(w->wall_top1.img, &w->wall_top1.bpp, &w->wall_top1.len, &w->wall_top1.end);
+	
+	w->wall_top2.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_top2.xpm", &iw, &ih);
+	w->wall_top2.add = mlx_get_data_addr(w->wall_top2.img, &w->wall_top2.bpp, &w->wall_top2.len, &w->wall_top2.end);
+	
+	w->wall_top3.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_top3.xpm", &iw, &ih);
+	w->wall_top3.add = mlx_get_data_addr(w->wall_top3.img, &w->wall_top3.bpp, &w->wall_top3.len, &w->wall_top3.end);
 //	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
 //	w->c.img = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &iw, &ih);
 //	w->w.img = mlx_xpm_file_to_image(w->mlx, "./img/1.xpm", &iw, &ih);
@@ -51,11 +64,46 @@ void	open_xpm_img(t_window *w)
 /* Choose the correct image depending the map char */
 void	put_img_to_window(char pos, t_window *wind, int x, int y)
 {
-	if (pos == '0')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->ground1.img, x, y);
-/*	else if (pos == '1')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->w.img, x, y);
-	if (pos == 'C')
+	if (pos == '0' || pos == 'P' || pos == 'C' || pos == 'E')
+	{
+		if (wind->count == 0)
+		{
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->ground1.img, x, y);
+			wind->count++;
+		}
+		else if (wind->count == 1)
+		{
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->ground2.img, x, y);
+			wind->count++;
+		}
+		else if (wind->count > 1)
+		{
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->ground3.img, x, y);
+			wind->count = 0;
+		}
+	}
+	else if (pos == '1')
+	{
+		if (y / IMG_H == 0 && y % IMG_H == 0) 
+		{
+			if (wind->count == 0 || wind->count == 2)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_top1.img, x, y);
+				wind->count++;
+			}
+			else if (wind->count == 1)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_top2.img, x, y);
+				wind->count++;
+			}
+			else if (wind->count > 2)
+			{
+				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_top3.img, x, y);
+				wind->count = 0;
+			}
+		}
+	}
+	/*if (pos == 'C')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->c.img, x, y);
 	else if (pos == 'E')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->e.img, x, y);
@@ -87,4 +135,5 @@ void	print_img(t_window *wind)
 			display_mouvement_count(wind);
 		a++;
 	}
+	wind->count = 0;
 }

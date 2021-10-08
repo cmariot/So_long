@@ -31,6 +31,7 @@ int	count_array_height(char **array)
 /* Set initial value of the objects structure */
 void	struct_init(t_window *wind)
 {
+	wind->count = 0;
 	wind->obj.height = count_array_height(wind->map);
 	wind->obj.width = 0;
 	wind->obj.start = 0;

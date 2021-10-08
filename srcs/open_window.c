@@ -27,12 +27,17 @@ int	close_window(int key, t_window *window)
 	free_map(&window->map);
 	
 	mlx_destroy_image(window->mlx, window->ground1.img);
+	mlx_destroy_image(window->mlx, window->ground2.img);
+	mlx_destroy_image(window->mlx, window->ground3.img);
+	mlx_destroy_image(window->mlx, window->wall_top1.img);
+	mlx_destroy_image(window->mlx, window->wall_top2.img);
+	mlx_destroy_image(window->mlx, window->wall_top3.img);
 //	mlx_destroy_image(window->mlx, window->c.img);
 //	mlx_destroy_image(window->mlx, window->w.img);
 //	mlx_destroy_image(window->mlx, window->v.img);
 //	mlx_destroy_image(window->mlx, window->e.img);
 	mlx_destroy_window(window->mlx, window->win);
-//	mlx_destroy_display(window->mlx);
+	mlx_destroy_display(window->mlx);
 	free(window->mlx);	
 	exit(EXIT_SUCCESS);
 	return (key);

@@ -58,10 +58,14 @@ typedef struct s_window
 	char	**map;
 	void	*mlx;
 	void	*win;
+	int		count;
 	t_obj	obj;
 	t_img	ground1;
 	t_img	ground2;
 	t_img	ground3;
+	t_img	wall_top1;
+	t_img	wall_top2;
+	t_img	wall_top3;
 	t_img	p;
 	t_img	c;
 	t_img	w;
