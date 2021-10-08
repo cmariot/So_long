@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/07 12:12:03 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/08 15:07:40 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,16 @@ void	open_xpm_img(t_window *w)
 	int		iw;
 	int		ih;
 
-	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
+	w->ground1.img = mlx_xpm_file_to_image(w->mlx, "./img/ground1.xpm", &iw, &ih);
+	w->ground1.add = mlx_get_data_addr(w->ground1.img, &w->ground1.bpp, &w->ground1.len, &w->ground1.end);
+
+
+//	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
 //	w->c.img = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &iw, &ih);
 //	w->w.img = mlx_xpm_file_to_image(w->mlx, "./img/1.xpm", &iw, &ih);
 //	w->v.img = mlx_xpm_file_to_image(w->mlx, "./img/0.xpm", &iw, &ih);
 //	w->e.img = mlx_xpm_file_to_image(w->mlx, "./img/e.xpm", &iw, &ih);
-	w->p.add = mlx_get_data_addr(w->p.img, &w->p.bpp, &w->p.len, &w->p.end);
+//	w->p.add = mlx_get_data_addr(w->p.img, &w->p.bpp, &w->p.len, &w->p.end);
 //	w->c.add = mlx_get_data_addr(w->c.img, &w->c.bpp, &w->c.len, &w->c.end);
 //	w->w.add = mlx_get_data_addr(w->w.img, &w->w.bpp, &w->w.len, &w->w.end);
 //	w->v.add = mlx_get_data_addr(w->v.img, &w->v.bpp, &w->v.len, &w->v.end);
@@ -47,9 +51,9 @@ void	open_xpm_img(t_window *w)
 /* Choose the correct image depending the map char */
 void	put_img_to_window(char pos, t_window *wind, int x, int y)
 {
-/*	if (pos == '0')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->v.img, x, y);
-	else if (pos == '1')
+	if (pos == '0')
+		mlx_put_image_to_window(wind->mlx, wind->win, wind->ground1.img, x, y);
+/*	else if (pos == '1')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->w.img, x, y);
 	if (pos == 'C')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->c.img, x, y);
@@ -57,8 +61,6 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->e.img, x, y);
 	else if (pos == 'P')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->p.img, x, y);*/
-	if (pos == 'P')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->p.img, x, y);
 }
 
 /* Check all the characters of the map,

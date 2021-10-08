@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 15:59:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/08 14:59:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ typedef struct s_window
 	void	*mlx;
 	void	*win;
 	t_obj	obj;
+	t_img	ground1;
+	t_img	ground2;
+	t_img	ground3;
 	t_img	p;
 	t_img	c;
 	t_img	w;
