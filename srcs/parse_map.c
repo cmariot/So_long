@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 15:49:33 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/09 00:46:39 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,14 @@ void	free_map(char ***map)
 	int	i;
 
 	i = 0;
-	while ((*map)[i])
+	while (*(map[i]) != NULL)
 	{
-		free((*map)[i]);
+		if (*(map[i]) != NULL)
+			free(*map[i]);
 		i++;
 	}
-	free(*map);
+	if (*map)
+		free(*map);
 }
 
 /* Count the lines of the map,
@@ -119,7 +121,7 @@ char	**parse_map(char *map_path)
 	}
 	if (*map[0] == '\0')
 	{
-		printf("Error,\nThe map is empty\n");
+		printf("Error,\nThe map is empty.\n");
 		free_map(&map);
 		exit(0);
 	}
@@ -127,6 +129,7 @@ char	**parse_map(char *map_path)
 	{
 		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
 		free_map(&map);
+		close(file_descriptor);
 		exit(0);
 	}
 	map [i] = NULL;

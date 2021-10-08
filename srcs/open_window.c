@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/08 23:41:34 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/08 23:48:19 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	close_window(int key, t_window *window)
 //	mlx_destroy_image(window->mlx, window->v.img);
 //	mlx_destroy_image(window->mlx, window->e.img);
 	mlx_destroy_window(window->mlx, window->win);
-	mlx_destroy_display(window->mlx);
+//	mlx_destroy_display(window->mlx);
 	free(window->mlx);	
 	exit(EXIT_SUCCESS);
 	return (key);
@@ -78,7 +78,6 @@ int	open_window(t_window *wind)
 
 	if (check_map(wind) == -1)
 		return (-1);
-	printf("MAP OK\n");
 	wind->mlx = mlx_init();
 	win_h = wind->obj.height * IMG_H;
 	win_w = wind->obj.width * IMG_W;
