@@ -78,6 +78,7 @@ int	open_window(t_window *wind)
 
 	if (check_map(wind) == -1)
 		return (-1);
+	printf("MAP OK\n");
 	wind->mlx = mlx_init();
 	win_h = wind->obj.height * IMG_H;
 	win_w = wind->obj.width * IMG_W;

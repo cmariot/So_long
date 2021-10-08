@@ -113,10 +113,17 @@ char	**parse_map(char *map_path)
 	while (i < map_height)
 	{
 		map[i] = gnl_without_bn(file_descriptor);
-		if (map[i++] == NULL)
+		if (map[i] == NULL)
 			break ;
+		i++;
 	}
-	if (map[i - 1] == NULL)
+	if (*map[0] == '\0')
+	{
+		printf("Error,\nThe map is empty\n");
+		free_map(&map);
+		exit(0);
+	}
+	if (*map[i - 1] == '\0')
 	{
 		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
 		free_map(&map);

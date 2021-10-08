@@ -27,28 +27,6 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-char	*ft_strdup(char *str)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	len = ft_strlen(str);
-	if (len == 0)
-		return (NULL);
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (str[i] != '\0')
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = '\0';
-	return (new);
-}
-
 char	*ft_strjoin(char *str1, char *str2)
 {
 	int		total_len;
