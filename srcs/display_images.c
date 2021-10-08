@@ -206,15 +206,9 @@ void	print_img(t_window *wind)
 			put_img_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
 			b++;
 			if (wind->map[a][b] == '1')
-			{
 				if (i != wind->obj.height && i != 0)
-				{
 					if (j != wind->obj.width && j != 0)
-					{
 						mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle.img, b * IMG_W, a * IMG_H);
-					}
-				}
-			}
 		}
 
 		a++;
