@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/08 13:49:05 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/08 23:45:43 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,6 +143,9 @@ clean :
 		@printf "Done\n"
 		@printf "Cleaning libft ... "
 		@make clean -C libft
+		@printf "Done\n"
+		@printf "Cleaning MinilibX ... "
+		@make clean -C $(MLX)
 		@printf "Done$(RC)\n"
 
 # Remove object and binary files
@@ -152,6 +155,9 @@ fclean : clean
 		@printf "Done\n"
 		@printf "Removing libft.a ... "
 		@make fclean -C libft
+		@printf "Done\n"
+		@printf "Cleaning MinilibX ... "
+		@make clean -C $(MLX)
 		@printf "Done$(RC)\n"
 
 # Remove all and recompile
