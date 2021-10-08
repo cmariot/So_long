@@ -50,7 +50,7 @@ ifeq ($(UNAME), arm64)
 	LFLAGS_LIB += -framework OpenGL -framework AppKit
 else
 	CFLAGS += -I /usr/include -O3
-	LFLAGS_LIB = -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm 
 endif
 
 # Debug flag, use with 'make DEBUG=1'
@@ -73,9 +73,7 @@ SRCS		= main.c \
 			  move_character.c \
 			  open_window.c \
 			  parse_map.c \
-			  libft/ft_itoa.c \
-			  libft/ft_putstr.c \
-			  libft/gnl_without_bn.c
+			  gnl_without_bn.c
 
 SRC			:= $(notdir $(SRCS))
 

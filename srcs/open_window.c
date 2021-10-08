@@ -32,7 +32,7 @@ int	close_window(int key, t_window *window)
 //	mlx_destroy_image(window->mlx, window->v.img);
 //	mlx_destroy_image(window->mlx, window->e.img);
 	mlx_destroy_window(window->mlx, window->win);
-//	mlx_destroy_display(window->mlx);
+	mlx_destroy_display(window->mlx);
 	free(window->mlx);	
 	exit(EXIT_SUCCESS);
 	return (key);
