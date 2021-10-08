@@ -66,6 +66,13 @@ typedef struct s_window
 	t_img	wall_top1;
 	t_img	wall_top2;
 	t_img	wall_top3;
+	
+	t_img	wall_top_corner_left;
+	t_img	wall_top_corner_right;
+	t_img	wall_left;
+	t_img	wall_right;
+	t_img	wall_bottom;
+	
 	t_img	p;
 	t_img	c;
 	t_img	w;
