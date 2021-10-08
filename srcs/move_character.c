@@ -25,7 +25,7 @@ int	exit_finish(t_window *wind)
 				printf("the %d collectibles !\n", wind->obj.collected);
 			else
 				printf("the collectible !\n");
-			exit(EXIT_SUCCESS);
+			close_window(0, wind);
 		}
 	}
 	return (-1);

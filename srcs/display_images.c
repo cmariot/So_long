@@ -20,7 +20,7 @@ void	display_mouvement_count(t_window *wind)
 
 	number = ft_itoa(wind->obj.mvmt);
 	movements = ft_strjoin("Moves : ", number);
-	mlx_string_put(wind->mlx, wind->win, 10, 20, 2147483647, movements);
+	mlx_string_put(wind->mlx, wind->win, 40, IMG_H * wind->obj.height - 15 , 2147483647, movements);
 	free(number);
 	free(movements);
 }
@@ -71,12 +71,14 @@ void	open_xpm_img(t_window *w)
 	w->wall_left.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_left.xpm", &iw, &ih);
 	w->wall_left.add = mlx_get_data_addr(w->wall_left.img, &w->wall_left.bpp, &w->wall_left.len, &w->wall_left.end);
 
-	w->obstacle1.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle1.xpm", &iw, &ih);
-	w->obstacle1.add = mlx_get_data_addr(w->obstacle1.img, &w->obstacle1.bpp, &w->obstacle1.len, &w->obstacle1.end);
+	w->obstacle.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle.xpm", &iw, &ih);
+	w->obstacle.add = mlx_get_data_addr(w->obstacle.img, &w->obstacle.bpp, &w->obstacle.len, &w->obstacle.end);
 
-	w->obstacle2.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle2.xpm", &iw, &ih);
-	w->obstacle2.add = mlx_get_data_addr(w->obstacle2.img, &w->obstacle2.bpp, &w->obstacle2.len, &w->obstacle2.end);
+	w->heart.img = mlx_xpm_file_to_image(w->mlx, "./img/coin.xpm", &iw, &ih);
+	w->heart.add = mlx_get_data_addr(w->heart.img, &w->heart.bpp, &w->heart.len, &w->heart.end);
 
+	w->exit.img = mlx_xpm_file_to_image(w->mlx, "./img/exit.xpm", &iw, &ih);
+	w->exit.add = mlx_get_data_addr(w->exit.img, &w->exit.bpp, &w->exit.len, &w->exit.end);
 
 
 //	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
@@ -94,7 +96,7 @@ void	open_xpm_img(t_window *w)
 /* Choose the correct image depending the map char */
 void	put_img_to_window(char pos, t_window *wind, int x, int y)
 {
-	if (pos == '0' || pos == 'P' || pos == 'C' || pos == 'E')
+	if (pos == '0')
 	{
 		if (wind->count == 0)
 		{
@@ -111,6 +113,14 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 			mlx_put_image_to_window(wind->mlx, wind->win, wind->ground3.img, x, y);
 			wind->count = 0;
 		}
+	}
+	else if (pos == 'C')
+	{
+		mlx_put_image_to_window(wind->mlx, wind->win, wind->heart.img, x, y);
+		if (wind->count < 2)
+			wind->count++;
+		else
+			wind->count = 0;
 	}
 	else if (pos == '1')
 	{
@@ -165,23 +175,19 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 		}
 		else
 		{
-			if (wind->count == 0)
-			{
-				mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle1.img, x, y);
-				wind->count++;
-			}
-			else
-			{
-				mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle2.img, x, y);
-			}
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle.img, x, y);
 		}
 	}
-	/*if (pos == 'C')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->c.img, x, y);
 	else if (pos == 'E')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->e.img, x, y);
+		mlx_put_image_to_window(wind->mlx, wind->win, wind->exit.img, x, y);
 	else if (pos == 'P')
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->p.img, x, y);*/
+	{
+		mlx_put_image_to_window(wind->mlx, wind->win, wind->heart.img, x, y);
+		if (wind->count < 2)
+			wind->count++;
+		else
+			wind->count = 0;
+	}
 }
 
 /* Check all the characters of the map,
@@ -204,9 +210,8 @@ void	print_img(t_window *wind)
 			put_img_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
 			b++;
 		}
-		if ((i + 1) == wind->obj.height)
-			display_mouvement_count(wind);
 		a++;
 	}
+	display_mouvement_count(wind);
 	wind->count = 0;
 }

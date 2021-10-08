@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include "mlx.h"
 
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 50
 # define IMG_H 40
 # define IMG_W 40
 
@@ -75,9 +75,13 @@ typedef struct s_window
 	t_img	wall_right;
 	t_img	wall_bottom;
 	
-	t_img	obstacle1;
-	t_img	obstacle2;
+	t_img	obstacle;
+
 	
+	t_img	heart;
+	t_img	exit;
+	
+
 	t_img	p;
 	t_img	c;
 	t_img	w;
@@ -102,6 +106,7 @@ int		turn_left(int key, t_window *wind);
 int		move_back(int key, t_window *wind);
 int		turn_right(int key, t_window *wind);
 void	free_map(char ***map);
+int		close_window(int key, t_window *window);
 
 // GET NEXT LINE
 char	*gnl_without_bn(int fd);

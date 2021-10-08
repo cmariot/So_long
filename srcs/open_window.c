@@ -39,8 +39,9 @@ int	close_window(int key, t_window *window)
 	mlx_destroy_image(window->mlx, window->wall_bottom.img);
 	mlx_destroy_image(window->mlx, window->wall_right.img);
 	mlx_destroy_image(window->mlx, window->wall_left.img);
-	mlx_destroy_image(window->mlx, window->obstacle1.img);
-	mlx_destroy_image(window->mlx, window->obstacle2.img);
+	mlx_destroy_image(window->mlx, window->obstacle.img);
+	mlx_destroy_image(window->mlx, window->heart.img);
+	mlx_destroy_image(window->mlx, window->exit.img);
 //	mlx_destroy_image(window->mlx, window->c.img);
 //	mlx_destroy_image(window->mlx, window->w.img);
 //	mlx_destroy_image(window->mlx, window->v.img);
