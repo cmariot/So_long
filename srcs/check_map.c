@@ -67,7 +67,10 @@ int	check_other_lines(char *map_line)
 	int	len;
 
 	if (map_line[0] != '1')
+	{
+		ft_putstr("Error\nThe map is not surround by walls.\n");
 		return (-1);
+	}
 	len = ft_strlen(map_line);
 	if (map_line[len - 1] != '1')
 	{
