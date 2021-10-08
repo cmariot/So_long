@@ -5,86 +5,158 @@
 #                                                     +:+ +:+         +:+      #
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/08/01 18:55:54 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/07 11:42:07 by cmariot          ###   ########.fr        #
+#    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
+#    Updated: 2021/10/08 13:49:05 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = so_long
 
-EXECUTABLE_NAME = so_long
+# **************************************************************************** #
+#                          PROJECT'S DIRECTORIES                               #
+# **************************************************************************** #
 
-COMPILER = gcc
+NAME		= so_long
+SRCS_DIR	= srcs
+INCL_DIR	= includes
+LIBFT_DIR	= libft
+OBJS_DIR	= objs/
 
-COMPILER_FLAGS = -Wall -Wextra -Werror
+# Select the correct minilibX for the current system
+# Works on macOS (ARM64) & Linux
+UNAME := $(shell uname -m)
+ifeq ($(UNAME), arm64)
+	MLX = mlx_macos
+else
+	MLX = mlx_linux
+endif
 
-INCLUDES_DIR = includes
+# **************************************************************************** #
+#                         COMPILATION AND LINK FLAGS                           #
+# **************************************************************************** #
 
-SRCS_DIR = srcs
+CC					= gcc
 
-SRCS = ${SRCS_DIR}/main.c \
-	   ${SRCS_DIR}/check_extension.c \
-	   ${SRCS_DIR}/parse_map.c \
-	   ${SRCS_DIR}/check_map.c \
-	   ${SRCS_DIR}/check_objects.c \
-	   ${SRCS_DIR}/open_window.c \
-	   ${SRCS_DIR}/display_images.c \
-	   ${SRCS_DIR}/move_character.c \
-	   ${SRCS_DIR}/libft/ft_itoa.c \
-	   ${SRCS_DIR}/libft/gnl_without_bn.c \
-	   ${SRCS_DIR}/libft/ft_putstr.c
+CFLAGS				= -Wall -Wextra -Werror
+CFLAGS				+= -I $(INCL_DIR)
+CFLAGS				+= -I $(LIBFT_DIR)
+CFLAGS				+= -I $(MLX)
 
-SRCS_OBJS = ${SRCS:.c=.o}
+LFLAGS				= -Wall -Wextra -Werror
+LFLAGS_LIB			= -L libft -l ft
+LFLAGS_LIB			+= -L $(MLX) -l mlx
 
-MLX_INCLUDES_DIR = mlx_linux
+UNAME := $(shell uname -m)
+ifeq ($(UNAME), arm64)
+	LFLAGS_LIB += -framework OpenGL -framework AppKit
+else
+	CFLAGS += -I /usr/include -O3
+	LFLAGS_LIB = -Lmlx_linux -lmlx_linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+endif
 
-MLX_LIBRARY_DIR = mlx_linux
-
-MAP_NAME = ./maps/34x6.ber
-
-REMOVE = rm -rf
-
-GREEN = /bin/echo -e "\x1b[92m$1\x1b[0m"
+# Debug flag, use with 'make DEBUG=1'
+ifeq ($(DEBUG), 1)
+	CFLAGS			+= -g
+	LFLAGS			+= -g
+endif
 
 
-.c.o:
-				${COMPILER} ${COMPILER_FLAGS} -I${INCLUDES_DIR} -I${MLX_INCLUDES_DIR} -g -c $< -o ${<:.c=.o} -g
 
-${NAME}:		compil_srcs
+# **************************************************************************** #
+#                                SOURCE FILES                                  #
+# **************************************************************************** #
 
-all: 			compil_srcs
+SRCS		= main.c \
+			  check_extension.c \
+			  check_map.c \
+			  check_objects.c \
+			  display_images.c \
+			  move_character.c \
+			  open_window.c \
+			  parse_map.c \
+			  libft/ft_itoa.c \
+			  libft/ft_putstr.c \
+			  libft/gnl_without_bn.c
 
-bonus:			compil_srcs
+SRC			:= $(notdir $(SRCS))
 
-norme:
-				@norminette srcs includes
-				@$(call GREEN,"The norm is checked.")
+OBJ			:= $(SRC:.c=.o)
 
-compil_srcs:	${SRCS_OBJS}
-				@cd ${MLX_LIBRARY_DIR} && ./configure
-				@${COMPILER} ${COMPILER_FLAGS} ${SRCS_OBJS} -Lmlx_linux -lmlx -lmlx_Linux -Imlx_linux -L/usr/lib -lXext -lX11 -lm -lz -o ${EXECUTABLE_NAME}  
-				$(call GREEN,"The game is ready. Call the executable with a map as argument.")
+OBJS		:= $(addprefix $(OBJS_DIR), $(OBJ))
 
-test:			compil_srcs
-				@./${EXECUTABLE_NAME} ${MAP_NAME}
+VPATH		:= $(SRCS_DIR) $(OBJS_DIR) $(shell find $(SRCS_DIR) -type d)
 
-leaks_macOs:			
-				@make re
-				@leaks -atExit -- ./${EXECUTABLE_NAME} ${MAP_NAME}
 
-leaks_linux:
-				@make re
-				@valgrind --tool=memcheck --leak-check=full --leak-resolution=high --show-reachable=yes ./so_long maps/34x6.ber
+# **************************************************************************** #
+#									COLORS                                     #
+# **************************************************************************** #
 
-clean:
-				@${REMOVE} ${SRCS_OBJS}
-				@$(call GREEN,"The object files have been deleted.")
+GR	= \033[32;1m
+RE	= \033[31;1m
+YE	= \033[33;1m
+CY	= \033[36;1m
+RC	= \033[0m
 
-fclean:			clean
-				@${REMOVE} ${EXECUTABLE_NAME}
-				@cd ${MLX_LIBRARY_DIR} && make clean
-				@$(call GREEN,"The binary files have been deleted.")
 
-re:				fclean all
+# **************************************************************************** #
+#                             MAKEFILE'S RULES                                 #
+# **************************************************************************** #
 
-.PHONY:			clean fclean
+all : $(NAME)
+
+header :
+		@figlet SoLong
+		@echo
+
+# Compiling
+$(OBJS_DIR)%.o : %.c
+		@mkdir -p $(OBJS_DIR)
+		@$(CC) $(CFLAGS) -c $< -o $@
+		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
+
+libft_compil:
+		@printf "$(YE)Libft compilation ... "
+		@make -C libft
+		@printf "Success !$(RC)\n\n"
+
+srcs_compil :
+		@printf "$(YE)Source code compilation ... \n$(RC)"
+			
+# Linking
+$(NAME)	: header libft_compil srcs_compil $(SRCS) $(OBJS)
+		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
+		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(RC)\n"
+		@$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) -o $(NAME)
+		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
+		@printf "Usage :\n./so_long [MAP_NAME]\n"
+
+bonus : $(NAME)
+
+# Check 42 norm 
+norm :
+				@norminette
+
+test:			${NAME}
+				./so_long maps/34x6.ber
+
+# Remove object files
+clean :
+		@printf "$(RE)Removing $(OBJS_DIR) ... "
+		@rm -rf $(OBJS_DIR)
+		@printf "Done\n"
+		@printf "Cleaning libft ... "
+		@make clean -C libft
+		@printf "Done$(RC)\n"
+
+# Remove object and binary files
+fclean : clean
+		@printf "$(RE)Removing $(NAME) ... "
+		@rm -f $(NAME)
+		@printf "Done\n"
+		@printf "Removing libft.a ... "
+		@make fclean -C libft
+		@printf "Done$(RC)\n"
+
+# Remove all and recompile
+re :	 fclean all
+
+.PHONY : clean fclean
