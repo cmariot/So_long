@@ -71,26 +71,33 @@ void	open_xpm_img(t_window *w)
 	w->wall_left.img = mlx_xpm_file_to_image(w->mlx, "./img/wall_left.xpm", &iw, &ih);
 	w->wall_left.add = mlx_get_data_addr(w->wall_left.img, &w->wall_left.bpp, &w->wall_left.len, &w->wall_left.end);
 
-	w->obstacle.img = mlx_xpm_file_to_image(w->mlx, "./img/obstacle.xpm", &iw, &ih);
-	w->obstacle.add = mlx_get_data_addr(w->obstacle.img, &w->obstacle.bpp, &w->obstacle.len, &w->obstacle.end);
+	w->trap1.img = mlx_xpm_file_to_image(w->mlx, "./img/trap1.xpm", &iw, &ih);
+	w->trap1.add = mlx_get_data_addr(w->trap1.img, &w->trap1.bpp, &w->trap1.len, &w->trap1.end);
 
-	w->heart.img = mlx_xpm_file_to_image(w->mlx, "./img/coin.xpm", &iw, &ih);
+	w->trap2.img = mlx_xpm_file_to_image(w->mlx, "./img/trap2.xpm", &iw, &ih);
+	w->trap2.add = mlx_get_data_addr(w->trap2.img, &w->trap2.bpp, &w->trap2.len, &w->trap2.end);
+	
+	w->trap3.img = mlx_xpm_file_to_image(w->mlx, "./img/trap3.xpm", &iw, &ih);
+	w->trap3.add = mlx_get_data_addr(w->trap3.img, &w->trap3.bpp, &w->trap3.len, &w->trap3.end);
+	
+	w->heart.img = mlx_xpm_file_to_image(w->mlx, "./img/heart.xpm", &iw, &ih);
 	w->heart.add = mlx_get_data_addr(w->heart.img, &w->heart.bpp, &w->heart.len, &w->heart.end);
 
 	w->exit.img = mlx_xpm_file_to_image(w->mlx, "./img/exit.xpm", &iw, &ih);
 	w->exit.add = mlx_get_data_addr(w->exit.img, &w->exit.bpp, &w->exit.len, &w->exit.end);
 
+	w->char_down.img = mlx_xpm_file_to_image(w->mlx, "./img/char_down.xpm", &iw, &ih);
+	w->char_down.add = mlx_get_data_addr(w->char_down.img, &w->char_down.bpp, &w->char_down.len, &w->char_down.end);
 
-//	w->p.img = mlx_xpm_file_to_image(w->mlx, "./img/p.xpm", &iw, &ih);
-//	w->c.img = mlx_xpm_file_to_image(w->mlx, "./img/c.xpm", &iw, &ih);
-//	w->w.img = mlx_xpm_file_to_image(w->mlx, "./img/1.xpm", &iw, &ih);
-//	w->v.img = mlx_xpm_file_to_image(w->mlx, "./img/0.xpm", &iw, &ih);
-//	w->e.img = mlx_xpm_file_to_image(w->mlx, "./img/e.xpm", &iw, &ih);
-//	w->p.add = mlx_get_data_addr(w->p.img, &w->p.bpp, &w->p.len, &w->p.end);
-//	w->c.add = mlx_get_data_addr(w->c.img, &w->c.bpp, &w->c.len, &w->c.end);
-//	w->w.add = mlx_get_data_addr(w->w.img, &w->w.bpp, &w->w.len, &w->w.end);
-//	w->v.add = mlx_get_data_addr(w->v.img, &w->v.bpp, &w->v.len, &w->v.end);
-//	w->e.add = mlx_get_data_addr(w->e.img, &w->e.bpp, &w->e.len, &w->e.end);
+	w->char_left.img = mlx_xpm_file_to_image(w->mlx, "./img/char_left.xpm", &iw, &ih);
+	w->char_left.add = mlx_get_data_addr(w->char_left.img, &w->char_left.bpp, &w->char_left.len, &w->char_left.end);
+
+	w->char_right.img = mlx_xpm_file_to_image(w->mlx, "./img/char_right.xpm", &iw, &ih);
+	w->char_right.add = mlx_get_data_addr(w->char_right.img, &w->char_right.bpp, &w->char_right.len, &w->char_right.end);
+
+	w->char_top.img = mlx_xpm_file_to_image(w->mlx, "./img/char_top.xpm", &iw, &ih);
+	w->char_top.add = mlx_get_data_addr(w->char_top.img, &w->char_top.bpp, &w->char_top.len, &w->char_top.end);
+
 }
 
 /* Choose the correct image depending the map char */
@@ -173,12 +180,58 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 				mlx_put_image_to_window(wind->mlx, wind->win, wind->wall_left.img, x, y);
 			}
 		}
+		else
+		{
+			if (wind->count == 0)
+			{
+				if (wind->trap_count == 0)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap1.img, x, y);
+				else if (wind->trap_count == 1)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				else if (wind->trap_count == 2)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap3.img, x, y);
+				else if (wind->trap_count == 3)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				wind->count++;
+			}
+			else if (wind->count == 1)
+			{
+				if (wind->trap_count == 0)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				else if (wind->trap_count == 1)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap3.img, x, y);
+				else if (wind->trap_count == 2)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				else if (wind->trap_count == 3)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap1.img, x, y);
+				wind->count++;
+			}
+			else if (wind->count > 1)
+			{
+				if (wind->trap_count == 0)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap3.img, x, y);
+				else if (wind->trap_count == 1)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				else if (wind->trap_count == 2)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap1.img, x, y);
+				else if (wind->trap_count == 3)
+					mlx_put_image_to_window(wind->mlx, wind->win, wind->trap2.img, x, y);
+				wind->count = 0;
+			}
+		}
 	}
 	else if (pos == 'E')
 		mlx_put_image_to_window(wind->mlx, wind->win, wind->exit.img, x, y);
-	else if (pos == 'P')
+	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
 	{
-		mlx_put_image_to_window(wind->mlx, wind->win, wind->heart.img, x, y);
+		if (pos == 'P')
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->char_down.img, x, y);
+		else if (pos == 'Q')
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->char_left.img, x, y);
+		else if (pos == 'R')
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->char_right.img, x, y);
+		else if (pos == 'S')
+			mlx_put_image_to_window(wind->mlx, wind->win, wind->char_top.img, x, y);
 		if (wind->count < 2)
 			wind->count++;
 		else
@@ -205,12 +258,7 @@ void	print_img(t_window *wind)
 		{
 			put_img_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
 			b++;
-			if (wind->map[a][b] == '1')
-				if (i != wind->obj.height && i != 0)
-					if (j != wind->obj.width && j != 0)
-						mlx_put_image_to_window(wind->mlx, wind->win, wind->obstacle.img, b * IMG_W, a * IMG_H);
 		}
-
 		a++;
 	}
 	display_mouvement_count(wind);

@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 		window.map = parse_map(argv[1]);
 		if (window.map == NULL)
 			return (-1);
+		if (check_the_map(&window) == -1)
+			return (-1);
 		open_window(&window);
 	}
 	else

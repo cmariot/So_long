@@ -111,6 +111,11 @@ $(OBJS_DIR)%.o : %.c
 		@$(CC) $(CFLAGS) -c $< -o $@
 		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
 
+mlx_compil:
+		@printf "$(YE)MinilibX compilation ... "
+		@make -C $(MLX)
+		@printf "Success !$(RC)\n\n"
+
 libft_compil:
 		@printf "$(YE)Libft compilation ... "
 		@make -C libft
@@ -120,7 +125,7 @@ srcs_compil :
 		@printf "$(YE)Source code compilation ... \n$(RC)"
 			
 # Linking
-$(NAME)	: header libft_compil srcs_compil $(SRCS) $(OBJS)
+$(NAME)	: header libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
 		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(RC)\n"
 		@$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) -o $(NAME)

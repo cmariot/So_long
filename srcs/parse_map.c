@@ -12,6 +12,16 @@
 
 #include "so_long.h"
 
+int	check_the_map(t_window *window)
+{
+	if (check_map(window) == -1)
+	{   
+		free_map(window->map);
+		return (-1);
+	}
+	return (0);
+}
+
 /* Check if the map is rectangular */
 int	is_rectangular(char **map, int i)
 {
@@ -78,19 +88,19 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
-void	free_map(char ***map)
+void	free_map(char **map)
 {
 	int	i;
 
 	i = 0;
-	while (*(map[i]) != NULL)
+	while (map[i])
 	{
-		if (*(map[i]) != NULL)
-			free(*map[i]);
+		if (map[i] != NULL)
+			free(map[i]);
 		i++;
 	}
-	if (*map)
-		free(*map);
+	if (map)
+		free(map);
 }
 
 /* Count the lines of the map,
@@ -107,7 +117,7 @@ char	**parse_map(char *map_path)
 	map_height = count_map_lines(map_path);
 	if (map_height == -1)
 		return (NULL);
-	map = malloc(sizeof(char *) * (map_height + 1));
+	map = malloc(sizeof(char **) * (map_height + 1));
 	if (!map)
 		return (NULL);
 	file_descriptor = open(map_path, O_RDONLY);
@@ -119,20 +129,20 @@ char	**parse_map(char *map_path)
 			break ;
 		i++;
 	}
+	map[i] = NULL;
 	if (*map[0] == '\0')
 	{
 		printf("Error,\nThe map is empty.\n");
-		free_map(&map);
+		free_map(map);
 		exit(0);
 	}
 	if (*map[i - 1] == '\0')
 	{
 		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
-		free_map(&map);
+		free_map(map);
 		close(file_descriptor);
 		exit(0);
 	}
-	map [i] = NULL;
 	close(file_descriptor);
 	return (map);
 }

@@ -17,53 +17,6 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-int	ft_strlen(char *str)
-{
-	int	len;
-
-	len = 0;
-	while (*str++)
-		len++;
-	return (len);
-}
-
-char	*ft_strjoin(char *str1, char *str2)
-{
-	int		total_len;
-	char	*new;
-	int		i;
-	int		j;
-
-	total_len = ft_strlen(str1) + ft_strlen(str2) + 1;
-	new = malloc(sizeof(char) * total_len);
-	if (!new)
-		return (NULL);
-	i = 0;
-	while (str1[i] != '\0')
-	{
-		new[i] = str1[i];
-		i++;
-	}
-	j = 0;
-	while (str2[j] != '\0')
-	{
-		new[i++] = str2[j++];
-	}
-	new[i] = '\0';
-	return (new);
-}
-
-int	ft_strchr(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		if (str[i++] == c)
-			return (1);
-	return (0);
-}
-
 char	*ft_gnl_get_begin(char *str)
 {
 	char	*new;

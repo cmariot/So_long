@@ -47,7 +47,7 @@ int	move_forward(int key, t_window *wind)
 		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 		{
 			wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
 			wind->obj.collected++;
 			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
 			printf("collected\n");
@@ -57,7 +57,7 @@ int	move_forward(int key, t_window *wind)
 		else
 		{
 			wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
 		}
 		printf("Mouvement %d : Top\n", wind->obj.mvmt);
 	}
@@ -76,7 +76,7 @@ int	turn_left(int key, t_window *wind)
 		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 		{
 			wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
 			wind->obj.collected++;
 			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
 			printf("collected\n");
@@ -86,7 +86,7 @@ int	turn_left(int key, t_window *wind)
 		else
 		{
 			wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
 		}
 		printf("Mouvement %d : Left\n", wind->obj.mvmt);
 	}
@@ -134,7 +134,7 @@ int	turn_right(int key, t_window *wind)
 		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 		{
 			wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
 			wind->obj.collected++;
 			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
 			printf("collected\n");
@@ -144,7 +144,7 @@ int	turn_right(int key, t_window *wind)
 		else
 		{
 			wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+			wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
 		}
 		printf("Mouvement %d : Right\n", wind->obj.mvmt);
 	}

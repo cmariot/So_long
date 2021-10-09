@@ -18,8 +18,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "mlx.h"
+# include "libft.h"
 
-# define BUFFER_SIZE 50
 # define IMG_H 40
 # define IMG_W 40
 
@@ -59,6 +59,7 @@ typedef struct s_window
 	void	*mlx;
 	void	*win;
 	int		count;
+	int		trap_count;
 	t_obj	obj;
 	t_img	ground1;
 	t_img	ground2;
@@ -66,7 +67,6 @@ typedef struct s_window
 	t_img	wall_top1;
 	t_img	wall_top2;
 	t_img	wall_top3;
-	
 	t_img	wall_top_corner_left;
 	t_img	wall_top_corner_right;
 	t_img	wall_bottom_corner_left;
@@ -74,19 +74,15 @@ typedef struct s_window
 	t_img	wall_left;
 	t_img	wall_right;
 	t_img	wall_bottom;
-	
-	t_img	obstacle;
-
-	
+	t_img	trap1;
+	t_img	trap2;
+	t_img	trap3;
+	t_img	char_down;
+	t_img	char_left;
+	t_img	char_right;
+	t_img	char_top;
 	t_img	heart;
 	t_img	exit;
-	
-
-	t_img	p;
-	t_img	c;
-	t_img	w;
-	t_img	v;
-	t_img	e;
 }	t_window;
 
 // SO LONG
@@ -96,6 +92,7 @@ int		check_map(t_window *wind);
 int		is_rectangular(char **map, int i);
 void	struct_init(t_window *window);
 int		check_objects(t_obj *objects);
+int		check_the_map(t_window *window);
 void	set_player_position(t_obj *objects, int x, int i);
 int		open_window(t_window *window);
 void	open_xpm_img(t_window *w);
@@ -105,19 +102,9 @@ int		move_forward(int key, t_window *wind);
 int		turn_left(int key, t_window *wind);
 int		move_back(int key, t_window *wind);
 int		turn_right(int key, t_window *wind);
-void	free_map(char ***map);
+void	free_map(char **map);
 int		close_window(int key, t_window *window);
-
-// GET NEXT LINE
 char	*gnl_without_bn(int fd);
-
-// LIBFT
-int		ft_putchar(char c);
 void	ft_putstr(char *str);
-void	ft_putnbr(int n);
-int		ft_strlen(char *str);
-char	*ft_strdup(char *str);
-char	*ft_strjoin(char *str1, char *str2);
-char	*ft_itoa(int n);
 
 #endif
