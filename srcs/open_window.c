@@ -13,10 +13,10 @@
 #include "so_long.h"
 
 /* Exit if we close the window by clicking on the cross */
-int	red_cross(int key, t_window **window)
+int	red_cross(int key, t_window *window)
 {
-	//It doesm't work ...
-	close_window(key, *window);
+	//It doesn't work yet ... SEGFAULT
+	close_window(key, window);
 	return (key);
 }
 
@@ -24,7 +24,6 @@ int	red_cross(int key, t_window **window)
 int	close_window(int key, t_window *window)
 {
 	free_map(window->map);
-	mlx_destroy_image(window->mlx, window->background.img);
 	mlx_destroy_image(window->mlx, window->ground1.img);
 	mlx_destroy_image(window->mlx, window->ground2.img);
 	mlx_destroy_image(window->mlx, window->ground3.img);
@@ -54,7 +53,7 @@ int	close_window(int key, t_window *window)
 	return (key);
 }
 
-/* MLX hook : if a key is pressed do action */
+/* MLX hook : if a key is pressed do action and print a new img */
 int	key_pressed(int key, t_window *wind)
 {
 	if (key == ESC_KEY)
@@ -86,10 +85,10 @@ int	open_window(t_window *wind)
 	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
 	open_xpm_img(wind);
 	background_color(wind, win_h, win_w);
-	display_rules(wind);
 	print_img(wind);
 	mlx_key_hook(wind->win, key_pressed, wind);
-	mlx_hook(wind->win, 17, 1L << 2, close_window, (t_window *)wind);
+	mlx_hook(wind->win, 17, 1L << 2, close_window, wind);
+	mlx_hook(wind->win, 25, 1L << 18, close_window, wind);
 	mlx_loop(wind->mlx);
 	return (0);
 }

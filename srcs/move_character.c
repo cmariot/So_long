@@ -28,6 +28,10 @@ int	exit_finish(t_window *wind)
 			close_window(0, wind);
 		}
 	}
+	else
+	{
+		printf("You haven't collected all the hearts ...\n");
+	}
 	return (-1);
 }
 

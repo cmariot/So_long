@@ -12,33 +12,66 @@
 
 #include "so_long.h"
 
-/* Display the string "Move : X" in white at the top left corner */
+/* Display the string "Moves : X" on the screen */
 void	display_mouvement_count(t_window *wind)
 {
 	char	*number;
 	char	*movements;
 
+	if (wind->obj.mvmt > INT_MAX)
+		return;
 	number = ft_itoa(wind->obj.mvmt);
 	movements = ft_strjoin("Moves : ", number);
 	mlx_string_put(wind->mlx, wind->win, 40,
-		IMG_H * wind->obj.height - 15, 2147483647, movements);
+		IMG_H * (wind->obj.height + 1) - 15, INT_MAX, movements);
 	free(number);
 	free(movements);
 }
 
+/* Display the string "Collected : X / X" on the screen */
+void	display_heart_count(t_window *wind)
+{
+	char	*collected;
+	char	*collectible;
+	char	*tmp;
+
+	if (wind->obj.collectible > INT_MAX)
+		return ;
+	if (wind->obj.collected > INT_MAX)
+		return ;
+	collected = ft_itoa(wind->obj.collected);
+	tmp = ft_strjoin("Collected : ", collected);
+	free(collected);
+	collected = ft_strdup(tmp);
+	free(tmp);
+	collectible = ft_itoa(wind->obj.collectible);
+	tmp = ft_strjoin(" / ", collectible);
+	free(collectible);
+	collectible = ft_strdup(tmp);
+	free(tmp);
+	tmp = ft_strjoin(collected, collectible);
+	free(collectible);
+	free(collected);
+	mlx_string_put(wind->mlx, wind->win, 40,
+		IMG_H * (wind->obj.height + 1) - 35, INT_MAX, tmp);
+	free(tmp);
+}
+
+/* Display the rules on the screen,
+   if the window is too small just display keys */
 void	display_rules(t_window *wind)
 {
 	char	*rules;
 	char	*additional;
 	char	*all;
 
-	if (wind->obj.width >= 12)
+	if (wind->obj.width > 12)
 	{
 		rules = ft_strdup("Collect all the hearts before leaving the place. ");
 		additional = ft_strdup("Move with WASD keys.");
 		all = ft_strjoin(rules, additional);
 		mlx_string_put(wind->mlx, wind->win,
-			40, IMG_H * (wind->obj.height + 1) - 15, 2147483647, all);
+			40, IMG_H * wind->obj.height - 15, INT_MAX, all);
 		free(rules);
 		free(all);
 	}
@@ -46,22 +79,17 @@ void	display_rules(t_window *wind)
 	{
 		additional = ft_strdup("Move with WASD keys.");
 		mlx_string_put(wind->mlx, wind->win, 40,
-			IMG_H * (wind->obj.height + 1) - 15, 2147483647, additional);
+			IMG_H * wind->obj.height  - 15, 2147483647, additional);
 	}
 	free(additional);
 }
 
-/*	'p' (player start), 'c' (coin), '1' (wall),
- *	'0' (void), 'e' (exit)	*/
+/* Open the XPM images and save their address */
 void	open_xpm_img(t_window *w)
 {
 	int		iw;
 	int		ih;
 
-	w->background.img = mlx_new_image(w->mlx,
-			w->obj.width * IMG_W, (w->obj.height + 1) * IMG_H);
-	w->ground1.add = mlx_get_data_addr(w->background.img,
-			&w->background.bpp, &w->background.len, &w->background.end);
 	w->ground1.img = mlx_xpm_file_to_image(w->mlx,
 			"./img/ground1.xpm", &iw, &ih);
 	w->ground1.add = mlx_get_data_addr(w->ground1.img,
@@ -159,29 +187,24 @@ void	open_xpm_img(t_window *w)
 			&w->char_top.bpp, &w->char_top.len, &w->char_top.end);
 }
 
-/* Choose the correct image depending the map char */
+/* Display the correct image depending the map char and it's position on the map */
 void	put_img_to_window(char pos, t_window *wind, int x, int y)
 {
 	if (pos == '0')
 	{
 		if (wind->count == 0)
-		{
 			mlx_put_image_to_window(wind->mlx,
 				wind->win, wind->ground1.img, x, y);
-			wind->count++;
-		}
 		else if (wind->count == 1)
-		{
 			mlx_put_image_to_window(wind->mlx,
 				wind->win, wind->ground2.img, x, y);
-			wind->count++;
-		}
 		else if (wind->count > 1)
-		{
 			mlx_put_image_to_window(wind->mlx,
 				wind->win, wind->ground3.img, x, y);
+		if (wind->count < 2)
+			wind->count++;
+		else
 			wind->count = 0;
-		}
 	}
 	else if (pos == 'C')
 	{
@@ -196,15 +219,11 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 		if (y / IMG_H == 0 && y % IMG_H == 0)
 		{
 			if (x / IMG_W == 0 && x % IMG_W == 0)
-			{
 				mlx_put_image_to_window(wind->mlx,
 					wind->win, wind->wall_top_corner_right.img, x, y);
-			}
 			else if (x / IMG_W == wind->obj.width - 1 && x % IMG_W == 0)
-			{
 				mlx_put_image_to_window(wind->mlx, wind->win,
 					wind->wall_top_corner_left.img, x, y);
-			}
 			else if (wind->count == 0 || wind->count == 2)
 			{
 				mlx_put_image_to_window(wind->mlx,
@@ -239,18 +258,14 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 		else if (x / IMG_W == 0 && x % IMG_W == 0)
 		{
 			if (y / IMG_H != wind->obj.height - 1)
-			{
 				mlx_put_image_to_window(wind->mlx,
 					wind->win, wind->wall_right.img, x, y);
-			}
 		}
 		else if (x / IMG_W == wind->obj.width - 1 && x % IMG_W == 0)
 		{
 			if (y / IMG_H != wind->obj.height - 1)
-			{
 				mlx_put_image_to_window(wind->mlx, wind->win,
 					wind->wall_left.img, x, y);
-			}
 		}
 		else
 		{
@@ -350,6 +365,10 @@ void	print_img(t_window *wind)
 		}
 		a++;
 	}
+	background_color(wind, IMG_H * (wind->obj.height + 1),
+		IMG_W * wind->obj.width);
+	display_rules(wind);
 	display_mouvement_count(wind);
+	display_heart_count(wind);
 	wind->count = 0;
 }

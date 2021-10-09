@@ -19,15 +19,18 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 	{
 		if (check_extension(argv[1]) == -1)
-			return (-1);
+			return (EXIT_FAILURE);
 		window.map = parse_map(argv[1]);
 		if (window.map == NULL)
-			return (-1);
+			return (EXIT_FAILURE);
 		if (check_the_map(&window) == -1)
-			return (-1);
+			return (EXIT_FAILURE);
 		open_window(&window);
+		return (EXIT_SUCCESS);
 	}
 	else
-		ft_putstr("Error\nUsage : ./so_long [MAP_PATH]\n");
-	return (0);
+	{
+		ft_putstr_fd("Error\nUsage : ./so_long [MAP_PATH]\n", 2);
+		return(EXIT_FAILURE);
+	}
 }

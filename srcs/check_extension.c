@@ -19,18 +19,10 @@ int	check_extension(char *map_name)
 
 	len = ft_strlen(map_name);
 	if (map_name[len - 4] == '.')
-	{
 		if (map_name[len - 3] == 'b')
-		{
 			if (map_name[len - 2] == 'e')
-			{
 				if (map_name[len - 1] == 'r')
-				{
 					return (0);
-				}
-			}
-		}
-	}
-	ft_putstr("Error\nThe map has not the correct extension.\n");
+	ft_putstr_fd("Error\nThe map has not the correct extension.\n", 2);
 	return (-1);
 }

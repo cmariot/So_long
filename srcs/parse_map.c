@@ -32,7 +32,7 @@ int	is_rectangular(char **map, int i)
 	line_len = ft_strlen(map[i]);
 	if (first_len != line_len)
 	{
-		ft_putstr("Error\nThe map is not rectangular.\n");
+		ft_putstr_fd("Error\nThe map is not rectangular.\n", 2);
 		return (0);
 	}
 	else
@@ -56,7 +56,7 @@ int	count_lines(int file_descriptor)
 		tmp[1] = '\0';
 		if (read_return == -1)
 		{
-			ft_putstr("Error\nThe so_long argument given is a directory.\n");
+			ft_putstr_fd("Error\nThe so_long argument given is a directory.\n", 2);
 			free(tmp);
 			return (-1);
 		}
@@ -78,7 +78,7 @@ int	count_map_lines(char *map_path)
 	file_descriptor = open(map_path, O_RDONLY);
 	if (file_descriptor == -1)
 	{
-		ft_putstr("Error\nThe map couldn't be open.\n");
+		ft_putstr_fd("Error\nThe map couldn't be open.\n", 2);
 		return (-1);
 	}
 	map_height = count_lines(file_descriptor);
@@ -132,16 +132,16 @@ char	**parse_map(char *map_path)
 	map[i] = NULL;
 	if (*map[0] == '\0')
 	{
-		printf("Error,\nThe map is empty.\n");
+		ft_putstr_fd("Error,\nThe map is empty.\n", 2);
 		free_map(map);
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 	if (*map[i - 1] == '\0')
 	{
-		ft_putstr("Error\nThere is a backslash n at the end of the map.\n");
+		ft_putstr_fd("Error\nThere is a backslash n at the end of the map.\n", 2);
 		free_map(map);
 		close(file_descriptor);
-		exit(0);
+		exit(EXIT_FAILURE);
 	}
 	close(file_descriptor);
 	return (map);

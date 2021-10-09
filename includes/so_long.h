@@ -22,6 +22,7 @@
 
 # define IMG_H 40
 # define IMG_W 40
+# define INT_MAX 2147483647
 
 # define ESC_KEY 65307
 # define W_KEY 119
@@ -61,7 +62,6 @@ typedef struct s_window
 	int		count;
 	int		trap_count;
 	t_obj	obj;
-	t_img	background;
 	t_img	ground1;
 	t_img	ground2;
 	t_img	ground3;

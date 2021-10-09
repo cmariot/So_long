@@ -49,17 +49,17 @@ int	check_objects(t_obj *objects)
 {
 	if (!objects->start)
 	{
-		ft_putstr("Error\nThere is no start on the map.\n");
+		ft_putstr_fd("Error\nThere is no start on the map.\n", 2);
 		return (-1);
 	}
 	else if (!objects->collectible)
 	{
-		ft_putstr("Error\nThere is no collectible on the map.\n");
+		ft_putstr_fd("Error\nThere is no collectible on the map.\n", 2);
 		return (-1);
 	}
 	else if (!objects->exit)
 	{
-		ft_putstr("Error\nThere is no  exit on the map.\n");
+		ft_putstr_fd("Error\nThere is no  exit on the map.\n", 2);
 		return (-1);
 	}
 	else

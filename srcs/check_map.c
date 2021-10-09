@@ -34,7 +34,7 @@ int	check_unauthorized_characters(char *line, t_obj *objects, int x)
 			objects->exit += 1;
 		else
 		{
-			ft_putstr("Error\nThe map have unauthorized characters.\n");
+			ft_putstr_fd("Error\nThe map have unauthorized characters.\n", 2);
 			return (-1);
 		}
 		i++;
@@ -53,7 +53,7 @@ int	check_firt_and_last_line(char *map_line)
 	{
 		if (map_line[i] != '1')
 		{
-			ft_putstr("Error\nThe map is not surround by walls.\n");
+			ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
 			return (-1);
 		}
 		i++;
@@ -68,13 +68,13 @@ int	check_other_lines(char *map_line)
 
 	if (map_line[0] != '1')
 	{
-		ft_putstr("Error\nThe map is not surround by walls.\n");
+		ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
 		return (-1);
 	}
 	len = ft_strlen(map_line);
 	if (map_line[len - 1] != '1')
 	{
-		ft_putstr("Error\nThe map is not surround by walls.\n");
+		ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
 		return (-1);
 	}
 	return (0);
