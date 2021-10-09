@@ -61,6 +61,7 @@ typedef struct s_window
 	int		count;
 	int		trap_count;
 	t_obj	obj;
+	t_img	background;
 	t_img	ground1;
 	t_img	ground2;
 	t_img	ground3;
@@ -106,5 +107,7 @@ void	free_map(char **map);
 int		close_window(int key, t_window *window);
 char	*gnl_without_bn(int fd);
 void	ft_putstr(char *str);
+void	background_color(t_window *wind, int height, int width);
+void	display_rules(t_window *window);
 
 #endif

@@ -25,6 +25,29 @@ void	display_mouvement_count(t_window *wind)
 	free(movements);
 }
 
+void	display_rules(t_window *wind)
+{
+	char	*rules;
+	char	*additional;
+	char	*all;
+
+	if (wind->obj.width >= 12)
+	{
+		rules = ft_strdup("Collect all the hearts before leaving the place. ");
+		additional = ft_strdup("Move with WASD keys.");
+		all = ft_strjoin(rules, additional);
+		mlx_string_put(wind->mlx, wind->win, 40, IMG_H * (wind->obj.height + 1) - 15 , 2147483647, all);
+		free(rules);
+		free(all);
+	}
+	else
+	{
+		additional = ft_strdup("Move with WASD keys.");
+		mlx_string_put(wind->mlx, wind->win, 40, IMG_H * (wind->obj.height + 1) - 15 , 2147483647, additional);
+	}
+	free(additional);
+}
+
 /*	'p' (player start), 'c' (coin), '1' (wall),
  *	'0' (void), 'e' (exit)	*/
 void	open_xpm_img(t_window *w)
@@ -32,6 +55,9 @@ void	open_xpm_img(t_window *w)
 	int		iw;
 	int		ih;
 
+	w->background.img = mlx_new_image(w->mlx, w->obj.width * IMG_W, (w->obj.height + 1) * IMG_H);
+	w->ground1.add = mlx_get_data_addr(w->background.img, &w->background.bpp, &w->background.len, &w->background.end);
+	
 	w->ground1.img = mlx_xpm_file_to_image(w->mlx, "./img/ground1.xpm", &iw, &ih);
 	w->ground1.add = mlx_get_data_addr(w->ground1.img, &w->ground1.bpp, &w->ground1.len, &w->ground1.end);
 

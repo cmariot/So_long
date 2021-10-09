@@ -24,6 +24,7 @@ int	red_cross(int key, t_window **window)
 int	close_window(int key, t_window *window)
 {
 	free_map(window->map);
+	mlx_destroy_image(window->mlx, window->background.img);
 	mlx_destroy_image(window->mlx, window->ground1.img);
 	mlx_destroy_image(window->mlx, window->ground2.img);
 	mlx_destroy_image(window->mlx, window->ground3.img);
@@ -80,10 +81,12 @@ int	open_window(t_window *wind)
 	int			win_w;
 
 	wind->mlx = mlx_init();
-	win_h = wind->obj.height * IMG_H;
+	win_h = (wind->obj.height + 1) * IMG_H;
 	win_w = wind->obj.width * IMG_W;
 	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
 	open_xpm_img(wind);
+	background_color(wind, win_h, win_w);
+	display_rules(wind);
 	print_img(wind);
 	mlx_key_hook(wind->win, key_pressed, wind);
 	mlx_hook(wind->win, 17, 1L << 2, close_window, (t_window *)wind);

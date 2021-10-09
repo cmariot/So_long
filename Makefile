@@ -72,6 +72,7 @@ SRCS		= main.c \
 			  display_images.c \
 			  move_character.c \
 			  open_window.c \
+			  colors.c \
 			  parse_map.c \
 			  gnl_without_bn.c
 
