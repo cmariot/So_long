@@ -15,7 +15,7 @@
 int	check_the_map(t_window *window)
 {
 	if (check_map(window) == -1)
-	{   
+	{
 		free_map(window->map);
 		return (-1);
 	}
