@@ -13,15 +13,15 @@ void	background_color(t_window* win, int height, int width)
 	int trgb_color;
 
 	trgb_color = create_trgb(0, 47, 47, 46);
-	i = win->obj.height * IMG_H;
-	while (i <= height)
+	j = 0;
+	while (j <= width)
 	{
-		j = 0;
-		while (j <= width)
+		i = win->obj.height * IMG_H;
+		while (i <= height)
 		{
 			mlx_pixel_put(win->mlx, win->win, j, i, trgb_color);
-			j++;
+			i++;
 		}
-		i++;
+		j++;
 	}
 }

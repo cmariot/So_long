@@ -140,7 +140,16 @@ norm :
 				@norminette
 
 test:			${NAME}
-				./so_long maps/34x6.ber
+				./so_long maps/lvl2.ber
+
+lvl1:			${NAME}
+				./so_long maps/lvl1.ber
+				
+lvl2:			${NAME}
+				./so_long maps/lvl2.ber
+
+lvl3:			${NAME}
+				./so_long maps/lvl3.ber
 
 # Remove object files
 clean :
