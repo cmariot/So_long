@@ -1,7 +1,6 @@
 #SoLong
 
 ##To do :
-- [ ] Close the window with the red cross without segfault
 - [ ] Resize the window
 - [ ] Error if a XPM image cannot be open
 - [ ] Norm
@@ -10,6 +9,7 @@
 - [ ] Enemy patrols
 - [ ] Game over if hit an enemy
 - [ ] Record log
+- [ ] MacOS compatibility
 - [ ] README.md
 
 ##Done :
@@ -25,3 +25,4 @@
 	- [X] Unauthorized characters
 	- [X] Final \n
 - [X] Error on strerror
+- [X] Close the window with the red cross without segfault

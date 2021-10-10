@@ -16,21 +16,17 @@ int	main(int argc, char **argv)
 {
 	t_window	window;
 
-	if (argc == 2)
-	{
-		if (check_extension(argv[1]) == -1)
-			return (EXIT_FAILURE);
-		window.map = parse_map(argv[1]);
-		if (window.map == NULL)
-			return (EXIT_FAILURE);
-		if (check_the_map(&window) == -1)
-			return (EXIT_FAILURE);
-		open_window(&window);
-		return (EXIT_SUCCESS);
-	}
-	else
-	{
+	if (argc != 2)
 		ft_putstr_fd("Error\nUsage : ./so_long [MAP_PATH]\n", 2);
+	if (argc != 2)
 		return(EXIT_FAILURE);
-	}
+	if (check_extension(argv[1]) == -1)
+		return (EXIT_FAILURE);
+	window.map = parse_map(argv[1]);
+	if (window.map == NULL)
+		return (EXIT_FAILURE);
+	if (check_the_map(&window) == -1)
+		return (EXIT_FAILURE);
+	open_window(&window);
+	return (EXIT_SUCCESS);
 }

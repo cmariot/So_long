@@ -12,18 +12,25 @@
 
 #include "so_long.h"
 
-/* Exit if we close the window by clicking on the cross */
-int	red_cross(int key, t_window *window)
+void	free_map(char **map)
 {
-	//It doesn't work yet ... SEGFAULT
-	close_window(key, window);
-	return (key);
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] != NULL)
+			free(map[i]);
+		map[i] = NULL;
+		i++;
+	}
+	if (map)
+		free(map);
+	map = NULL;
 }
 
-/* If ESC is pressed */
-int	close_window(int key, t_window *window)
+void	free_img(t_window *window)
 {
-	free_map(window->map);
 	mlx_destroy_image(window->mlx, window->ground1.img);
 	mlx_destroy_image(window->mlx, window->ground2.img);
 	mlx_destroy_image(window->mlx, window->ground3.img);
@@ -46,6 +53,25 @@ int	close_window(int key, t_window *window)
 	mlx_destroy_image(window->mlx, window->char_left.img);
 	mlx_destroy_image(window->mlx, window->char_right.img);
 	mlx_destroy_image(window->mlx, window->char_down.img);
+}
+
+/* Exit if we close the window by clicking on the cross */
+int	red_cross(t_window *window)
+{
+	free_map(window->map);
+	free_img(window);
+	mlx_destroy_window(window->mlx, window->win);
+	mlx_destroy_display(window->mlx);
+	free(window->mlx);
+	exit(EXIT_SUCCESS);
+	return (0);
+}
+
+/* If ESC is pressed */
+int	close_window(int key, t_window *window)
+{
+	free_map(window->map);
+	free_img(window);
 	mlx_destroy_window(window->mlx, window->win);
 	mlx_destroy_display(window->mlx);
 	free(window->mlx);
@@ -57,7 +83,7 @@ int	close_window(int key, t_window *window)
 int	key_pressed(int key, t_window *wind)
 {
 	if (key == ESC_KEY)
-		close_window(key, (t_window *)wind);
+		close_window(key, wind);
 	else if (key == W_KEY)
 		move_forward(key, wind);
 	else if (key == A_KEY)
@@ -87,8 +113,7 @@ int	open_window(t_window *wind)
 	background_color(wind, win_h, win_w);
 	print_img(wind);
 	mlx_key_hook(wind->win, key_pressed, wind);
-	mlx_hook(wind->win, 17, 1L << 2, close_window, wind);
-	mlx_hook(wind->win, 25, 1L << 18, close_window, wind);
+	mlx_hook(wind->win, 33, 1L << 5, red_cross, wind);
 	mlx_loop(wind->mlx);
 	return (0);
 }

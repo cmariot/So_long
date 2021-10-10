@@ -88,21 +88,6 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		if (map[i] != NULL)
-			free(map[i]);
-		i++;
-	}
-	if (map)
-		free(map);
-}
-
 /* Count the lines of the map,
    create an array to store the map,
    put the map in the array, without the '\n',
