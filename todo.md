@@ -1,7 +1,6 @@
 #SoLong
 
 ##To do :
-- [ ] Resize the window
 - [ ] Error if a XPM image cannot be open
 - [ ] Norm
 - [ ] Bonus files and Makefile bonus rule

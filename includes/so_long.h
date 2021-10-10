@@ -92,6 +92,11 @@ void	set_player_position(t_obj *objects, int x, int i);
 int		open_window(t_window *window);
 void	open_xpm_img(t_window *w);
 void	put_img_to_window(char pos, t_window *wind, int x, int y);
+void	update_img(t_window *window);
+void	display_mouvement_count(t_window *wind);
+void	display_heart_count(t_window *wind);
+void	display_rules(t_window *wind);
+
 void	print_img(t_window *wind);
 int		move_forward(int key, t_window *wind);
 int		turn_left(int key, t_window *wind);

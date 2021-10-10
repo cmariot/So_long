@@ -75,6 +75,7 @@ SRCS		= main.c \
 			  move_character.c \
 			  open_window.c \
 			  colors.c \
+			  update_img.c \
 			  parse_map.c \
 			  gnl_without_bn.c
 
@@ -139,7 +140,7 @@ bonus : $(NAME)
 
 # Check 42 norm 
 norm :
-				@norminette
+				@norminette srcs includes libft
 
 test:			${NAME}
 				./so_long maps/lvl2.ber

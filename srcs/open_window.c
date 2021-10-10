@@ -61,7 +61,7 @@ int	red_cross(t_window *window)
 	free_map(window->map);
 	free_img(window);
 	mlx_destroy_window(window->mlx, window->win);
-//	mlx_destroy_display(window->mlx);
+	mlx_destroy_display(window->mlx);
 	free(window->mlx);
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -73,7 +73,7 @@ int	close_window(int key, t_window *window)
 	free_map(window->map);
 	free_img(window);
 	mlx_destroy_window(window->mlx, window->win);
-//	mlx_destroy_display(window->mlx);
+	mlx_destroy_display(window->mlx);
 	free(window->mlx);
 	exit(EXIT_SUCCESS);
 	return (key);
@@ -95,7 +95,7 @@ int	key_pressed(int key, t_window *wind)
 	wind->trap_count++;
 	if (wind->trap_count > 3)
 		wind->trap_count = 0;
-	print_img(wind);
+	update_img(wind);
 	return (0);
 }
 

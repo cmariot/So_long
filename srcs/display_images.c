@@ -19,7 +19,7 @@ void	display_mouvement_count(t_window *wind)
 	char	*movements;
 
 	if (wind->obj.mvmt > INT_MAX)
-		return;
+		return ;
 	number = ft_itoa(wind->obj.mvmt);
 	movements = ft_strjoin("Moves : ", number);
 	mlx_string_put(wind->mlx, wind->win, 40,
@@ -79,7 +79,7 @@ void	display_rules(t_window *wind)
 	{
 		additional = ft_strdup("Move with WASD keys.");
 		mlx_string_put(wind->mlx, wind->win, 40,
-			IMG_H * wind->obj.height  - 15, 2147483647, additional);
+			IMG_H * wind->obj.height - 15, 2147483647, additional);
 	}
 	free(additional);
 }
@@ -187,7 +187,8 @@ void	open_xpm_img(t_window *w)
 			&w->char_top.bpp, &w->char_top.len, &w->char_top.end);
 }
 
-/* Display the correct image depending the map char and it's position on the map */
+/* Display the correct image depending 
+ * the map char and it's position on the map */
 void	put_img_to_window(char pos, t_window *wind, int x, int y)
 {
 	if (pos == '0')

@@ -56,7 +56,7 @@ int	count_lines(int file_descriptor)
 		tmp[1] = '\0';
 		if (read_return == -1)
 		{
-			ft_putstr_fd("Error\nThe so_long argument given is a directory.\n", 2);
+			ft_putstr_fd("Error\nThe argument is a directory.\n", 2);
 			free(tmp);
 			return (-1);
 		}
