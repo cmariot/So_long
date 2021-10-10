@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/08 23:48:19 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/10 15:56:14 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	red_cross(t_window *window)
 	free_map(window->map);
 	free_img(window);
 	mlx_destroy_window(window->mlx, window->win);
-	mlx_destroy_display(window->mlx);
+//	mlx_destroy_display(window->mlx);
 	free(window->mlx);
 	exit(EXIT_SUCCESS);
 	return (0);
@@ -73,7 +73,7 @@ int	close_window(int key, t_window *window)
 	free_map(window->map);
 	free_img(window);
 	mlx_destroy_window(window->mlx, window->win);
-	mlx_destroy_display(window->mlx);
+//	mlx_destroy_display(window->mlx);
 	free(window->mlx);
 	exit(EXIT_SUCCESS);
 	return (key);

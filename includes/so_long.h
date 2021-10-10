@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/08 14:59:11 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/10 15:47:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@
 # define IMG_H 40
 # define IMG_W 40
 # define INT_MAX 2147483647
-
-# define ESC_KEY 65307
-# define W_KEY 119
-# define S_KEY 115
-# define D_KEY 100
-# define A_KEY 97
 
 typedef struct s_obj
 {

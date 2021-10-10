@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/08 23:45:43 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/10 15:49:19 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,11 @@ LFLAGS_LIB			+= -L $(MLX) -l mlx
 UNAME := $(shell uname -m)
 ifeq ($(UNAME), arm64)
 	LFLAGS_LIB += -framework OpenGL -framework AppKit
+	KEYMAP = -D ESC_KEY=53 -D W_KEY=13 -D S_KEY=1 -D D_KEY=2 -D A_KEY=0
 else
 	CFLAGS += -I /usr/include -O3
 	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm 
+	KEYMAP = -D ESC_KEY=65307 -D W_KEY=119 -D S_KEY=115 -D D_KEY=100 -D A_KEY=97
 endif
 
 # Debug flag, use with 'make DEBUG=1'
@@ -109,7 +111,7 @@ header :
 # Compiling
 $(OBJS_DIR)%.o : %.c
 		@mkdir -p $(OBJS_DIR)
-		@$(CC) $(CFLAGS) -c $< -o $@
+		@$(CC) $(CFLAGS) $(KEYMAP) -c $< -o $@
 		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
 
 mlx_compil:
