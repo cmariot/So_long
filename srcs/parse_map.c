@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/09 00:46:39 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/11 16:00:03 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,24 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
+void	print_parsing_error(char **map, int i, int file_descriptor)
+{
+	if (*map[0] == '\0')
+	{
+		close(file_descriptor);
+		ft_putstr_fd("Error,\nThe map is empty.\n", 2);
+		free_map(map);
+		exit(EXIT_FAILURE);
+	}
+	else if (*map[i - 1] == '\0')
+	{
+		ft_putstr_fd("Error\nThere is a backslash n at the end of the map.\n", 2);
+		free_map(map);
+		close(file_descriptor);
+		exit(EXIT_FAILURE);
+	}
+}
+
 /* Count the lines of the map,
    create an array to store the map,
    put the map in the array, without the '\n',
@@ -115,19 +133,8 @@ char	**parse_map(char *map_path)
 		i++;
 	}
 	map[i] = NULL;
-	if (*map[0] == '\0')
-	{
-		ft_putstr_fd("Error,\nThe map is empty.\n", 2);
-		free_map(map);
-		exit(EXIT_FAILURE);
-	}
-	if (*map[i - 1] == '\0')
-	{
-		ft_putstr_fd("Error\nThere is a backslash n at the end of the map.\n", 2);
-		free_map(map);
-		close(file_descriptor);
-		exit(EXIT_FAILURE);
-	}
+	if (*map[0] == '\0' || *map[i - 1] == '\0')
+		print_parsing_error(map, i, file_descriptor);
 	close(file_descriptor);
 	return (map);
 }

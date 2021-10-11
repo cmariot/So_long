@@ -1,9 +1,6 @@
 #SoLong
 
 ##To do :
-- [ ] Compilation on the 42 Linux Dumps
-- [ ] Error if a XPM image cannot be open
-- [ ] Game optimisation : previous 'C' and 'P' as new letters, update only this letter and no all '0'
 - [ ] Norm
 - [ ] Bonus files and Makefile bonus rule
 - [ ] Enemy patrols
@@ -25,3 +22,5 @@
 - [X] Error on strerror
 - [X] Close the window with the red cross without segfault
 - [X] Display "It's a trap !" if the character try to walk on an obstacle
+- [X] Compilation on the 42 Linux Dumps
+- [X] Error if a XPM image cannot be open

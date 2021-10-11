@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/08 16:30:02 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/11 17:37:56 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ int	exit_finish(t_window *wind)
 		}
 	}
 	else
-	{
 		printf("You haven't collected all the hearts ...\n");
-	}
 	return (-1);
 }
 
-void its_a_trap(t_window *window, char key)
+int	its_a_trap(t_window *window, char key)
 {
 	if (key == 'W' && window->obj.player_x != 1)
 		printf("It's a trap !\n");
@@ -46,6 +44,7 @@ void its_a_trap(t_window *window, char key)
 		printf("It's a trap !\n");
 	else if (key == 'D' && window->obj.player_y != (window->obj.width - 2))
 		printf("It's a trap !\n");
+	return (0);
 }
 
 /* If we can't move : return
@@ -54,124 +53,112 @@ void its_a_trap(t_window *window, char key)
  * Else : we can move to the next position, move. */
 int	move_forward(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] != '1')
+	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '1')
+		return (its_a_trap(wind, 'W'));
+	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == 'E')
+		if (exit_finish(wind) == -1)
+			return (key);
+	wind->obj.mvmt++;
+	wind->obj.player_x -= 1;
+	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
-		if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == 'E')
-			if (exit_finish(wind) == -1)
-				return (key);
-		wind->obj.mvmt++;
-		wind->obj.player_x -= 1;
-		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
-		{
-			wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
-			wind->obj.collected++;
-			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
-			printf("collected\n");
-		}
-		else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
-			exit_finish(wind);
-		else
-		{
-			wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
-		}
-		printf("Mouvement %d : Top\n", wind->obj.mvmt);
-		return (key);
+		wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
+		wind->obj.collected++;
+		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("collected\n");
 	}
-	its_a_trap(wind, 'W');
+	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
+		exit_finish(wind);
+	else
+	{
+		wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
+	}
+	printf("Mouvement %d : Top\n", wind->obj.mvmt);
 	return (key);
 }
 
 int	turn_left(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] != '1')
+	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == '1')
+		return (its_a_trap(wind, 'A'));
+	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == 'E')
+		if (exit_finish(wind) == -1)
+			return (key);
+	wind->obj.mvmt++;
+	wind->obj.player_y -= 1;
+	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
-		if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == 'E')
-			if (exit_finish(wind) == -1)
-				return (key);
-		wind->obj.mvmt++;
-		wind->obj.player_y -= 1;
-		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
-		{
-			wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
-			wind->obj.collected++;
-			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
-			printf("collected\n");
-		}
-		else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
-			exit_finish(wind);
-		else
-		{
-			wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
-		}
-		printf("Mouvement %d : Left\n", wind->obj.mvmt);
-		return (key);
+		wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
+		wind->obj.collected++;
+		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("collected\n");
 	}
-	its_a_trap(wind, 'A');
+	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
+		exit_finish(wind);
+	else
+	{
+		wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
+	}
+	printf("Mouvement %d : Left\n", wind->obj.mvmt);
 	return (key);
 }
 
 int	move_back(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] != '1')
+	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == '1')
+		return (its_a_trap(wind, 'S'));
+	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == 'E')
+		if (exit_finish(wind) == -1)
+			return (key);
+	wind->obj.mvmt++;
+	wind->obj.player_x += 1;
+	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
-		if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == 'E')
-			if (exit_finish(wind) == -1)
-				return (key);
-		wind->obj.mvmt++;
-		wind->obj.player_x += 1;
-		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
-		{
-			wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
-			wind->obj.collected++;
-			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
-			printf("collected\n");
-		}
-		else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
-			exit_finish(wind);
-		else
-		{
-			wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
-		}
-		printf("Mouvement %d : Back\n", wind->obj.mvmt);
-		return (key);
+		wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+		wind->obj.collected++;
+		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("collected\n");
 	}
-	its_a_trap(wind, 'S');
+	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
+		exit_finish(wind);
+	else
+	{
+		wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
+	}
+	printf("Mouvement %d : Back\n", wind->obj.mvmt);
 	return (key);
 }
 
 int	turn_right(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] != '1')
+	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == '1')
+		return (its_a_trap(wind, 'D'));
+	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == 'E')
+		if (exit_finish(wind) == -1)
+			return (key);
+	wind->obj.mvmt++;
+	wind->obj.player_y += 1;
+	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
-		if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == 'E')
-			if (exit_finish(wind) == -1)
-				return (key);
-		wind->obj.mvmt++;
-		wind->obj.player_y += 1;
-		if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
-		{
-			wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
-			wind->obj.collected++;
-			printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
-			printf("collected\n");
-		}
-		else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
-			exit_finish(wind);
-		else
-		{
-			wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
-			wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
-		}
-		printf("Mouvement %d : Right\n", wind->obj.mvmt);
-		return (key);
+		wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
+		wind->obj.collected++;
+		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("collected\n");
 	}
-	its_a_trap(wind, 'D');
+	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
+		exit_finish(wind);
+	else
+	{
+		wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
+		wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
+	}
+	printf("Mouvement %d : Right\n", wind->obj.mvmt);
 	return (key);
 }

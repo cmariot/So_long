@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 16:23:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/09 14:55:26 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/11 16:21:28 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,32 @@ int	count_array_height(char **array)
 	return (height);
 }
 
+void	img_init(t_window *wind)
+{
+	wind->ground1.img = NULL;
+	wind->ground2.img = NULL;
+	wind->ground3.img = NULL;
+	wind->wall_top1.img = NULL;
+	wind->wall_top2.img = NULL;
+	wind->wall_top3.img = NULL;
+	wind->wall_top_corner_left.img = NULL;
+	wind->wall_top_corner_right.img = NULL;
+	wind->wall_bottom_corner_left.img = NULL;
+	wind->wall_bottom_corner_right.img = NULL;
+	wind->wall_left.img = NULL;
+	wind->wall_right.img = NULL;
+	wind->wall_bottom.img = NULL;
+	wind->trap1.img = NULL;
+	wind->trap2.img = NULL;
+	wind->trap3.img = NULL;
+	wind->char_down.img = NULL;
+	wind->char_left.img = NULL;
+	wind->char_right.img = NULL;
+	wind->char_top.img = NULL;
+	wind->heart.img = NULL;
+	wind->exit.img = NULL;
+}
+
 /* Set initial value of the objects structure */
 void	struct_init(t_window *wind)
 {
@@ -42,6 +68,7 @@ void	struct_init(t_window *wind)
 	wind->obj.wall = 0;
 	wind->obj.space = 0;
 	wind->obj.mvmt = 0;
+	img_init(wind);
 }
 
 /* Check if there is at least a Start, a Coin and an Exit */

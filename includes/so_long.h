@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/10 15:47:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/11 18:05:35 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,17 @@ int		check_objects(t_obj *objects);
 int		check_the_map(t_window *window);
 void	set_player_position(t_obj *objects, int x, int i);
 int		open_window(t_window *window);
-void	open_xpm_img(t_window *w);
+int		open_xpm_img(t_window *w);
 void	put_img_to_window(char pos, t_window *wind, int x, int y);
 void	update_img(t_window *window);
 void	display_mouvement_count(t_window *wind);
 void	display_heart_count(t_window *wind);
 void	display_rules(t_window *wind);
-
+void	display_character(t_window *wind, int x, int y, char pos);
+void	display_obstacle1(t_window *wind, int x, int y);
+void	display_obstacle2(t_window *wind, int x, int y);
+void	display_obstacle3(t_window *wind, int x, int y);
+void	display_ground(t_window *wind, int x, int y);
 void	print_img(t_window *wind);
 int		move_forward(int key, t_window *wind);
 int		turn_left(int key, t_window *wind);

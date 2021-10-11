@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/10 15:49:19 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/11 15:09:07 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,7 @@ RC	= \033[0m
 all : $(NAME)
 
 header :
-		@figlet SoLong
+	#	@figlet SoLong
 		@echo
 
 # Compiling

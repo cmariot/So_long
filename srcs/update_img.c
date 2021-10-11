@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_images.c                                    :+:      :+:    :+:   */
+/*   update_img.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/08 15:07:40 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/11 18:06:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,7 @@
 void	put_update_to_window(char pos, t_window *wind, int x, int y)
 {
 	if (pos == '0')
-	{
-		if (wind->count == 0)
-			mlx_put_image_to_window(wind->mlx,
-				wind->win, wind->ground1.img, x, y);
-		else if (wind->count == 1)
-			mlx_put_image_to_window(wind->mlx,
-				wind->win, wind->ground2.img, x, y);
-		else if (wind->count > 1)
-			mlx_put_image_to_window(wind->mlx,
-				wind->win, wind->ground3.img, x, y);
-		if (wind->count < 2)
-			wind->count++;
-		else
-			wind->count = 0;
-	}
+		display_ground(wind, x, y);
 	else if (pos == '1')
 	{
 		if (y / IMG_H == 0 || y / IMG_H == wind->obj.height - 1)
@@ -39,73 +25,14 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 		else if (x / IMG_W == 0 || x / IMG_W == wind->obj. width - 1)
 			return ;
 		if (wind->count == 0)
-		{
-			if (wind->trap_count == 0)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap1.img, x, y);
-			else if (wind->trap_count == 1)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			else if (wind->trap_count == 2)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap3.img, x, y);
-			else if (wind->trap_count == 3)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			wind->count++;
-		}
+			display_obstacle1(wind, x, y);
 		else if (wind->count == 1)
-		{
-			if (wind->trap_count == 0)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			else if (wind->trap_count == 1)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap3.img, x, y);
-			else if (wind->trap_count == 2)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			else if (wind->trap_count == 3)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap1.img, x, y);
-			wind->count++;
-		}
+			display_obstacle2(wind, x, y);
 		else if (wind->count > 1)
-		{
-			if (wind->trap_count == 0)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap3.img, x, y);
-			else if (wind->trap_count == 1)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			else if (wind->trap_count == 2)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap1.img, x, y);
-			else if (wind->trap_count == 3)
-				mlx_put_image_to_window(wind->mlx,
-					wind->win, wind->trap2.img, x, y);
-			wind->count = 0;
-		}
+			display_obstacle3(wind, x, y);
 	}
 	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
-	{
-		if (pos == 'P')
-			mlx_put_image_to_window(wind->mlx, wind->win,
-				wind->char_down.img, x, y);
-		else if (pos == 'Q')
-			mlx_put_image_to_window(wind->mlx, wind->win,
-				wind->char_left.img, x, y);
-		else if (pos == 'R')
-			mlx_put_image_to_window(wind->mlx, wind->win,
-				wind->char_right.img, x, y);
-		else if (pos == 'S')
-			mlx_put_image_to_window(wind->mlx, wind->win,
-				wind->char_top.img, x, y);
-		if (wind->count < 2)
-			wind->count++;
-		else
-			wind->count = 0;
-	}
+		display_character(wind, x, y, pos);
 }
 
 void	update_img(t_window *wind)
