@@ -81,8 +81,11 @@ typedef struct s_window
 }	t_window;
 
 // SO LONG
-int		check_extension(char *map_name);
-char	**parse_map(char *map_path);
+int		main(int argc, char **argv);
+int		wrong_extension(char *map_name);
+void	game_structure_init(t_window *window);
+char	**store_the_map(char *map_path);
+
 int		check_map(t_window *wind);
 int		is_rectangular(char **map, int i);
 void	struct_init(t_window *window);

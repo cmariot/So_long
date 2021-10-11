@@ -12,9 +12,26 @@
 
 #include "so_long.h"
 
+/* Check if the map is rectangular */
+int	isnot_rectangular(char **map, int i)
+{
+	int	first_len;
+	int	line_len;
+
+	first_len = ft_strlen(map[0]);
+	line_len = ft_strlen(map[i]);
+	if (first_len != line_len)
+	{
+		ft_putstr_fd("Error\nThe map is not rectangular.\n", 2);
+		return (1);
+	}
+	else
+		return (0);
+}
+
 /* Authorized char :
 	'0' (void), '1' (wall), 'P' (start), 'C' coin, 'E' (exit) */
-int	check_unauthorized_characters(char *line, t_obj *objects, int x)
+int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 {
 	int	i;
 
@@ -35,7 +52,7 @@ int	check_unauthorized_characters(char *line, t_obj *objects, int x)
 		else
 		{
 			ft_putstr_fd("Error\nThe map have unauthorized characters.\n", 2);
-			return (-1);
+			return (1);
 		}
 		i++;
 		objects->width += 1;
@@ -81,7 +98,7 @@ int	check_other_lines(char *map_line)
 }
 
 /* Check if the map is surounded by walls */
-int	check_walls(char *map, int i)
+int	isnot_closed_by_walls(char *map, int i)
 {
 	int	j;
 
@@ -91,34 +108,48 @@ int	check_walls(char *map, int i)
 	if (i == 0 || i == j)
 	{
 		if (check_firt_and_last_line(map) == -1)
-			return (-1);
+			return (1);
 	}
 	else
 	{
 		if (check_other_lines(map) == -1)
-			return (-1);
+			return (1);
 	}
 	return (0);
 }
 
 /* Search if there are errors on the map */
-int	check_map(t_window *wind)
+int	isnot_correct_map(t_window *game)
 {
 	int		i;
 
-	struct_init(wind);
 	i = 0;
-	while (wind->map[i])
+	while (game->map[i])
 	{
-		if (check_unauthorized_characters(wind->map[i], &wind->obj, i) == -1)
-			return (-1);
-		if (check_walls(wind->map[i], i) == -1)
-			return (-1);
-		if (is_rectangular(wind->map, i) == 0)
-			return (-1);
+		if (have_unauthorized_characters(game->map[i], &game->obj, i))
+			return (1);
+		if (isnot_closed_by_walls(game->map[i], i))
+			return (1);
+		if (isnot_rectangular(game->map, i))
+			return (1);
 		i++;
 	}
-	if (check_objects(&wind->obj) == -1)
-		return (-1);
+	if (check_objects(&game->obj) == -1)
+		return (1);
 	return (0);
 }
+
+int	check_map(t_window *game)
+{
+	game_structure_init(game);
+	if (isnot_correct_map(game))
+	{
+		free_map(game->map);
+		return (-1);
+	}
+	else
+	{
+		return (0);
+	}
+}
+

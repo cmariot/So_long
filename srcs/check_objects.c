@@ -28,49 +28,6 @@ int	count_array_height(char **array)
 	return (height);
 }
 
-void	img_init(t_window *wind)
-{
-	wind->ground1.img = NULL;
-	wind->ground2.img = NULL;
-	wind->ground3.img = NULL;
-	wind->wall_top1.img = NULL;
-	wind->wall_top2.img = NULL;
-	wind->wall_top3.img = NULL;
-	wind->wall_top_corner_left.img = NULL;
-	wind->wall_top_corner_right.img = NULL;
-	wind->wall_bottom_corner_left.img = NULL;
-	wind->wall_bottom_corner_right.img = NULL;
-	wind->wall_left.img = NULL;
-	wind->wall_right.img = NULL;
-	wind->wall_bottom.img = NULL;
-	wind->trap1.img = NULL;
-	wind->trap2.img = NULL;
-	wind->trap3.img = NULL;
-	wind->char_down.img = NULL;
-	wind->char_left.img = NULL;
-	wind->char_right.img = NULL;
-	wind->char_top.img = NULL;
-	wind->heart.img = NULL;
-	wind->exit.img = NULL;
-}
-
-/* Set initial value of the objects structure */
-void	struct_init(t_window *wind)
-{
-	wind->count = 0;
-	wind->trap_count = 0;
-	wind->obj.height = count_array_height(wind->map);
-	wind->obj.width = 0;
-	wind->obj.start = 0;
-	wind->obj.collected = 0;
-	wind->obj.collectible = 0;
-	wind->obj.exit = 0;
-	wind->obj.wall = 0;
-	wind->obj.space = 0;
-	wind->obj.mvmt = 0;
-	img_init(wind);
-}
-
 /* Check if there is at least a Start, a Coin and an Exit */
 int	check_objects(t_obj *objects)
 {

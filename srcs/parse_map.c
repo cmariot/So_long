@@ -12,31 +12,23 @@
 
 #include "so_long.h"
 
-int	check_the_map(t_window *window)
+/* Print an error and exit the program if :
+ * - The map is empty
+ * - There is a '\n' just before the end of file */
+void	print_parsing_error(char **map, int i)
 {
-	if (check_map(window) == -1)
+	if (*map[0] == '\0')
 	{
-		free_map(window->map);
-		return (-1);
+		ft_putstr_fd("Error,\nThe map is empty.\n", 2);
+		free_map(map);
+		exit(EXIT_FAILURE);
 	}
-	return (0);
-}
-
-/* Check if the map is rectangular */
-int	is_rectangular(char **map, int i)
-{
-	int	first_len;
-	int	line_len;
-
-	first_len = ft_strlen(map[0]);
-	line_len = ft_strlen(map[i]);
-	if (first_len != line_len)
+	else if (*map[i - 1] == '\0')
 	{
-		ft_putstr_fd("Error\nThe map is not rectangular.\n", 2);
-		return (0);
+		ft_putstr_fd("Error\nThere is a backslash n at the end of the map.\n", 2);
+		free_map(map);
+		exit(EXIT_FAILURE);
 	}
-	else
-		return (1);
 }
 
 /* Count the number of lines of the map */
@@ -70,7 +62,7 @@ int	count_lines(int file_descriptor)
 }
 
 /* Open the file for ft_count_line */
-int	count_map_lines(char *map_path)
+int	openmap_and_countlines(char *map_path)
 {
 	int	file_descriptor;
 	int	map_height;
@@ -78,7 +70,7 @@ int	count_map_lines(char *map_path)
 	file_descriptor = open(map_path, O_RDONLY);
 	if (file_descriptor == -1)
 	{
-		ft_putstr_fd("Error\nThe map couldn't be open.\n", 2);
+		ft_putstr_fd("Error\nThe map cannot be open.\n", 2);
 		return (-1);
 	}
 	map_height = count_lines(file_descriptor);
@@ -88,36 +80,18 @@ int	count_map_lines(char *map_path)
 	return (map_height);
 }
 
-void	print_parsing_error(char **map, int i, int file_descriptor)
-{
-	if (*map[0] == '\0')
-	{
-		close(file_descriptor);
-		ft_putstr_fd("Error,\nThe map is empty.\n", 2);
-		free_map(map);
-		exit(EXIT_FAILURE);
-	}
-	else if (*map[i - 1] == '\0')
-	{
-		ft_putstr_fd("Error\nThere is a backslash n at the end of the map.\n", 2);
-		free_map(map);
-		close(file_descriptor);
-		exit(EXIT_FAILURE);
-	}
-}
-
 /* Count the lines of the map,
    create an array to store the map,
    put the map in the array, without the '\n',
    return the map. */
-char	**parse_map(char *map_path)
+char	**store_the_map(char *map_path)
 {
 	int		file_descriptor;
 	char	**map;
 	int		map_height;
 	int		i;
 
-	map_height = count_map_lines(map_path);
+	map_height = openmap_and_countlines(map_path);
 	if (map_height == -1)
 		return (NULL);
 	map = malloc(sizeof(char **) * (map_height + 1));
@@ -128,13 +102,12 @@ char	**parse_map(char *map_path)
 	while (i < map_height)
 	{
 		map[i] = gnl_without_bn(file_descriptor);
-		if (map[i] == NULL)
+		if (map[i++] == NULL)
 			break ;
-		i++;
 	}
 	map[i] = NULL;
-	if (*map[0] == '\0' || *map[i - 1] == '\0')
-		print_parsing_error(map, i, file_descriptor);
 	close(file_descriptor);
+	if (*map[0] == '\0' || *map[i - 1] == '\0')
+		print_parsing_error(map, i);
 	return (map);
 }

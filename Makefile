@@ -70,6 +70,7 @@ endif
 SRCS		= main.c \
 			  check_extension.c \
 			  check_map.c \
+			  game_structure_init.c \
 			  check_objects.c \
 			  display_images.c \
 			  move_character.c \

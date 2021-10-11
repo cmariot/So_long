@@ -13,7 +13,7 @@
 #include "so_long.h"
 
 /* Check if the argument name is "*.ber" */
-int	check_extension(char *map_name)
+int	wrong_extension(char *map_name)
 {
 	int	len;
 
@@ -24,5 +24,5 @@ int	check_extension(char *map_name)
 				if (map_name[len - 1] == 'r')
 					return (0);
 	ft_putstr_fd("Error\nThe map has not the correct extension.\n", 2);
-	return (-1);
+	return (1);
 }
