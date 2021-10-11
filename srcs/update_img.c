@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   update_images.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
+/*   Updated: 2021/10/08 15:07:40 by cmariot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 /* Display the correct image depending 
@@ -123,4 +135,3 @@ void	update_img(t_window *wind)
 	display_heart_count(wind);
 	wind->count = 0;
 }
-

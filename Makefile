@@ -51,14 +51,14 @@ ifeq ($(UNAME), arm64)
 	KEYMAP = -D ESC_KEY=53 -D W_KEY=13 -D S_KEY=1 -D D_KEY=2 -D A_KEY=0
 else
 	CFLAGS += -I /usr/include -O3
-	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm 
+	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm 
 	KEYMAP = -D ESC_KEY=65307 -D W_KEY=119 -D S_KEY=115 -D D_KEY=100 -D A_KEY=97
 endif
 
 # Debug flag, use with 'make DEBUG=1'
 ifeq ($(DEBUG), 1)
-	CFLAGS			+= -g
-	LFLAGS			+= -g
+	CFLAGS			+= -g3
+	LFLAGS			+= -g3
 endif
 
 
@@ -113,7 +113,7 @@ header :
 $(OBJS_DIR)%.o : %.c
 		@mkdir -p $(OBJS_DIR)
 		@$(CC) $(CFLAGS) $(KEYMAP) -c $< -o $@
-		@printf "$(YE)$(CC) $(CFLAGS) -c $< -o $@ ✅ \n$(RC)"
+		@printf "$(YE)$(CC) $(CFLAGS) $(KEYMAP) -c $< -o $@ ✅ \n$(RC)"
 
 mlx_compil:
 		@printf "$(YE)MinilibX compilation ... "
@@ -131,7 +131,7 @@ srcs_compil :
 # Linking
 $(NAME)	: header libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
-		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(RC)\n"
+		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) $(RC)\n"
 		@$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) -o $(NAME)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
 		@printf "Usage :\n./so_long [MAP_NAME]\n"
@@ -142,8 +142,8 @@ bonus : $(NAME)
 norm :
 				@norminette srcs includes libft
 
-test:			${NAME}
-				./so_long maps/lvl2.ber
+lvl0:			${NAME}
+				./so_long maps/min.ber
 
 lvl1:			${NAME}
 				./so_long maps/lvl1.ber

@@ -84,8 +84,7 @@ void	display_rules(t_window *wind)
 	free(additional);
 }
 
-/* Open the XPM images and save their address */
-void	open_xpm_img(t_window *w)
+void	open_ground_img(t_window *w)
 {
 	int		iw;
 	int		ih;
@@ -102,6 +101,13 @@ void	open_xpm_img(t_window *w)
 			"./img/ground3.xpm", &iw, &ih);
 	w->ground3.add = mlx_get_data_addr(w->ground3.img,
 			&w->ground3.bpp, &w->ground3.len, &w->ground3.end);
+}
+
+void	open_wall_img(t_window *w)
+{
+	int		iw;
+	int		ih;
+
 	w->wall_top1.img = mlx_xpm_file_to_image(w->mlx,
 			"./img/wall_top1.xpm", &iw, &ih);
 	w->wall_top1.add = mlx_get_data_addr(w->wall_top1.img,
@@ -114,6 +120,25 @@ void	open_xpm_img(t_window *w)
 			"./img/wall_top3.xpm", &iw, &ih);
 	w->wall_top3.add = mlx_get_data_addr(w->wall_top3.img,
 			&w->wall_top3.bpp, &w->wall_top3.len, &w->wall_top3.end);
+	w->wall_bottom.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/wall_bottom.xpm", &iw, &ih);
+	w->wall_bottom.add = mlx_get_data_addr(w->wall_bottom.img,
+			&w->wall_bottom.bpp, &w->wall_bottom.len, &w->wall_bottom.end);
+	w->wall_right.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/wall_right.xpm", &iw, &ih);
+	w->wall_right.add = mlx_get_data_addr(w->wall_right.img,
+			&w->wall_right.bpp, &w->wall_right.len, &w->wall_right.end);
+	w->wall_left.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/wall_left.xpm", &iw, &ih);
+	w->wall_left.add = mlx_get_data_addr(w->wall_left.img,
+			&w->wall_left.bpp, &w->wall_left.len, &w->wall_left.end);
+}
+
+void	open_wall_corner_img(t_window *w)
+{
+	int		iw;
+	int		ih;
+
 	w->wall_top_corner_right.img = mlx_xpm_file_to_image(w->mlx,
 			"./img/wall_top_corner_right.xpm", &iw, &ih);
 	w->wall_top_corner_right.add = mlx_get_data_addr(
@@ -137,18 +162,36 @@ void	open_xpm_img(t_window *w)
 			w->wall_bottom_corner_left.img,
 			&w->wall_bottom_corner_left.bpp, &w->wall_bottom_corner_left.len,
 			&w->wall_bottom_corner_left.end);
-	w->wall_bottom.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/wall_bottom.xpm", &iw, &ih);
-	w->wall_bottom.add = mlx_get_data_addr(w->wall_bottom.img,
-			&w->wall_bottom.bpp, &w->wall_bottom.len, &w->wall_bottom.end);
-	w->wall_right.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/wall_right.xpm", &iw, &ih);
-	w->wall_right.add = mlx_get_data_addr(w->wall_right.img,
-			&w->wall_right.bpp, &w->wall_right.len, &w->wall_right.end);
-	w->wall_left.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/wall_left.xpm", &iw, &ih);
-	w->wall_left.add = mlx_get_data_addr(w->wall_left.img,
-			&w->wall_left.bpp, &w->wall_left.len, &w->wall_left.end);
+}
+
+void	open_char_img(t_window *w)
+{
+	int		iw;
+	int		ih;
+
+	w->char_down.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/char_down.xpm", &iw, &ih);
+	w->char_down.add = mlx_get_data_addr(w->char_down.img,
+			&w->char_down.bpp, &w->char_down.len, &w->char_down.end);
+	w->char_left.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/char_left.xpm", &iw, &ih);
+	w->char_left.add = mlx_get_data_addr(w->char_left.img,
+			&w->char_left.bpp, &w->char_left.len, &w->char_left.end);
+	w->char_right.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/char_right.xpm", &iw, &ih);
+	w->char_right.add = mlx_get_data_addr(w->char_right.img,
+			&w->char_right.bpp, &w->char_right.len, &w->char_right.end);
+	w->char_top.img = mlx_xpm_file_to_image(w->mlx,
+			"./img/char_top.xpm", &iw, &ih);
+	w->char_top.add = mlx_get_data_addr(w->char_top.img,
+			&w->char_top.bpp, &w->char_top.len, &w->char_top.end);
+}
+
+void	open_other_img(t_window *w)
+{
+	int		iw;
+	int		ih;
+
 	w->trap1.img = mlx_xpm_file_to_image(w->mlx,
 			"./img/trap1.xpm", &iw, &ih);
 	w->trap1.add = mlx_get_data_addr(w->trap1.img,
@@ -169,22 +212,15 @@ void	open_xpm_img(t_window *w)
 			"./img/exit.xpm", &iw, &ih);
 	w->exit.add = mlx_get_data_addr(w->exit.img,
 			&w->exit.bpp, &w->exit.len, &w->exit.end);
-	w->char_down.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/char_down.xpm", &iw, &ih);
-	w->char_down.add = mlx_get_data_addr(w->char_down.img,
-			&w->char_down.bpp, &w->char_down.len, &w->char_down.end);
-	w->char_left.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/char_left.xpm", &iw, &ih);
-	w->char_left.add = mlx_get_data_addr(w->char_left.img,
-			&w->char_left.bpp, &w->char_left.len, &w->char_left.end);
-	w->char_right.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/char_right.xpm", &iw, &ih);
-	w->char_right.add = mlx_get_data_addr(w->char_right.img,
-			&w->char_right.bpp, &w->char_right.len, &w->char_right.end);
-	w->char_top.img = mlx_xpm_file_to_image(w->mlx,
-			"./img/char_top.xpm", &iw, &ih);
-	w->char_top.add = mlx_get_data_addr(w->char_top.img,
-			&w->char_top.bpp, &w->char_top.len, &w->char_top.end);
+}
+
+void	open_xpm_img(t_window *w)
+{
+	open_ground_img(w);
+	open_wall_img(w);
+	open_wall_corner_img(w);
+	open_char_img(w);
+	open_other_img(w);
 }
 
 /* Display the correct image depending 

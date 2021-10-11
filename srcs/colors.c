@@ -28,7 +28,7 @@ void	background_color(t_window *win, int height, int width)
 	j = 0;
 	while (j <= width)
 	{
-		i = win->obj.height * IMG_H;
+		i = win->obj.height * IMG_H - 10;
 		while (i <= height)
 		{
 			mlx_pixel_put(win->mlx, win->win, j, i, trgb_color);

@@ -109,6 +109,8 @@ int	open_window(t_window *wind)
 	win_h = (wind->obj.height + 1) * IMG_H;
 	win_w = wind->obj.width * IMG_W;
 	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
+//	mlx_set_font(wind->mlx, wind->win,
+//		"-misc-fixed-*-*-*-*-14-*-*-*-*-*-*-*");
 	open_xpm_img(wind);
 	background_color(wind, win_h, win_w);
 	print_img(wind);

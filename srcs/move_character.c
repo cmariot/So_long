@@ -19,6 +19,7 @@ int	exit_finish(t_window *wind)
 	{
 		if (wind->obj.collected % wind->obj.collectible == 0)
 		{
+			printf("Mouvement %d : Exit\n", ++wind->obj.mvmt);
 			printf("Congratualations ! You finished this level ");
 			printf("in %d moves and collected ", wind->obj.mvmt);
 			if (wind->obj.collected > 1)
@@ -33,6 +34,18 @@ int	exit_finish(t_window *wind)
 		printf("You haven't collected all the hearts ...\n");
 	}
 	return (-1);
+}
+
+void its_a_trap(t_window *window, char key)
+{
+	if (key == 'W' && window->obj.player_x != 1)
+		printf("It's a trap !\n");
+	else if (key == 'A' && window->obj.player_y != 1)
+		printf("It's a trap !\n");
+	else if (key == 'S' && window->obj.player_x != (window->obj.height - 2))
+		printf("It's a trap !\n");
+	else if (key == 'D' && window->obj.player_y != (window->obj.width - 2))
+		printf("It's a trap !\n");
 }
 
 /* If we can't move : return
@@ -64,7 +77,9 @@ int	move_forward(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
 		}
 		printf("Mouvement %d : Top\n", wind->obj.mvmt);
+		return (key);
 	}
+	its_a_trap(wind, 'W');
 	return (key);
 }
 
@@ -93,7 +108,9 @@ int	turn_left(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
 		}
 		printf("Mouvement %d : Left\n", wind->obj.mvmt);
+		return (key);
 	}
+	its_a_trap(wind, 'A');
 	return (key);
 }
 
@@ -122,7 +139,9 @@ int	move_back(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
 		}
 		printf("Mouvement %d : Back\n", wind->obj.mvmt);
+		return (key);
 	}
+	its_a_trap(wind, 'S');
 	return (key);
 }
 
@@ -151,6 +170,8 @@ int	turn_right(int key, t_window *wind)
 			wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
 		}
 		printf("Mouvement %d : Right\n", wind->obj.mvmt);
+		return (key);
 	}
+	its_a_trap(wind, 'D');
 	return (key);
 }

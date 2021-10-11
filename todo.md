@@ -2,14 +2,12 @@
 
 ##To do :
 - [ ] Error if a XPM image cannot be open
+- [ ] Game optimisation : previous 'C' and 'P' as new letters, update only this letter and no all '0'
 - [ ] Norm
 - [ ] Bonus files and Makefile bonus rule
-- [ ] Sprite animation
 - [ ] Enemy patrols
 - [ ] Game over if hit an enemy
-- [ ] Record log
-- [ ] MacOS compatibility
-- [ ] README.md
+- [ ] Sprite animation
 
 ##Done :
 - [X] Message if try to exit without all the hearts
@@ -25,3 +23,4 @@
 	- [X] Final \n
 - [X] Error on strerror
 - [X] Close the window with the red cross without segfault
+- [X] Display "It's a trap !" if the character try to walk on an obstacle
