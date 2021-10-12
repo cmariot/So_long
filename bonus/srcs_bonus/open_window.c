@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 17:51:17 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 18:49:19 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ int	key_pressed(int key, t_window *wind)
 	else if (key == D_KEY)
 		turn_right(key, wind);
 	wind->trap_count++;
-	if (wind->trap_count > 3)
-		wind->trap_count = 0;
 	update_img(wind);
 	return (0);
 }
