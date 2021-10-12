@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 13:33:59 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 17:48:23 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 		else if (wind->count > 1)
 			display_obstacle3(wind, x, y);
 	}
+	else if (pos == 'C')
+		display_heart(wind, x, y);
 	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
 		display_character(wind, x, y, pos);
 }
