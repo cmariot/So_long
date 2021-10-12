@@ -6,12 +6,17 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:50:26 by cmariot           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/10/12 18:08:44 by cmariot          ###   ########.fr       */
+=======
+/*   Updated: 2021/10/12 17:58:12 by cmariot          ###   ########.fr       */
+>>>>>>> 6610b1b5d52997b6d0e1a882bbacdc17f32976c8
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+<<<<<<< HEAD
 void	update_counter(t_window *wind)
 {
 	if (wind->count > 2)
@@ -60,6 +65,11 @@ int	obstacle_animation(t_window *wind)
 		a++;
 	}
 	wind->count = 0;
+=======
+int	obstacle_animation(t_window *wind)
+{
+	update_img(wind);
+>>>>>>> 6610b1b5d52997b6d0e1a882bbacdc17f32976c8
 	wind->trap_count++;
 	if (wind->trap_count > 3)
 		wind->trap_count = 0;
