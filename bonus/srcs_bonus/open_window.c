@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:34:35 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 16:31:05 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int	key_pressed(int key, t_window *wind)
 	return (0);
 }
 
+int	obstacle_animation(t_window *wind)
+{
+	key_pressed(42, wind);
+	return (0);
+}
+
 /* Set the mlx_ptr and create a window, mlx loop until exit() */
 int	open_window(t_window *wind)
 {
@@ -48,6 +54,7 @@ int	open_window(t_window *wind)
 	print_img(wind);
 	mlx_key_hook(wind->win, key_pressed, wind);
 	mlx_hook(wind->win, 33, 1L << 5, close_window, wind);
+	mlx_loop_hook(wind->mlx, obstacle_animation, wind);
 	mlx_loop(wind->mlx);
 	return (0);
 }
