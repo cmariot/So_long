@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_extension.c                                  :+:      :+:    :+:   */
+/*   close_window_macos.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/01 14:37:34 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 11:52:58 by cmariot          ###   ########.fr       */
+/*   Created: 2021/10/12 13:23:18 by cmariot           #+#    #+#             */
+/*   Updated: 2021/10/12 13:24:05 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/* Check if the argument ends with ".ber" */
-int	check_extension(char *map_name)
+/* Exit if we close the window by clicking on the cross 
+ * Leaks beacause no destroy_display() on macOS*/
+int	close_window(t_window *window)
 {
-	int	len;
-
-	len = ft_strlen(map_name);
-	if (map_name[len - 4] == '.')
-		if (map_name[len - 3] == 'b')
-			if (map_name[len - 2] == 'e')
-				if (map_name[len - 1] == 'r')
-					return (0);
-	ft_putstr_fd("Error\nThe map has not the correct extension.\n", 2);
-	return (-1);
+	free_map(window->map);
+	free_img(window);
+	free_img_pt2(window);
+	mlx_destroy_window(window->mlx, window->win);
+	free(window->mlx);
+	exit(EXIT_SUCCESS);
+	return (1);
 }

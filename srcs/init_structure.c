@@ -1,4 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_structure.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/12 10:27:50 by cmariot           #+#    #+#             */
+/*   Updated: 2021/10/12 11:54:56 by cmariot          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
+
+/* The last 'P' will be the start position */
+void	set_player_position(t_obj *objects, int x, int i)
+{
+	objects->player_y = i;
+	objects->player_x = x;
+	objects->start += 1;
+}
 
 /* The height of the map = number of char * in the array */
 int	get_map_height(char **map)
@@ -12,7 +32,7 @@ int	get_map_height(char **map)
 }
 
 /* Set all the img pointer at NULL */
-void	images_init(t_window *wind)
+void	init_images(t_window *wind)
 {
 	wind->ground1.img = NULL;
 	wind->ground2.img = NULL;
@@ -39,7 +59,7 @@ void	images_init(t_window *wind)
 }
 
 /* Set initial value of the objects structure */
-void	game_structure_init(t_window *wind)
+void	init_structure(t_window *wind)
 {
 	wind->count = 0;
 	wind->trap_count = 0;
@@ -52,5 +72,5 @@ void	game_structure_init(t_window *wind)
 	wind->obj.wall = 0;
 	wind->obj.space = 0;
 	wind->obj.mvmt = 0;
-	images_init(wind);
+	init_images(wind);
 }

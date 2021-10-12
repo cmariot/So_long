@@ -6,14 +6,14 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/11 18:06:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 13:26:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/* Display the correct image depending 
- * the map char and it's position on the map */
+/* Update the ground, the obstacles and the player position,
+ * not the walls, the exit or the hearts.*/
 void	put_update_to_window(char pos, t_window *wind, int x, int y)
 {
 	if (pos == '0')
@@ -57,7 +57,7 @@ void	update_img(t_window *wind)
 	}
 	background_color(wind, IMG_H * (wind->obj.height + 1),
 		IMG_W * wind->obj.width);
-	display_rules(wind);
+//	display_rules(wind);
 	display_mouvement_count(wind);
 	display_heart_count(wind);
 	wind->count = 0;

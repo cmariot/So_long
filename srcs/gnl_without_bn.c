@@ -6,16 +6,11 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 14:35:22 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 15:58:18 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 00:29:04 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
 
 char	*ft_gnl_get_begin(char *str)
 {

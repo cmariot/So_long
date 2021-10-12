@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/11 17:37:56 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 13:19:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,12 @@ int	exit_finish(t_window *wind)
 				printf("the %d collectibles !\n", wind->obj.collected);
 			else
 				printf("the collectible !\n");
-			close_window(0, wind);
+			close_window(wind);
 		}
 	}
 	else
 		printf("You haven't collected all the hearts ...\n");
 	return (-1);
-}
-
-int	its_a_trap(t_window *window, char key)
-{
-	if (key == 'W' && window->obj.player_x != 1)
-		printf("It's a trap !\n");
-	else if (key == 'A' && window->obj.player_y != 1)
-		printf("It's a trap !\n");
-	else if (key == 'S' && window->obj.player_x != (window->obj.height - 2))
-		printf("It's a trap !\n");
-	else if (key == 'D' && window->obj.player_y != (window->obj.width - 2))
-		printf("It's a trap !\n");
-	return (0);
 }
 
 /* If we can't move : return

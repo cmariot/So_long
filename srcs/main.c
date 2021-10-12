@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/07 11:26:09 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:52:00 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * The map need to have the ".ber" extension. */
 int	main(int argc, char **argv)
 {
-	t_window	window;
+	t_window	game;
 	char		*map_name;
 
 	if (argc != 2)
@@ -24,17 +24,14 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("Error\nUsage : ./so_long [map.ber]\n", 2);
 		return (EXIT_FAILURE);
 	}
-	map_name = argv[1]; 
-	if (wrong_extension(map_name))
+	map_name = argv[1];
+	if (check_extension(map_name) == -1)
 		exit(EXIT_FAILURE);
 	else
 	{
-		window.map = store_the_map(map_name);
-		if (window.map == NULL)
-			exit(EXIT_FAILURE);
+		game.map = store_map(map_name);
+		check_map(&game);
+		open_window(&game);
 	}
-	if (check_map(&window) == -1)
-		exit(EXIT_FAILURE);
-	open_window(&window);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/11 18:05:35 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 13:18:58 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,38 +82,37 @@ typedef struct s_window
 
 // SO LONG
 int		main(int argc, char **argv);
-int		wrong_extension(char *map_name);
-void	game_structure_init(t_window *window);
-char	**store_the_map(char *map_path);
-
+int		check_extension(char *map_name);
+char	**store_map(char *map_path);
+char	*gnl_without_bn(int fd);
 int		check_map(t_window *wind);
-int		is_rectangular(char **map, int i);
-void	struct_init(t_window *window);
+void	init_structure(t_window *window);
 int		check_objects(t_obj *objects);
-int		check_the_map(t_window *window);
 void	set_player_position(t_obj *objects, int x, int i);
 int		open_window(t_window *window);
-int		open_xpm_img(t_window *w);
-void	put_img_to_window(char pos, t_window *wind, int x, int y);
-void	update_img(t_window *window);
-void	display_mouvement_count(t_window *wind);
-void	display_heart_count(t_window *wind);
-void	display_rules(t_window *wind);
+int		open_xpm_images(t_window *w);
+int		open_wall_img(t_window *w);
+int		open_wall_corner_img(t_window *w);
+void	print_img(t_window *wind);
 void	display_character(t_window *wind, int x, int y, char pos);
 void	display_obstacle1(t_window *wind, int x, int y);
 void	display_obstacle2(t_window *wind, int x, int y);
 void	display_obstacle3(t_window *wind, int x, int y);
 void	display_ground(t_window *wind, int x, int y);
-void	print_img(t_window *wind);
+void	display_wall(t_window *wind, int x, int y);
+void	background_color(t_window *wind, int height, int width);
+void	display_rules(t_window *wind);
+void	display_heart_count(t_window *wind);
+void	display_mouvement_count(t_window *wind);
 int		move_forward(int key, t_window *wind);
 int		turn_left(int key, t_window *wind);
 int		move_back(int key, t_window *wind);
 int		turn_right(int key, t_window *wind);
+void	update_img(t_window *window);
+int		its_a_trap(t_window *window, char key);
 void	free_map(char **map);
-int		close_window(int key, t_window *window);
-char	*gnl_without_bn(int fd);
-void	ft_putstr(char *str);
-void	background_color(t_window *wind, int height, int width);
-void	display_rules(t_window *window);
+void	free_img(t_window *window);
+void	free_img_pt2(t_window *window);
+int		close_window(t_window *window);
 
 #endif

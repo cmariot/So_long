@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/09/14 15:43:21 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:52:51 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,41 @@ int	isnot_rectangular(char **map, int i)
 		return (0);
 }
 
-/* Authorized char :
-	'0' (void), '1' (wall), 'P' (start), 'C' coin, 'E' (exit) */
+/* Check if the map is surounded by walls :
+ * for the first and the last lines, the lines must be only composed by '1'
+ * for the other lines they must start and end by '1'*/
+int	isnot_closed_by_walls(char *map_line, int current_index, char **map_array)
+{
+	int	i;
+	int	error;
+	int	max_index;
+
+	max_index = 0;
+	while (map_array[max_index] != NULL)
+		max_index++;
+	error = 0;
+	if (current_index == 0 || current_index == max_index - 1)
+	{
+		i = 0;
+		while (map_line[i] != '\0')
+			if (map_line[i++] != '1')
+				error++;
+	}
+	else
+	{
+		max_index = ft_strlen(map_line) - 1;
+		if (map_line[0] != '1' || map_line[max_index] != '1')
+			error++;
+	}
+	if (error == 0)
+		return (0);
+	ft_putstr_fd("Error,\nThe map is not closed by walls\n", 2);
+	return (error);
+}
+
+/* The map must be only composed by authorized characters.
+ * Authorized char :
+ * '0' (void), '1' (wall), 'P' (start), 'C' coin, 'E' (exit) */
 int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 {
 	int	i;
@@ -51,7 +84,7 @@ int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 			objects->exit += 1;
 		else
 		{
-			ft_putstr_fd("Error\nThe map have unauthorized characters.\n", 2);
+			ft_putstr_fd("Error\nThe map has unauthorized characters.\n", 2);
 			return (1);
 		}
 		i++;
@@ -60,65 +93,8 @@ int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 	return (0);
 }
 
-/* Check if the first and the last lines are only composed of '1' */
-int	check_firt_and_last_line(char *map_line)
-{
-	int	i;
-
-	i = 0;
-	while (map_line[i])
-	{
-		if (map_line[i] != '1')
-		{
-			ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
-			return (-1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-/* Check if the other lines begin and finish with '1' */
-int	check_other_lines(char *map_line)
-{
-	int	len;
-
-	if (map_line[0] != '1')
-	{
-		ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
-		return (-1);
-	}
-	len = ft_strlen(map_line);
-	if (map_line[len - 1] != '1')
-	{
-		ft_putstr_fd("Error\nThe map is not surround by walls.\n", 2);
-		return (-1);
-	}
-	return (0);
-}
-
-/* Check if the map is surounded by walls */
-int	isnot_closed_by_walls(char *map, int i)
-{
-	int	j;
-
-	j = 0;
-	while (map[j])
-		j++;
-	if (i == 0 || i == j)
-	{
-		if (check_firt_and_last_line(map) == -1)
-			return (1);
-	}
-	else
-	{
-		if (check_other_lines(map) == -1)
-			return (1);
-	}
-	return (0);
-}
-
-/* Search if there are errors on the map */
+/* Search if there are errors on the map,
+ * make test on each lines.*/
 int	isnot_correct_map(t_window *game)
 {
 	int		i;
@@ -128,7 +104,7 @@ int	isnot_correct_map(t_window *game)
 	{
 		if (have_unauthorized_characters(game->map[i], &game->obj, i))
 			return (1);
-		if (isnot_closed_by_walls(game->map[i], i))
+		if (isnot_closed_by_walls(game->map[i], i, game->map))
 			return (1);
 		if (isnot_rectangular(game->map, i))
 			return (1);
@@ -141,15 +117,16 @@ int	isnot_correct_map(t_window *game)
 
 int	check_map(t_window *game)
 {
-	game_structure_init(game);
+	if (game->map == NULL)
+		exit(EXIT_FAILURE);
+	init_structure(game);
 	if (isnot_correct_map(game))
 	{
 		free_map(game->map);
-		return (-1);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		return (0);
 	}
 }
-

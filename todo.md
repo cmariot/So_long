@@ -1,7 +1,7 @@
 #SoLong
 
 ##To do :
-- [ ] Norm
+- [ ] Check the mandatory part
 - [ ] Bonus files and Makefile bonus rule
 - [ ] Enemy patrols
 - [ ] Game over if hit an enemy
@@ -24,3 +24,4 @@
 - [X] Display "It's a trap !" if the character try to walk on an obstacle
 - [X] Compilation on the 42 Linux Dumps
 - [X] Error if a XPM image cannot be open
+- [X] Norm : Create new files to store functions

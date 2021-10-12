@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   store_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:19:52 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/11 16:00:03 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 11:58:24 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	openmap_and_countlines(char *map_path)
    create an array to store the map,
    put the map in the array, without the '\n',
    return the map. */
-char	**store_the_map(char *map_path)
+char	**store_map(char *map_path)
 {
 	int		file_descriptor;
 	char	**map;
