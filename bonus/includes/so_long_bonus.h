@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 17:54:12 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 22:59:09 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
+# include <time.h>
 # include "mlx.h"
 # include "libft.h"
 
@@ -55,6 +56,7 @@ typedef struct s_window
 	void	*win;
 	int		count;
 	int		trap_count;
+	int		frame;
 	t_obj	obj;
 	t_img	ground1;
 	t_img	ground2;
@@ -115,7 +117,6 @@ void	free_map(char **map);
 void	free_img(t_window *window);
 void	free_img_pt2(t_window *window);
 int		close_window(t_window *window);
-
-int	obstacle_animation(t_window *wind);
+int		obstacle_animation(t_window *wind);
 
 #endif

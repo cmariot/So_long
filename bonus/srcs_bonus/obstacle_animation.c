@@ -6,12 +6,11 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:50:26 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 19:05:14 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 23:13:31 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-#include <time.h>
 
 void	update_counter(t_window *wind)
 {
@@ -67,13 +66,9 @@ int	find_obstacle(t_window *wind)
 	return (0);
 }
 
-enum {SECS_TO_SLEEP = 0, NSEC_TO_SLEEP = 42000000};
-
 int	obstacle_animation(t_window *wind)
 {
-    struct timespec remaining, request = {SECS_TO_SLEEP,  NSEC_TO_SLEEP};
-
 	find_obstacle(wind);
-	nanosleep(&request, &remaining);
+	usleep(90000);
 	return (0);
 }

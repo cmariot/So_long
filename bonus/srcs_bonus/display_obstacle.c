@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 12:36:20 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 16:19:49 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 23:17:29 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	game_over(t_window *window)
 {
-	printf("Game over.\nIt was a trap.\n");
+	printf("Mouvement %d : ", ++window->obj.mvmt);
+	printf("You jumped on the spikes ...\n");
+	printf("Game over.\n");
 	close_window(window);
 }
 

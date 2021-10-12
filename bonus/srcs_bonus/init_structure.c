@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 10:27:50 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:25 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 22:38:45 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	init_structure(t_window *wind)
 {
 	wind->count = 0;
 	wind->trap_count = 0;
+	wind->frame = 0;
 	wind->obj.height = get_map_height(wind->map);
 	wind->obj.width = 0;
 	wind->obj.start = 0;
