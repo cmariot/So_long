@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_window.c                                      :+:      :+:    :+:   */
+/*   open_window_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 23:12:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 23:54:29 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_pressed(int key, t_window *wind)
 
 int	animation(t_window *window)
 {
-	if (window->frame < 20)
+	if (window->frame < 15)
 	{
 		obstacle_animation(window);
 		window->frame++;

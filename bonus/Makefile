@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/12 17:54:38 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/12 23:52:59 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,12 @@ UNAME := $(shell uname -m)
 ifeq ($(UNAME), arm64)
 	LFLAGS_LIB += -framework OpenGL -framework AppKit
 	KEYMAP = -D ESC_KEY=53 -D W_KEY=13 -D S_KEY=1 -D D_KEY=2 -D A_KEY=0
-	SRCS			= close_window_macos.c
+	SRCS			= close_window_macos_bonus.c
 else
 	CFLAGS += -I /usr/include -O3
 	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm 
 	KEYMAP = -D ESC_KEY=65307 -D W_KEY=119 -D S_KEY=115 -D D_KEY=100 -D A_KEY=97
-	SRCS			= close_window_linux.c
+	SRCS			= close_window_linux_bonus.c
 endif
 
 # Debug flag, use with 'make DEBUG=1'
@@ -69,24 +69,24 @@ endif
 #                                SOURCE FILES                                  #
 # **************************************************************************** #
 
-SRCS		+= main.c \
-			  check_extension.c \
-			  store_map.c \
-			  gnl_without_bn.c \
-			  check_map.c \
-			  init_structure.c \
-			  open_window.c \
-			  open_images.c \
-			  open_wall_images.c \
-			  display_images.c \
-			  display_obstacle.c \
-			  display_wall.c \
-			  display_str.c \
-			  check_objects.c \
-			  move_character.c \
-			  update_img.c \
-			  free_structure.c \
-			  obstacle_animation.c
+SRCS	+= main_bonus.c \
+		   check_extension_bonus.c \
+		   check_map_bonus.c \
+		   check_objects_bonus.c \
+		   display_images_bonus.c \
+		   display_obstacle_bonus.c \
+		   display_str_bonus.c \
+		   display_wall_bonus.c \
+		   free_structure_bonus.c \
+		   gnl_without_bn_bonus.c \
+		   init_structure_bonus.c \
+		   move_character_bonus.c \
+		   obstacle_animation_bonus.c \
+		   open_images_bonus.c \
+		   open_wall_images_bonus.c \
+		   open_window_bonus.c \
+		   store_map_bonus.c \
+		   update_img_bonus.c
 
 SRC			:= $(notdir $(SRCS))
 
