@@ -6,11 +6,11 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 13:33:59 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 14:34:31 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 /* Update the ground, the obstacles and the player position,
  * not the walls, the exit or the hearts.*/

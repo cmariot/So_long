@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/12 14:22:54 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/12 14:53:03 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,19 +15,19 @@
 #                          PROJECT'S DIRECTORIES                               #
 # **************************************************************************** #
 
-NAME			= so_long
-SRCS_DIR		= srcs
+NAME			= so_long_bonus
+SRCS_DIR		= srcs_bonus
 INCL_DIR		= includes
-LIBFT_DIR		= libft
-OBJS_DIR		= objs/
+LIBFT_DIR		= ../libft
+OBJS_DIR		= objs_bonus/
 
 # Select the correct minilibX for the current system
 # Works on macOS (ARM64) & Linux
 UNAME := $(shell uname -m)
 ifeq ($(UNAME), arm64)
-	MLX = mlx_macos
+	MLX = ../mlx_macos
 else
-	MLX = mlx_linux
+	MLX = ../mlx_linux
 endif
 
 # **************************************************************************** #
@@ -42,7 +42,7 @@ CFLAGS				+= -I $(LIBFT_DIR)
 CFLAGS				+= -I $(MLX)
 
 LFLAGS				= -Wall -Wextra -Werror
-LFLAGS_LIB			= -L libft -l ft
+LFLAGS_LIB			= -L ../libft -l ft
 LFLAGS_LIB			+= -L $(MLX) -l mlx
 
 UNAME := $(shell uname -m)
@@ -125,7 +125,7 @@ mlx_compil:
 
 libft_compil:
 		@printf "$(YE)Libft compilation ... "
-		@make -C libft
+		@make -C ../libft
 		@printf "Success !$(RC)\n\n"
 
 srcs_compil :
@@ -148,16 +148,16 @@ norm :
 				@norminette srcs includes libft
 
 lvl0:			${NAME}
-				./so_long maps/min.ber
+				./so_long_bonus maps/min.ber
 
 lvl1:			${NAME}
-				./so_long maps/lvl1.ber
+				./so_long_bonus maps/lvl1.ber
 				
 lvl2:			${NAME}
-				./so_long maps/lvl2.ber
+				./so_long_bonus maps/lvl2.ber
 
 lvl3:			${NAME}
-				./so_long maps/lvl3.ber
+				./so_long_bonus maps/lvl3.ber
 
 # Remove object files
 clean :
@@ -165,7 +165,7 @@ clean :
 		@rm -rf $(OBJS_DIR)
 		@printf "Done\n"
 		@printf "Cleaning libft ... "
-		@make clean -C libft
+		@make clean -C ../libft
 		@printf "Done\n"
 
 # Remove object and binary files
@@ -174,7 +174,7 @@ fclean : clean
 		@rm -f $(NAME)
 		@printf "Done\n"
 		@printf "Removing libft.a ... "
-		@make fclean -C libft
+		@make fclean -C ../libft
 		@printf "Done\n"
 		@printf "Cleaning MinilibX ... "
 		@make clean -C $(MLX)
