@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 16:31:05 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 17:51:17 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	key_pressed(int key, t_window *wind)
 	if (wind->trap_count > 3)
 		wind->trap_count = 0;
 	update_img(wind);
-	return (0);
-}
-
-int	obstacle_animation(t_window *wind)
-{
-	key_pressed(42, wind);
 	return (0);
 }
 

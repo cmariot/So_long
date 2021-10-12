@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_img.c                                       :+:      :+:    :+:   */
+/*   obstacle_animation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 17:48:23 by cmariot          ###   ########.fr       */
+/*   Created: 2021/10/12 17:50:26 by cmariot           #+#    #+#             */
+/*   Updated: 2021/10/12 18:08:44 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-/* Update the ground, the obstacles and the player position,
- * not the walls, the exit or the hearts.*/
-void	put_update_to_window(char pos, t_window *wind, int x, int y)
+void	update_counter(t_window *wind)
 {
-	if (pos == '0')
-		display_ground(wind, x, y);
+	if (wind->count > 2)
+		wind->count = 0;
+	else
+		wind->count++;
+}
+
+void	update_obstacle(char pos, t_window *wind, int x, int y)
+{
+	if (pos == '0' || pos == 'C')
+		update_counter(wind);
 	else if (pos == '1')
 	{
 		if (y / IMG_H == 0 || y / IMG_H == wind->obj.height - 1)
@@ -31,13 +37,9 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 		else if (wind->count > 1)
 			display_obstacle3(wind, x, y);
 	}
-	else if (pos == 'C')
-		display_heart(wind, x, y);
-	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
-		display_character(wind, x, y, pos);
 }
 
-void	update_img(t_window *wind)
+int	obstacle_animation(t_window *wind)
 {
 	int	i;
 	int	j;
@@ -52,14 +54,14 @@ void	update_img(t_window *wind)
 		b = 0;
 		while (j--)
 		{
-			put_update_to_window(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
+			update_obstacle(wind->map[a][b], wind, b * IMG_W, a * IMG_H);
 			b++;
 		}
 		a++;
 	}
-	background_color(wind, IMG_H * (wind->obj.height + 1),
-		IMG_W * wind->obj.width);
-	display_mouvement_count(wind);
-	display_heart_count(wind);
 	wind->count = 0;
+	wind->trap_count++;
+	if (wind->trap_count > 3)
+		wind->trap_count = 0;
+	return (0);
 }

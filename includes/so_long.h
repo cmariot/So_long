@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 13:18:58 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 17:48:13 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		open_wall_img(t_window *w);
 int		open_wall_corner_img(t_window *w);
 void	print_img(t_window *wind);
 void	display_character(t_window *wind, int x, int y, char pos);
+void	display_heart(t_window*wind, int x, int y);
 void	display_obstacle1(t_window *wind, int x, int y);
 void	display_obstacle2(t_window *wind, int x, int y);
 void	display_obstacle3(t_window *wind, int x, int y);

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:45:56 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/12 17:54:12 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	display_obstacle2(t_window *wind, int x, int y);
 void	display_obstacle3(t_window *wind, int x, int y);
 void	display_ground(t_window *wind, int x, int y);
 void	display_wall(t_window *wind, int x, int y);
+void	display_heart(t_window*wind, int x, int y);
 void	background_color(t_window *wind, int height, int width);
 void	display_rules(t_window *wind);
 void	display_heart_count(t_window *wind);
@@ -114,5 +115,7 @@ void	free_map(char **map);
 void	free_img(t_window *window);
 void	free_img_pt2(t_window *window);
 int		close_window(t_window *window);
+
+int	obstacle_animation(t_window *wind);
 
 #endif

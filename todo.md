@@ -1,11 +1,9 @@
 #SoLong
 
 ##To do :
-- [ ] Check the mandatory part
-- [ ] Bonus files and Makefile bonus rule
 - [ ] Enemy patrols
 - [ ] Game over if hit an enemy
-- [ ] Sprite animation
+- [ ] Walk animation
 
 ##Done :
 - [X] Message if try to exit without all the hearts
@@ -25,3 +23,6 @@
 - [X] Compilation on the 42 Linux Dumps
 - [X] Error if a XPM image cannot be open
 - [X] Norm : Create new files to store functions
+- [X] Check the mandatory part
+- [X] Bonus files and Makefile bonus rule
+- [X] Sprite animation of the spikes

@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/12 14:53:03 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/12 17:54:38 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,8 @@ SRCS		+= main.c \
 			  check_objects.c \
 			  move_character.c \
 			  update_img.c \
-			  free_structure.c
+			  free_structure.c \
+			  obstacle_animation.c
 
 SRC			:= $(notdir $(SRCS))
 
