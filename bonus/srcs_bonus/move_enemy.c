@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:45:35 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 15:08:36 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 15:21:53 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	move_enemy(t_window *window)
 		}
 		else
 		{
-			window->enemies[0].direction += 2;
-			window->map[x][y] = '4'; 
+			window->enemies[0].direction = 6;
+			window->map[x][y] = '6'; 
 		}
 	}
 	else if (window->enemies[0].direction == 4)
@@ -43,8 +43,8 @@ void	move_enemy(t_window *window)
 		}
 		else
 		{
-			window->enemies[0].direction += 2;
-			window->map[x][y] = '4'; 
+			window->enemies[0].direction = 2;
+			window->map[x][y] = '2'; 
 		}
 	}
 	else if (window->enemies[0].direction == 6)
@@ -57,8 +57,8 @@ void	move_enemy(t_window *window)
 		}
 		else
 		{
-			window->enemies[0].direction += 2;
-			window->map[x][y] = '6'; 
+			window->enemies[0].direction = 8;
+			window->map[x][y] = '8'; 
 		}
 	}
 	else if (window->enemies[0].direction == 8)
@@ -71,8 +71,8 @@ void	move_enemy(t_window *window)
 		}
 		else
 		{
-			window->enemies[0].direction = 2;
-			window->map[x][y] = '8'; 
+			window->enemies[0].direction = 4 ;
+			window->map[x][y] = '4'; 
 		}
 	}
 	update_img(window);

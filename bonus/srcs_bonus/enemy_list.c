@@ -6,11 +6,23 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:34:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 14:04:01 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 15:35:18 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+void	ft_lstclear_enemy_list(t_enemy **lst)
+{
+	t_enemy	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(lst);
+		*lst = tmp;
+	}
+}
 
 t_enemy	*new_enemy_list(int x, int y, int direction)
 {
@@ -78,14 +90,13 @@ void	get_enemy_data(t_window *window)
 				{
 					if (first == TRUE)
 					{
-						printf("x = %d, y = %d, direction = %d\n", x, y, direction);	
 						window->enemies = new_enemy_list(x, y, direction);
 						direction += 2;
 						first = FALSE;
 					}
 					else
 					{
-						add_enemy_to_list(&window->enemies, new_enemy_list(x, y, direction));
+						add_enemy_to_list(&(window->enemies), new_enemy_list(x, y, direction));
 						printf("x = %d, y = %d, direction = %d\n", x, y, direction);	
 						direction += 2;
 						if (direction == 10)
