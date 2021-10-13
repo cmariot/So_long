@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_images.c                                   :+:      :+:    :+:   */
+/*   display_images_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:50 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 09:25:59 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ void	put_img_to_window(char pos, t_window *wind, int x, int y)
 			wind->win, wind->exit.img, x, y);
 	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
 		display_character(wind, x, y, pos);
+	else if (pos == '6')
+		mlx_put_image_to_window(wind->mlx, wind->win,
+			wind->enemy_down.img, x, y);
 }
 
 /* Check all the characters of the map,

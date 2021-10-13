@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   open_images.c                                      :+:      :+:    :+:   */
+/*   open_images_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 12:00:07 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:09 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 09:12:49 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ int	open_xpm_images(t_window *w)
 	if (open_char_img(w) == -1)
 		error++;
 	if (open_trap_img(w) == -1)
+		error++;
+	if (open_enemy_img(w) == -1)
 		error++;
 	if (open_other_img(w) == -1)
 		error++;

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 22:59:09 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 09:17:57 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,14 @@ typedef struct s_img
 	int		end;
 }	t_img;
 
+typedef struct s_enemy
+{
+	int		x;
+	int		y;
+	char	*direction;
+
+}	t_enemy;
+
 typedef struct s_window
 {
 	char	**map;
@@ -57,6 +65,7 @@ typedef struct s_window
 	int		count;
 	int		trap_count;
 	int		frame;
+	t_enemy	enemy;
 	t_obj	obj;
 	t_img	ground1;
 	t_img	ground2;
@@ -79,6 +88,10 @@ typedef struct s_window
 	t_img	char_right;
 	t_img	char_top;
 	t_img	heart;
+	t_img	enemy_top;
+	t_img	enemy_down;
+	t_img	enemy_left;
+	t_img	enemy_right;
 	t_img	exit;
 }	t_window;
 
@@ -118,5 +131,6 @@ void	free_img(t_window *window);
 void	free_img_pt2(t_window *window);
 int		close_window(t_window *window);
 int		obstacle_animation(t_window *wind);
+int		open_enemy_img(t_window *w);
 
 #endif

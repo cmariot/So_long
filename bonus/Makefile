@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/12 23:52:59 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/13 09:15:02 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,7 +86,8 @@ SRCS	+= main_bonus.c \
 		   open_wall_images_bonus.c \
 		   open_window_bonus.c \
 		   store_map_bonus.c \
-		   update_img_bonus.c
+		   update_img_bonus.c \
+		   open_enemy_images.c
 
 SRC			:= $(notdir $(SRCS))
 

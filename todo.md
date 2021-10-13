@@ -1,6 +1,8 @@
 #SoLong
 
 ##To do :
+- [ ] Create enemy frames
+- [ ] Enemy spawn
 - [ ] Enemy patrols
 - [ ] Game over if hit an enemy
 - [ ] Walk animation

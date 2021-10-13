@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:36:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 09:00:08 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,12 @@ int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 			objects->collectible += 1;
 		else if (line[i] == 'E')
 			objects->exit += 1;
+		else if (line[i] == '6')
+		{
+			//Create an enemy array
+			//Create an enemy
+			//Store enemy position
+		}
 		else
 		{
 			ft_putstr_fd("Error\nThe map has unauthorized characters.\n", 2);
