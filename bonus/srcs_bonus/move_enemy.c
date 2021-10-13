@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:45:35 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 13:05:07 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 15:08:36 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,39 +21,59 @@ void	move_enemy(t_window *window)
 	y = window->enemies[0].y;
 	if (window->enemies[0].direction == 2)
 	{
-		//if map x - 1 = 0
-		//	move forward
-		//else
-		window->enemies[0].direction += 2;
-	}
-	if (window->enemies[0].direction == 4)
-	{
-		if (window->map[x - 1][y] == 0)
+		if (window->map[x + 1][y] == '0')
 		{
-			window->enemies[0].y--;
+			window->enemies[0].x += 1;
 			window->map[x][y] = '0'; 
-			window->map[x][y - 1] = '6';
+			window->map[x + 1][y] = '2';
 		}
 		else
+		{
 			window->enemies[0].direction += 2;
+			window->map[x][y] = '4'; 
+		}
 	}
-	if (window->enemies[0].direction == 6)
+	else if (window->enemies[0].direction == 4)
 	{
-		//if map x - 1 = 0
-		//	move forward
-		//else
+		if (window->map[x][y - 1] == '0')
+		{
+			window->enemies[0].y -= 1;
+			window->map[x][y] = '0'; 
+			window->map[x][y - 1] = '4';
+		}
+		else
+		{
 			window->enemies[0].direction += 2;
+			window->map[x][y] = '4'; 
+		}
 	}
-	if (window->enemies[0].direction == 8)
+	else if (window->enemies[0].direction == 6)
 	{
-		//if map x - 1 = 0
-		//	move forward
-		//else
+		if (window->map[x][y + 1] == '0')
+		{
+			window->enemies[0].y += 1;
+			window->map[x][y] = '0'; 
+			window->map[x][y + 1] = '6';
+		}
+		else
+		{
+			window->enemies[0].direction += 2;
+			window->map[x][y] = '6'; 
+		}
+	}
+	else if (window->enemies[0].direction == 8)
+	{
+		if (window->map[x - 1][y] == '0')
+		{
+			window->enemies[0].x -= 1;
+			window->map[x][y] = '0'; 
+			window->map[x - 1][y] = '8';
+		}
+		else
+		{
 			window->enemies[0].direction = 2;
+			window->map[x][y] = '8'; 
+		}
 	}
-	printf("DATA ENEMY 1 :\n");
-	printf("x = %d\n", window->enemies[0].x);
-	printf("y = %d\n", window->enemies[0].y);
-	printf("dir = %d\n", window->enemies[0].direction);
-	//update_img
+	update_img(window);
 }

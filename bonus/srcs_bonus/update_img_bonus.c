@@ -6,12 +6,35 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 12:57:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 15:04:11 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
+void display_enemy(t_window *wind, int x, int y, char pos)
+{
+	if (pos == '2')
+	{
+		mlx_put_image_to_window(wind->mlx,
+			wind->win, wind->enemy_down.img, x, y);
+	}
+	else if (pos == '4')
+	{
+		mlx_put_image_to_window(wind->mlx,
+			wind->win, wind->enemy_right.img, x, y);
+	}
+	else if (pos == '6')
+	{
+		mlx_put_image_to_window(wind->mlx,
+			wind->win, wind->enemy_left.img, x, y);
+	}
+	else if (pos == '8')
+	{
+		mlx_put_image_to_window(wind->mlx,
+			wind->win, wind->enemy_top.img, x, y);
+	}
+}
 
 /* Update the ground, the obstacles and the player position,
  * not the walls, the exit or the hearts.*/
@@ -36,8 +59,8 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 		display_heart(wind, x, y);
 	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
 		display_character(wind, x, y, pos);
-//	else if (pos == '2' || pos == '4' || pos == '6' || pos == '8')
-//		display_enemy(wind, x, y);
+	else if (pos == '2' || pos == '4' || pos == '6' || pos == '8')
+		display_enemy(wind, x, y, pos);
 }
 
 void	update_img(t_window *wind)
