@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/13 09:15:02 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/13 12:47:21 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,9 @@ SRCS	+= main_bonus.c \
 		   open_window_bonus.c \
 		   store_map_bonus.c \
 		   update_img_bonus.c \
-		   open_enemy_images.c
+		   open_enemy_images.c \
+		   enemy_list.c \
+		   move_enemy.c
 
 SRC			:= $(notdir $(SRCS))
 
@@ -139,7 +141,7 @@ $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "$(GR)Object files linking ...\n$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) $(RC)\n"
 		@$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) -o $(NAME)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
-		@printf "Usage :\n./so_long [MAP_NAME]\n"
+		@printf "Usage :\n./so_long_bonus [MAP_NAME]\n"
 
 bonus :
 		@make -C bonus

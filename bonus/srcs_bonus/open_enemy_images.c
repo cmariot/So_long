@@ -6,11 +6,20 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:00:53 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 09:22:44 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 11:09:15 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
+int	enemy_game_over(t_window *window)
+{
+	printf("Mouvement %d : ", ++window->obj.mvmt);
+	printf("Hit by a skeleton.\n");
+	printf("Game over.\n");
+	close_window(window);
+	return (0);
+}
 
 int	open_enemy_images_pt2(t_window *w)
 {

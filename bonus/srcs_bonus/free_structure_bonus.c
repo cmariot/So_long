@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_structure.c                                   :+:      :+:    :+:   */
+/*   free_structure_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 12:21:56 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:33 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 10:57:57 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ void	free_map(char **map)
 	if (map)
 		free(map);
 	map = NULL;
+}
+
+void	free_enemy_img(t_window *window)
+{
+	if (window->enemy_top.img != NULL)
+		mlx_destroy_image(window->mlx, window->enemy_top.img);
+	if (window->enemy_down.img != NULL)
+		mlx_destroy_image(window->mlx, window->enemy_down.img);
+	if (window->enemy_right.img != NULL)
+		mlx_destroy_image(window->mlx, window->enemy_left.img);
+	if (window->enemy_left.img != NULL)
+		mlx_destroy_image(window->mlx, window->enemy_right.img);
 }
 
 void	free_img_pt2(t_window *window)
@@ -79,4 +91,5 @@ void	free_img(t_window *window)
 		mlx_destroy_image(window->mlx, window->wall_top_corner_right.img);
 	if (window->wall_top_corner_left.img != NULL)
 		mlx_destroy_image(window->mlx, window->wall_top_corner_left.img);
+	free_enemy_img(window);
 }

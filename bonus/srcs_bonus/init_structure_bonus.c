@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 10:27:50 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 09:23:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 12:00:12 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,7 @@ void	set_player_position(t_obj *objects, int x, int i)
 
 void	init_enemy(t_window *window)
 {
-	window->enemy.x = 0;
-	window->enemy.y = 0;
-	window->enemy.direction = NULL;
+	window->enemies = NULL;
 	window->enemy_top.img = NULL;
 	window->enemy_down.img = NULL;
 	window->enemy_left.img = NULL;
@@ -84,6 +82,7 @@ void	init_structure(t_window *wind)
 	wind->obj.wall = 0;
 	wind->obj.space = 0;
 	wind->obj.mvmt = 0;
+	wind->obj.enemy_count = 0;
 	init_images(wind);
 	init_enemy(wind);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_character.c                                   :+:      :+:    :+:   */
+/*   move_character_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:13 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 11:08:42 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ int	exit_finish(t_window *wind)
  * Else : we can move to the next position, move. */
 int	move_forward(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '1')
+	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '6')
+		return (enemy_game_over(wind));
+	else if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '1')
 		return (its_a_trap(wind, 'W'));
-	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == 'E')
+	else if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == 'E')
 		if (exit_finish(wind) == -1)
 			return (key);
 	wind->obj.mvmt++;
@@ -51,8 +53,7 @@ int	move_forward(int key, t_window *wind)
 	{
 		wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
-		wind->obj.collected++;
-		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("%d/%d ", ++wind->obj.collected, wind->obj.collectible);
 		printf("collected\n");
 	}
 	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
@@ -68,6 +69,8 @@ int	move_forward(int key, t_window *wind)
 
 int	turn_left(int key, t_window *wind)
 {
+	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == '6')
+		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == '1')
 		return (its_a_trap(wind, 'A'));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == 'E')
@@ -79,8 +82,7 @@ int	turn_left(int key, t_window *wind)
 	{
 		wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
-		wind->obj.collected++;
-		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("%d/%d ", ++wind->obj.collected, wind->obj.collectible);
 		printf("collected\n");
 	}
 	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
@@ -96,6 +98,8 @@ int	turn_left(int key, t_window *wind)
 
 int	move_back(int key, t_window *wind)
 {
+	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == '6')
+		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == '1')
 		return (its_a_trap(wind, 'S'));
 	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == 'E')
@@ -107,8 +111,7 @@ int	move_back(int key, t_window *wind)
 	{
 		wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
-		wind->obj.collected++;
-		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("%d/%d ", ++wind->obj.collected, wind->obj.collectible);
 		printf("collected\n");
 	}
 	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')
@@ -124,6 +127,8 @@ int	move_back(int key, t_window *wind)
 
 int	turn_right(int key, t_window *wind)
 {
+	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == '6')
+		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == '1')
 		return (its_a_trap(wind, 'D'));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == 'E')
@@ -135,8 +140,7 @@ int	turn_right(int key, t_window *wind)
 	{
 		wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';
-		wind->obj.collected++;
-		printf("%d/%d ", wind->obj.collected, wind->obj.collectible);
+		printf("%d/%d ", ++wind->obj.collected, wind->obj.collectible);
 		printf("collected\n");
 	}
 	else if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'E')

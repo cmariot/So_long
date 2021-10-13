@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 09:17:57 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 12:46:42 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define IMG_H 40
 # define IMG_W 40
 # define INT_MAX 2147483647
+# define TRUE 1
+# define FALSE 0
 
 typedef struct s_obj
 {
@@ -38,6 +40,7 @@ typedef struct s_obj
 	int	mvmt;
 	int	player_x;
 	int	player_y;
+	int	enemy_count;
 }	t_obj;
 
 typedef struct s_img
@@ -53,8 +56,8 @@ typedef struct s_enemy
 {
 	int		x;
 	int		y;
-	char	*direction;
-
+	int		direction;
+	struct s_enemy	*next;
 }	t_enemy;
 
 typedef struct s_window
@@ -62,10 +65,10 @@ typedef struct s_window
 	char	**map;
 	void	*mlx;
 	void	*win;
+	t_enemy	*enemies;
 	int		count;
 	int		trap_count;
 	int		frame;
-	t_enemy	enemy;
 	t_obj	obj;
 	t_img	ground1;
 	t_img	ground2;
@@ -132,5 +135,8 @@ void	free_img_pt2(t_window *window);
 int		close_window(t_window *window);
 int		obstacle_animation(t_window *wind);
 int		open_enemy_img(t_window *w);
+int		enemy_game_over(t_window *window);
+void	get_enemy_data(t_window *window);
+void	move_enemy(t_window *window);
 
 #endif

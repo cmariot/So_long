@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   update_img.c                                       :+:      :+:    :+:   */
+/*   update_img_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 19:06:57 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 12:57:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
+
 
 /* Update the ground, the obstacles and the player position,
  * not the walls, the exit or the hearts.*/
@@ -35,6 +36,8 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 		display_heart(wind, x, y);
 	else if (pos == 'P' || pos == 'Q' || pos == 'R' || pos == 'S')
 		display_character(wind, x, y, pos);
+//	else if (pos == '2' || pos == '4' || pos == '6' || pos == '8')
+//		display_enemy(wind, x, y);
 }
 
 void	update_img(t_window *wind)
