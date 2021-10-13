@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/12 14:22:54 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/14 00:07:29 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,12 +140,12 @@ $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "Usage :\n./so_long [MAP_NAME]\n"
 
 bonus :
-		@make -C bonus
-		@mv bonus/so_long_bonus .
+		@make all -C bonus
+		@cd bonus
 
 # Check 42 norm 
 norm :
-				@norminette srcs includes libft
+				@norminette srcs includes libft bonus/srcs_bonus bonus/includes
 
 lvl0:			${NAME}
 				./so_long maps/min.ber
@@ -179,6 +179,7 @@ fclean : clean
 		@printf "Cleaning MinilibX ... "
 		@make clean -C $(MLX)
 		@printf "Done$(RC)\n"
+		@make fclean -C bonus
 
 # Remove all and recompile
 re :	 fclean all

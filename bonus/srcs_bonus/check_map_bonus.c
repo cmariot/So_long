@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 14:53:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 11:55:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 23:52:30 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ int	have_unauthorized_characters(char *line, t_obj *objects, int x)
 			objects->collectible += 1;
 		else if (line[i] == 'E')
 			objects->exit += 1;
-		else if (line[i] == '6')
+		else if (line[i] == '2' || line[i] == '4'
+			|| line[i] == '6' || line[i] == '8')
 			objects->enemy_count++;
 		else
-		{
-			ft_putstr_fd("Error\nThe map has unauthorized characters.\n", 2);
 			return (1);
-		}
 		i++;
 		objects->width++;
 	}
@@ -105,7 +103,10 @@ int	isnot_correct_map(t_window *game)
 	while (game->map[i])
 	{
 		if (have_unauthorized_characters(game->map[i], &game->obj, i))
+		{
+			ft_putstr_fd("Error\nThe map has unauthorized characters.\n", 2);
 			return (1);
+		}
 		if (isnot_closed_by_walls(game->map[i], i, game->map))
 			return (1);
 		if (isnot_rectangular(game->map, i))

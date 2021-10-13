@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 12:46:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 23:43:46 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,48 +54,48 @@ typedef struct s_img
 
 typedef struct s_enemy
 {
-	int		x;
-	int		y;
-	int		direction;
+	int				x;
+	int				y;
+	int				direction;
 	struct s_enemy	*next;
 }	t_enemy;
 
 typedef struct s_window
 {
-	char	**map;
-	void	*mlx;
-	void	*win;
-	t_enemy	*enemies;
-	int		count;
-	int		trap_count;
-	int		frame;
-	t_obj	obj;
-	t_img	ground1;
-	t_img	ground2;
-	t_img	ground3;
-	t_img	wall_top1;
-	t_img	wall_top2;
-	t_img	wall_top3;
-	t_img	wall_top_corner_left;
-	t_img	wall_top_corner_right;
-	t_img	wall_bottom_corner_left;
-	t_img	wall_bottom_corner_right;
-	t_img	wall_left;
-	t_img	wall_right;
-	t_img	wall_bottom;
-	t_img	trap1;
-	t_img	trap2;
-	t_img	trap3;
-	t_img	char_down;
-	t_img	char_left;
-	t_img	char_right;
-	t_img	char_top;
-	t_img	heart;
-	t_img	enemy_top;
-	t_img	enemy_down;
-	t_img	enemy_left;
-	t_img	enemy_right;
-	t_img	exit;
+	char		**map;
+	void		*mlx;
+	void		*win;
+	t_enemy		*enemies;
+	int			count;
+	int			trap_count;
+	int			frame;
+	t_obj		obj;
+	t_img		ground1;
+	t_img		ground2;
+	t_img		ground3;
+	t_img		wall_top1;
+	t_img		wall_top2;
+	t_img		wall_top3;
+	t_img		wall_top_corner_left;
+	t_img		wall_top_corner_right;
+	t_img		wall_bottom_corner_left;
+	t_img		wall_bottom_corner_right;
+	t_img		wall_left;
+	t_img		wall_right;
+	t_img		wall_bottom;
+	t_img		trap1;
+	t_img		trap2;
+	t_img		trap3;
+	t_img		char_down;
+	t_img		char_left;
+	t_img		char_right;
+	t_img		char_top;
+	t_img		heart;
+	t_img		enemy_top;
+	t_img		enemy_down;
+	t_img		enemy_left;
+	t_img		enemy_right;
+	t_img		exit;
 }	t_window;
 
 // SO LONG
@@ -138,5 +138,7 @@ int		open_enemy_img(t_window *w);
 int		enemy_game_over(t_window *window);
 void	get_enemy_data(t_window *window);
 void	move_enemy(t_window *window);
+void	attack(t_window *wind);
+void	display_enemy(t_window *wind, int x, int y, char pos);
 
 #endif

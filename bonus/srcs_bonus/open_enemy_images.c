@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 09:00:53 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 11:09:15 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 16:47:09 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,13 @@ int	enemy_game_over(t_window *window)
 	printf("Game over.\n");
 	close_window(window);
 	return (0);
+}
+
+void	attack(t_window *wind)
+{
+	printf("A skeleton killed you\n");
+	printf("Game over.\n");
+	close_window(wind);
 }
 
 int	open_enemy_images_pt2(t_window *w)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:15:30 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:22 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 23:56:44 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr_fd("Error\nUsage : ./so_long [map.ber]\n", 2);
+		ft_putstr_fd("Error\nUsage : ./so_long_bonus [map.ber]\n", 2);
 		return (EXIT_FAILURE);
 	}
 	map_name = argv[1];

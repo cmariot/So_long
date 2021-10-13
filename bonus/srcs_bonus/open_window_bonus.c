@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 15:30:05 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/13 16:33:10 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ int	key_pressed(int key, t_window *wind)
 
 int	animation(t_window *window)
 {
-	if (window->frame < 2)
+	if (window->frame < 15)
 	{
 		obstacle_animation(window);
 		window->frame++;
 	}
 	else
 	{
-		printf("%d Enemy patrol move.\n", window->obj.enemy_count);
-		move_enemy(window);
-
+		if (window->obj.enemy_count > 0)
+			move_enemy(window);
 		window->frame = 0;
 	}
 	return (0);
@@ -54,7 +53,6 @@ int	open_window(t_window *wind)
 	int			win_w;
 
 	get_enemy_data(wind);
-	
 	wind->mlx = mlx_init();
 	win_h = (wind->obj.height + 1) * IMG_H;
 	win_w = wind->obj.width * IMG_W;

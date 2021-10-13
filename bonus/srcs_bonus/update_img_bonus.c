@@ -6,13 +6,13 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 15:04:11 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 00:04:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void display_enemy(t_window *wind, int x, int y, char pos)
+void	display_enemy(t_window *wind, int x, int y, char pos)
 {
 	if (pos == '2')
 	{
@@ -34,6 +34,10 @@ void display_enemy(t_window *wind, int x, int y, char pos)
 		mlx_put_image_to_window(wind->mlx,
 			wind->win, wind->enemy_top.img, x, y);
 	}
+	if (wind->count < 2)
+		wind->count++;
+	else
+		wind->count = 0;
 }
 
 /* Update the ground, the obstacles and the player position,

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:34:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 15:35:18 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 00:01:27 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	add_enemy_to_list(t_enemy **alst, t_enemy *new)
 
 void	get_enemy_data(t_window *window)
 {
-	int first;
+	int	first;
 	int	x;
 	int	y;
 	int	direction;
@@ -90,17 +90,17 @@ void	get_enemy_data(t_window *window)
 				{
 					if (first == TRUE)
 					{
+						direction = window->map[x][y] - '0';
 						window->enemies = new_enemy_list(x, y, direction);
-						direction += 2;
+						printf("x = %d, y = %d, dir = %d\n", x, y, direction);
 						first = FALSE;
 					}
 					else
 					{
-						add_enemy_to_list(&(window->enemies), new_enemy_list(x, y, direction));
-						printf("x = %d, y = %d, direction = %d\n", x, y, direction);	
-						direction += 2;
-						if (direction == 10)
-							direction = 2;
+						direction = window->map[x][y] - '0';
+						add_enemy_to_list(&(window->enemies),
+							new_enemy_list(x, y, direction));
+						printf("x = %d, y = %d, dir = %d\n", x, y, direction);
 					}
 				}
 				y++;
@@ -109,4 +109,3 @@ void	get_enemy_data(t_window *window)
 		}
 	}
 }
-
