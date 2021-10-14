@@ -6,21 +6,18 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:34:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 00:01:27 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 11:10:38 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-void	ft_lstclear_enemy_list(t_enemy **lst)
+void	print_list(t_enemy *list)
 {
-	t_enemy	*tmp;
-
-	while (*lst)
+	while (list)
 	{
-		tmp = (*lst)->next;
-		free(lst);
-		*lst = tmp;
+		printf("x = %d, y = %d, dir = %d\n", list->x, list->y, list->direction);
+		list = list->next;
 	}
 }
 
@@ -81,18 +78,18 @@ void	get_enemy_data(t_window *window)
 		x = 1;
 		direction = 2;
 		first = TRUE;
-		while (x < window->obj.height - 2)
+		while (x < window->obj.height - 1)
 		{
 			y = 1;
-			while (y < window->obj.width - 2)
+			while (y < window->obj.width - 1)
 			{
-				if (window->map[x][y] == '6')
+				if (window->map[x][y] == '2' || window->map[x][y] == '4'
+					|| window->map[x][y] == '6' || window->map[x][y] == '8')
 				{
 					if (first == TRUE)
 					{
 						direction = window->map[x][y] - '0';
 						window->enemies = new_enemy_list(x, y, direction);
-						printf("x = %d, y = %d, dir = %d\n", x, y, direction);
 						first = FALSE;
 					}
 					else
@@ -100,7 +97,6 @@ void	get_enemy_data(t_window *window)
 						direction = window->map[x][y] - '0';
 						add_enemy_to_list(&(window->enemies),
 							new_enemy_list(x, y, direction));
-						printf("x = %d, y = %d, dir = %d\n", x, y, direction);
 					}
 				}
 				y++;
@@ -108,4 +104,5 @@ void	get_enemy_data(t_window *window)
 			x++;
 		}
 	}
+	print_list(window->enemies);
 }

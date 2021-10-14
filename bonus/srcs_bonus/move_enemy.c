@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 12:45:35 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 16:46:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 11:19:19 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,24 +96,31 @@ void	move_enemy(t_window *window)
 {
 	int	x;
 	int	y;
+	t_enemy *backup;
 
-	x = window->enemies[0].x;
-	y = window->enemies[0].y;
-	if (window->enemies[0].direction == 2)
+	backup = window->enemies;
+	while (window->enemies)
 	{
-		move_up(window, x, y);
+		x = window->enemies->x;
+		y = window->enemies->y;
+		if (window->enemies->direction == 2)
+		{
+			move_up(window, x, y);
+		}
+		else if (window->enemies->direction == 4)
+		{
+			move_right(window, x, y);
+		}
+		else if (window->enemies->direction == 6)
+		{
+			move_left(window, x, y);
+		}
+		else if (window->enemies->direction == 8)
+		{
+			move_down(window, x, y);
+		}
+		window->enemies = window->enemies->next;
 	}
-	else if (window->enemies[0].direction == 4)
-	{
-		move_right(window, x, y);
-	}
-	else if (window->enemies[0].direction == 6)
-	{
-		move_left(window, x, y);
-	}
-	else if (window->enemies[0].direction == 8)
-	{
-		move_down(window, x, y);
-	}
+	window->enemies = backup;
 	update_img(window);
 }

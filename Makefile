@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/14 00:07:29 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/14 00:12:46 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,8 +140,7 @@ $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "Usage :\n./so_long [MAP_NAME]\n"
 
 bonus :
-		@make all -C bonus
-		@cd bonus
+		@make -C bonus
 
 # Check 42 norm 
 norm :
