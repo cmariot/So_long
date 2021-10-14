@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 11:38:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 18:17:10 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ int	key_pressed(int key, t_window *wind)
 		move_back(key, wind);
 	else if (key == D_KEY)
 		turn_right(key, wind);
-	wind->trap_count++;
-	update_img(wind);
 	return (0);
 }
 
 int	animation(t_window *window)
 {
-	if (window->frame < 15)
+	if (window->frame < 16)
 	{
 		if (window->frame % 2 == 0)
 			obstacle_animation(window);
+		update_img(window);
+		usleep(5000);
 		window->frame++;
 	}
 	else
@@ -57,7 +57,7 @@ int	open_window(t_window *wind)
 	wind->mlx = mlx_init();
 	win_h = (wind->obj.height + 1) * IMG_H;
 	win_w = wind->obj.width * IMG_W;
-	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long");
+	wind->win = mlx_new_window(wind->mlx, win_w, win_h, "./so_long_bonus");
 	if (open_xpm_images(wind) == -1)
 		close_window(wind);
 	background_color(wind, win_h, win_w);

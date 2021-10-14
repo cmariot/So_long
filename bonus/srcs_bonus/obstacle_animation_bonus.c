@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:50:26 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 11:32:04 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 18:05:16 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 void	update_counter(t_window *wind)
 {
-	if (wind->count > 2)
+	wind->count++;
+	if (wind->count == 2)
 		wind->count = 0;
-	else
-		wind->count++;
 }
 
 void	update_obstacle(char pos, t_window *wind, int x, int y)
@@ -39,7 +38,7 @@ void	update_obstacle(char pos, t_window *wind, int x, int y)
 	}
 }
 
-int	find_obstacle(t_window *wind)
+int	obstacle_animation(t_window *wind)
 {
 	int	i;
 	int	j;
@@ -63,13 +62,5 @@ int	find_obstacle(t_window *wind)
 	wind->trap_count++;
 	if (wind->trap_count > 3)
 		wind->trap_count = 0;
-	return (0);
-}
-
-//Print an image every 0,1 seconds
-int	obstacle_animation(t_window *wind)
-{
-	find_obstacle(wind);
-	usleep(100000);
 	return (0);
 }

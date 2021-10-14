@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_wall.c                                     :+:      :+:    :+:   */
+/*   display_wall_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 12:35:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 14:35:38 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 14:19:27 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	display_wall(t_window *wind, int x, int y)
 	{
 		if (wind->count == 0)
 			display_obstacle1(wind, x, y);
-		else if (wind->count == 1)
-			display_obstacle2(wind, x, y);
-		else if (wind->count > 1)
+		else if (wind->count == 2)
 			display_obstacle3(wind, x, y);
+		else
+			display_obstacle2(wind, x, y);
 	}
 }

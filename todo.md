@@ -1,10 +1,6 @@
 # SoLong
 
 ## To do :
-- [ ] In the attack() : If the player is near the enemy -> Attack
-- [ ] Randomize orientation change
-- [ ] Walk animation
-- [ ] Subject check
 - [ ] Makefile check
 
 ## Done :

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:34:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 12:14:20 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 13:59:23 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,34 @@ void	add_enemy_to_list(t_enemy **alst, t_enemy *new)
 	}
 }
 
+int	put_data_in_list(t_window *window, int x, int y, int first)
+{
+	int	direction;
+
+	if (window->map[x][y] == '2' || window->map[x][y] == '4'
+		|| window->map[x][y] == '6' || window->map[x][y] == '8')
+	{
+		if (first == TRUE)
+		{
+			direction = window->map[x][y] - '0';
+			window->enemies = new_enemy_list(x, y, direction);
+			first = FALSE;
+		}
+		else
+		{
+			direction = window->map[x][y] - '0';
+			add_enemy_to_list(&(window->enemies),
+				new_enemy_list(x, y, direction));
+		}
+	}
+	return (first);
+}
+
 void	get_enemy_data(t_window *window)
 {
 	int	first;
 	int	x;
 	int	y;
-	int	direction;
 
 	if (window->obj.enemy_count > 0)
 	{
@@ -73,22 +95,7 @@ void	get_enemy_data(t_window *window)
 			y = 1;
 			while (y < window->obj.width - 1)
 			{
-				if (window->map[x][y] == '2' || window->map[x][y] == '4'
-					|| window->map[x][y] == '6' || window->map[x][y] == '8')
-				{
-					if (first == TRUE)
-					{
-						direction = window->map[x][y] - '0';
-						window->enemies = new_enemy_list(x, y, direction);
-						first = FALSE;
-					}
-					else
-					{
-						direction = window->map[x][y] - '0';
-						add_enemy_to_list(&(window->enemies),
-							new_enemy_list(x, y, direction));
-					}
-				}
+				first = put_data_in_list(window, x, y, first);
 				y++;
 			}
 			x++;

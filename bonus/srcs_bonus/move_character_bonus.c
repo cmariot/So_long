@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/02 13:41:58 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 11:08:42 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 13:52:34 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	exit_finish(t_window *wind)
  * Else : we can move to the next position, move. */
 int	move_forward(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '6')
+	if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] >= '2' &&
+		wind->map[wind->obj.player_x - 1][wind->obj.player_y] <= '8')
 		return (enemy_game_over(wind));
 	else if (wind->map[wind->obj.player_x - 1][wind->obj.player_y] == '1')
 		return (its_a_trap(wind, 'W'));
@@ -48,8 +49,7 @@ int	move_forward(int key, t_window *wind)
 		if (exit_finish(wind) == -1)
 			return (key);
 	wind->obj.mvmt++;
-	wind->obj.player_x -= 1;
-	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
+	if (wind->map[--wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
 		wind->map[wind->obj.player_x + 1][wind->obj.player_y] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'S';
@@ -69,7 +69,8 @@ int	move_forward(int key, t_window *wind)
 
 int	turn_left(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == '6')
+	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] >= '2' &&
+		wind->map[wind->obj.player_x][wind->obj.player_y - 1] <= '8')
 		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y - 1] == '1')
 		return (its_a_trap(wind, 'A'));
@@ -77,8 +78,7 @@ int	turn_left(int key, t_window *wind)
 		if (exit_finish(wind) == -1)
 			return (key);
 	wind->obj.mvmt++;
-	wind->obj.player_y -= 1;
-	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
+	if (wind->map[wind->obj.player_x][--wind->obj.player_y] == 'C')
 	{
 		wind->map[wind->obj.player_x][wind->obj.player_y + 1] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'R';
@@ -98,7 +98,8 @@ int	turn_left(int key, t_window *wind)
 
 int	move_back(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == '6')
+	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] >= '2' &&
+		wind->map[wind->obj.player_x + 1][wind->obj.player_y] <= '8')
 		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x + 1][wind->obj.player_y] == '1')
 		return (its_a_trap(wind, 'S'));
@@ -106,8 +107,7 @@ int	move_back(int key, t_window *wind)
 		if (exit_finish(wind) == -1)
 			return (key);
 	wind->obj.mvmt++;
-	wind->obj.player_x += 1;
-	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
+	if (wind->map[++wind->obj.player_x][wind->obj.player_y] == 'C')
 	{
 		wind->map[wind->obj.player_x - 1][wind->obj.player_y] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'P';
@@ -127,7 +127,8 @@ int	move_back(int key, t_window *wind)
 
 int	turn_right(int key, t_window *wind)
 {
-	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == '6')
+	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] >= '2' &&
+		wind->map[wind->obj.player_x][wind->obj.player_y + 1] <= '8')
 		return (enemy_game_over(wind));
 	if (wind->map[wind->obj.player_x][wind->obj.player_y + 1] == '1')
 		return (its_a_trap(wind, 'D'));
@@ -135,8 +136,7 @@ int	turn_right(int key, t_window *wind)
 		if (exit_finish(wind) == -1)
 			return (key);
 	wind->obj.mvmt++;
-	wind->obj.player_y += 1;
-	if (wind->map[wind->obj.player_x][wind->obj.player_y] == 'C')
+	if (wind->map[wind->obj.player_x][++wind->obj.player_y] == 'C')
 	{
 		wind->map[wind->obj.player_x][wind->obj.player_y - 1] = '0';
 		wind->map[wind->obj.player_x][wind->obj.player_y] = 'Q';

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 17:47:39 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 00:04:50 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 14:11:26 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,10 @@ void	put_update_to_window(char pos, t_window *wind, int x, int y)
 			return ;
 		else if (x / IMG_W == 0 || x / IMG_W == wind->obj. width - 1)
 			return ;
-		if (wind->count == 0)
-			display_obstacle1(wind, x, y);
-		else if (wind->count == 1)
-			display_obstacle2(wind, x, y);
-		else if (wind->count > 1)
-			display_obstacle3(wind, x, y);
+		if (wind->count < 2)
+			wind->count++;
+		else
+			wind->count = 0;
 	}
 	else if (pos == 'C')
 		display_heart(wind, x, y);
