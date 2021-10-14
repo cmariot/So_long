@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 19:43:00 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 16:33:10 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 11:38:10 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	animation(t_window *window)
 {
 	if (window->frame < 15)
 	{
-		obstacle_animation(window);
+		if (window->frame % 2 == 0)
+			obstacle_animation(window);
 		window->frame++;
 	}
 	else

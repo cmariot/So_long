@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/01 12:17:51 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/13 23:43:46 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 12:15:50 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ void	get_enemy_data(t_window *window);
 void	move_enemy(t_window *window);
 void	attack(t_window *wind);
 void	display_enemy(t_window *wind, int x, int y, char pos);
+void	free_enemy_list(t_enemy **lst);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:50:26 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/12 23:13:31 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 11:32:04 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ int	find_obstacle(t_window *wind)
 	return (0);
 }
 
+//Print an image every 0,1 seconds
 int	obstacle_animation(t_window *wind)
 {
 	find_obstacle(wind);
-	usleep(90000);
+	usleep(100000);
 	return (0);
 }

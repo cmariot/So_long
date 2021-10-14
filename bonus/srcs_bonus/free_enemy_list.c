@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_window_macos_bonus.c                         :+:      :+:    :+:   */
+/*   free_enemy_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 13:23:18 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 12:15:07 by cmariot          ###   ########.fr       */
+/*   Created: 2021/10/14 12:08:12 by cmariot           #+#    #+#             */
+/*   Updated: 2021/10/14 12:14:05 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-/* Exit if we close the window by clicking on the cross 
- * Leaks beacause no destroy_display() on macOS*/
-int	close_window(t_window *window)
+void	print_list(t_enemy *list)
 {
-	free_map(window->map);
-	free_img(window);
-	free_img_pt2(window);
-	if (window->obj.enemy_count)
-		free_enemy_list(&(window->enemies));
-	mlx_destroy_window(window->mlx, window->win);
-	free(window->mlx);
-	exit(EXIT_SUCCESS);
-	return (1);
+	while (list)
+	{
+		printf("x = %d, y = %d, dir = %d\n", list->x, list->y, list->direction);
+		list = list->next;
+	}
+}
+
+void	free_enemy_list(t_enemy **lst)
+{
+	t_enemy	*tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
 }

@@ -3,7 +3,6 @@
 ## To do :
 - [ ] In the attack() : If the player is near the enemy -> Attack
 - [ ] Randomize orientation change
-- [ ] All the enemies patrol
 - [ ] Walk animation
 - [ ] Subject check
 - [ ] Makefile check
@@ -32,3 +31,4 @@
 - [X] Create enemy frames
 - [X] Enemy spawn
 - [X] Game over if hit an enemy or an enemy hit the character
+- [X] All the enemies patrol

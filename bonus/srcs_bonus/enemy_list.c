@@ -6,20 +6,11 @@
 /*   By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 11:34:29 by cmariot           #+#    #+#             */
-/*   Updated: 2021/10/14 11:10:38 by cmariot          ###   ########.fr       */
+/*   Updated: 2021/10/14 12:14:20 by cmariot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
-
-void	print_list(t_enemy *list)
-{
-	while (list)
-	{
-		printf("x = %d, y = %d, dir = %d\n", list->x, list->y, list->direction);
-		list = list->next;
-	}
-}
 
 t_enemy	*new_enemy_list(int x, int y, int direction)
 {
@@ -76,7 +67,6 @@ void	get_enemy_data(t_window *window)
 	if (window->obj.enemy_count > 0)
 	{
 		x = 1;
-		direction = 2;
 		first = TRUE;
 		while (x < window->obj.height - 1)
 		{
@@ -104,5 +94,4 @@ void	get_enemy_data(t_window *window)
 			x++;
 		}
 	}
-	print_list(window->enemies);
 }
