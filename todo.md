@@ -1,7 +1,8 @@
 # SoLong
 
 ## To do :
-- [ ] Makefile check
+- [ ] Subject and Makefile check
+- [ ] Push the project on the vogsphere
 
 ## Done :
 - [X] Message if try to exit without all the hearts
