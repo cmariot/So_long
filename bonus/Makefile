@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/14 17:49:28 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/15 14:26:48 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,13 @@ LFLAGS_LIB			+= -L $(MLX) -l mlx
 
 UNAME := $(shell uname -m)
 ifeq ($(UNAME), arm64)
-	LFLAGS_LIB += -framework OpenGL -framework AppKit
-	KEYMAP = -D ESC_KEY=53 -D W_KEY=13 -D S_KEY=1 -D D_KEY=2 -D A_KEY=0
+	LFLAGS_LIB 		+= -framework OpenGL -framework AppKit
+	KEYMAP 			= -D ESC_KEY=53 -D W_KEY=13 -D S_KEY=1 -D D_KEY=2 -D A_KEY=0
 	SRCS			= close_window_macos_bonus.c
 else
-	CFLAGS += -I /usr/include -O3
-	LFLAGS_LIB += -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm 
-	KEYMAP = -D ESC_KEY=65307 -D W_KEY=119 -D S_KEY=115 -D D_KEY=100 -D A_KEY=97
+	CFLAGS 			+= -I /usr/include -O3
+	LFLAGS_LIB 		+= -Lmlx_linux -lmlx_Linux -L/usr/lib -lXext -lX11 -lm 
+	KEYMAP 			= -D ESC_KEY=65307 -D W_KEY=119 -D S_KEY=115 -D D_KEY=100 -D A_KEY=97
 	SRCS			= close_window_linux_bonus.c
 endif
 
@@ -100,6 +100,7 @@ OBJS		:= $(addprefix $(OBJS_DIR), $(OBJ))
 
 VPATH		:= $(SRCS_DIR) $(OBJS_DIR) $(shell find $(SRCS_DIR) -type d)
 
+
 # **************************************************************************** #
 #									COLORS                                     #
 # **************************************************************************** #
@@ -135,7 +136,9 @@ libft_compil:
 
 srcs_compil :
 		@printf "$(YE)Source code compilation ... \n$(RC)"
-			
+		
+bonus : 	all
+
 # Linking
 $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "$(YE)$(NAME) compilation success !\n\n$(RC)"
@@ -143,10 +146,6 @@ $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@$(CC) $(LFLAGS) $(OBJS) $(LFLAGS_LIB) -o $(NAME)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
 		@printf "Usage :\n./so_long_bonus [MAP_NAME]\n"
-
-bonus :
-		@make -C bonus
-		@mv bonus/so_long_bonus .
 
 # Check 42 norm 
 norm :
@@ -174,7 +173,10 @@ clean :
 		@printf "Done\n"
 
 # Remove object and binary files
-fclean : clean
+fclean :
+		@printf "$(RE)Removing $(OBJS_DIR) ... "
+		@rm -rf $(OBJS_DIR)
+		@printf "Done\n"
 		@printf "$(RE)Removing $(NAME) ... "
 		@rm -f $(NAME)
 		@printf "Done\n"

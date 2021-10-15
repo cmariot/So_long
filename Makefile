@@ -6,7 +6,7 @@
 #    By: cmariot <cmariot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 11:15:47 by cmariot           #+#    #+#              #
-#    Updated: 2021/10/14 00:12:46 by cmariot          ###   ########.fr        #
+#    Updated: 2021/10/15 14:36:13 by cmariot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -139,8 +139,10 @@ $(NAME)	: libft_compil mlx_compil srcs_compil $(SRCS) $(OBJS)
 		@printf "$(GR)Success !\n$(NAME) is ready.\n\n$(RC)"
 		@printf "Usage :\n./so_long [MAP_NAME]\n"
 
-bonus :
-		@make -C bonus
+compil_bonus:
+	make bonus -C bonus
+
+bonus: compil_bonus
 
 # Check 42 norm 
 norm :
@@ -168,7 +170,10 @@ clean :
 		@printf "Done\n"
 
 # Remove object and binary files
-fclean : clean
+fclean :
+		@printf "$(RE)Removing $(OBJS_DIR) ... "
+		@rm -rf $(OBJS_DIR)
+		@printf "Done\n"
 		@printf "$(RE)Removing $(NAME) ... "
 		@rm -f $(NAME)
 		@printf "Done\n"
@@ -178,7 +183,6 @@ fclean : clean
 		@printf "Cleaning MinilibX ... "
 		@make clean -C $(MLX)
 		@printf "Done$(RC)\n"
-		@make fclean -C bonus
 
 # Remove all and recompile
 re :	 fclean all
