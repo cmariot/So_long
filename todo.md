@@ -1,7 +1,6 @@
 # SoLong
 
 ## To do :
-- [ ] Subject and Makefile check
 - [ ] Push the project on the vogsphere
 
 ## Done :
@@ -29,3 +28,4 @@
 - [X] Enemy spawn
 - [X] Game over if hit an enemy or an enemy hit the character
 - [X] All the enemies patrol
+- [X] Subject and Makefile check
