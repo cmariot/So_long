@@ -25,17 +25,24 @@ int	key_pressed(int key, t_window *wind)
 		move_back(key, wind);
 	else if (key == D_KEY)
 		turn_right(key, wind);
+	if (key == W_KEY || key == A_KEY || key == S_KEY || key == D_KEY)
+	{
+		background_color(wind, IMG_H * (wind->obj.height + 1),
+			IMG_W * wind->obj.width);
+		display_mouvement_count(wind);
+		display_heart_count(wind);
+	}
 	return (0);
 }
 
 int	animation(t_window *window)
 {
-	if (window->frame < 16)
+	if (window->frame < 20)
 	{
 		if (window->frame % 2 == 0)
 			obstacle_animation(window);
 		update_img(window);
-		usleep(5000);
+		usleep(50000);
 		window->frame++;
 	}
 	else

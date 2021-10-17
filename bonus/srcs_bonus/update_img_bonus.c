@@ -85,9 +85,5 @@ void	update_img(t_window *wind)
 		}
 		a++;
 	}
-	background_color(wind, IMG_H * (wind->obj.height + 1),
-		IMG_W * wind->obj.width);
-	display_mouvement_count(wind);
-	display_heart_count(wind);
 	wind->count = 0;
 }
